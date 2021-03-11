@@ -1,4 +1,4 @@
-# [Armageddon](https://www.curseforge.com/minecraft/mc-mods/morezombies) | Home
+# [Armageddon](https://www.curseforge.com/minecraft/mc-mods/armageddon) | Home
 
 This mod implements Zombified versions of the vanilla mobs.
 
