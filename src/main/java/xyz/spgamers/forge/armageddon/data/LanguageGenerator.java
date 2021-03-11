@@ -18,8 +18,13 @@ public class LanguageGenerator extends LanguageProvider
 	{
 		addItem(ModItems.ZOMBIE_PIG_SPAWN_EGG, "Zombie Pig Spawn Egg");
 		addItem(ModItems.ZOMBIE_CREEPER_SPAWN_EGG, "Zombie Creeper Spawn Egg");
+		addItem(ModItems.ZOMBIE_COW_SPAWN_EGG, "Zombie Cow Spawn Egg");
+		addItem(ModItems.ZOMBIE_RED_MOOSHROOM_SPAWN_EGG, "Zombie Mooshroom Spawn Egg");
 
 		addEntityType(ModEntities.ZOMBIE_PIG, "Zombie Pig");
 		addEntityType(ModEntities.ZOMBIE_CREEPER, "Zombie Creeper");
+		addEntityType(ModEntities.ZOMBIE_COW, "Zombie Cow");
+		addEntityType(ModEntities.ZOMBIE_BROWN_MOOSHROOM, "Zombie Brown Mooshroom");
+		addEntityType(ModEntities.ZOMBIE_RED_MOOSHROOM, "Zombie Red Mooshroom");
 	}
 }

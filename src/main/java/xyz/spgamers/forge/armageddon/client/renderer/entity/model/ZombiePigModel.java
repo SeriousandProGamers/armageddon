@@ -3,7 +3,7 @@ package xyz.spgamers.forge.armageddon.client.renderer.entity.model;
 import net.minecraft.client.renderer.entity.model.QuadrupedModel;
 import xyz.spgamers.forge.armageddon.entity.ZombiePigEntity;
 
-public final class ZombiePigModel extends QuadrupedModel<ZombiePigEntity>
+public final class ZombiePigModel<E extends ZombiePigEntity> extends QuadrupedModel<E>
 {
 	public ZombiePigModel()
 	{

@@ -6,7 +6,7 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
 import xyz.spgamers.forge.armageddon.entity.ZombieCreeperEntity;
 
-public class ZombieCreeperModel extends SegmentedModel<ZombieCreeperEntity>
+public class ZombieCreeperModel<E extends ZombieCreeperEntity> extends SegmentedModel<E>
 {
 	private final ModelRenderer head;
 	private final ModelRenderer creeperArmor;

@@ -10,11 +10,11 @@ import xyz.spgamers.forge.armageddon.client.renderer.entity.model.ZombieCreeperM
 import xyz.spgamers.forge.armageddon.entity.ZombieCreeperEntity;
 import xyz.spgamers.forge.armageddon.util.Constants;
 
-public class ZombieCreeperRenderer extends MobRenderer<ZombieCreeperEntity, ZombieCreeperModel>
+public class ZombieCreeperRenderer extends MobRenderer<ZombieCreeperEntity, ZombieCreeperModel<ZombieCreeperEntity>>
 {
 	public ZombieCreeperRenderer(EntityRendererManager rendererManager)
 	{
-		super(rendererManager, new ZombieCreeperModel(), .5F);
+		super(rendererManager, new ZombieCreeperModel<>(), .5F);
 
 		addLayer(new ZombieCreeperChargeLayer(this));
 	}

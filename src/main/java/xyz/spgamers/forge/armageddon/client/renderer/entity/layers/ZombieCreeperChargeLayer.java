@@ -8,11 +8,11 @@ import xyz.spgamers.forge.armageddon.client.renderer.entity.model.ZombieCreeperM
 import xyz.spgamers.forge.armageddon.entity.ZombieCreeperEntity;
 import xyz.spgamers.forge.armageddon.util.Constants;
 
-public class ZombieCreeperChargeLayer extends EnergyLayer<ZombieCreeperEntity, ZombieCreeperModel>
+public class ZombieCreeperChargeLayer<E extends ZombieCreeperEntity> extends EnergyLayer<E, ZombieCreeperModel<E>>
 {
-	private final ZombieCreeperModel model = new ZombieCreeperModel(2F);
+	private final ZombieCreeperModel<E> model = new ZombieCreeperModel<>(2F);
 
-	public ZombieCreeperChargeLayer(IEntityRenderer<ZombieCreeperEntity, ZombieCreeperModel> entityRenderer)
+	public ZombieCreeperChargeLayer(IEntityRenderer<E, ZombieCreeperModel<E>> entityRenderer)
 	{
 		super(entityRenderer);
 	}
@@ -30,7 +30,7 @@ public class ZombieCreeperChargeLayer extends EnergyLayer<ZombieCreeperEntity, Z
 	}
 
 	@Override
-	protected EntityModel<ZombieCreeperEntity> func_225635_b_()
+	protected EntityModel<E> func_225635_b_()
 	{
 		return model;
 	}

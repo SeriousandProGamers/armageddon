@@ -7,11 +7,11 @@ import xyz.spgamers.forge.armageddon.client.renderer.entity.model.ZombiePigModel
 import xyz.spgamers.forge.armageddon.entity.ZombiePigEntity;
 import xyz.spgamers.forge.armageddon.util.Constants;
 
-public final class ZombiePigRenderer extends MobRenderer<ZombiePigEntity, ZombiePigModel>
+public final class ZombiePigRenderer extends MobRenderer<ZombiePigEntity, ZombiePigModel<ZombiePigEntity>>
 {
 	public ZombiePigRenderer(EntityRendererManager renderManagerIn)
 	{
-		super(renderManagerIn, new ZombiePigModel(), .7F);
+		super(renderManagerIn, new ZombiePigModel<>(), .7F);
 	}
 
 	@Override
