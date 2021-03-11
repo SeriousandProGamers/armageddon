@@ -1,0 +1,52 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+license="GNU"
+issueTrackerURL="https://github.com/SeriousandProGamers/Armageddon/issues"
+
+[[mods]]
+modId="armageddon"
+version="${file.jarVersion}"
+displayName="Armageddon"
+updateJSONURL="https://raw.githubusercontent.com/SeriousandProGamers/Armageddon/main/update.json"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/armageddon"
+# logoFile="logo.png"
+# credits=""
+authors="ApexModder, RudySPG"
+description='''
+This mod implements Zombified versions of the vanilla mobs.
+'''
+
+# Minecraft & Forge dependencies are optional
+# and not required, all mods are loaded after these
+# but for completness best to include them
+[[dependencies.armageddon]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.armageddon]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3]"
+    ordering="NONE"
+    side="BOTH"
+
+# Required dependencies
+# NO-OP
+
+# Optional dependencies
+[[dependencies.armageddon]]
+    modId="jei"
+    mandatory=false
+    versionRange="[7.6,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.armageddon]]
+    modId="theoneprobe"
+    mandatory=false
+    versionRange="[1.16.3-3,)"
+    ordering="AFTER"
+    side="BOTH"
