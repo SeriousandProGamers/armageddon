@@ -10,6 +10,7 @@ import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.MooshroomEntity;
 import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
@@ -49,6 +50,7 @@ public final class EntityEventHandler
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, MooshroomEntity.class, true));
+		// zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, HorseEntity.class, true));
 	}
 
 	// priority = EventPriority.HIGHEST
@@ -72,6 +74,9 @@ public final class EntityEventHandler
 		}
 		else if(mob instanceof CowEntity)
 			event.setZombifiedVariant(ModEntities.ZOMBIE_COW.get());
+		// ZombieHorseEntity does not extend ZombieEntity
+		/*else if(mob instanceof HorseEntity)
+			event.setZombifiedVariant(EntityType.ZOMBIE_HORSE);*/
 	}
 
 	@SubscribeEvent
@@ -99,6 +104,7 @@ public final class EntityEventHandler
 		if(!(damageSource.getTrueSource() instanceof ZombieEntity))
 			return;
 
+		ZombieEntity attacker = (ZombieEntity) damageSource.getTrueSource();
 		Difficulty difficulty = damagedEntity.world.getDifficulty();
 
 		// zombie variants only spawn on normal or higher
@@ -118,14 +124,13 @@ public final class EntityEventHandler
 
 				if(zombieType != null)
 				{
-					ZombieEntity zombie = damagedEntity.func_233656_b_(zombieType, false);
-
+					// ZombieEntity zombie = damagedEntity.func_233656_b_(zombieType, false);
+					ZombieEntity zombie = ModEntities.spawnDuplicateEntity(damagedEntity, zombieType, false);
+					// this requires a server world, which we do not have
 					// zombie.onInitialSpawn(entity.world, entity.world.getDifficultyForLocation(zombie.getPosition()), SpawnReason.CONVERSION, new ZombieEntity.GroupData(false, true), null);
 
-					if(!damagedEntity.isSilent())
-						damagedEntity.world.playEvent(null, 1026, damagedEntity.getPosition(), 0);
-
-					damagedEntity.world.addEntity(zombie);
+					if(!attacker.isSilent())
+						zombie.world.playEvent(null, 1026, damagedEntity.getPosition(), 0);
 				}
 			}
 		}
