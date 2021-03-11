@@ -1,9 +1,8 @@
 package xyz.spgamers.forge.armageddon.util;
 
 import net.minecraft.util.ResourceLocation;
-import xyz.spgamers.forge.armageddon.Armageddon;
 
-public class Constants
+public final class Constants
 {
 	public static final String MOD_ID = "armageddon";
 
