@@ -39,7 +39,7 @@ import javax.annotation.Nullable;
 public class LivingZombieTurnEvent extends LivingEvent // LivingHurtEvent
 {
 	@Nullable
-	private EntityType<? extends ZombieEntity> zombifiedVariant = null;
+	private EntityType<? extends MobEntity> zombifiedVariant = null;
 	private final MobEntity mob;
 	private final DamageSource source;
 	private final float damage;
@@ -70,12 +70,12 @@ public class LivingZombieTurnEvent extends LivingEvent // LivingHurtEvent
 	}
 
 	@Nullable
-	public EntityType<? extends ZombieEntity> getZombifiedVariant()
+	public EntityType<? extends MobEntity> getZombifiedVariant()
 	{
 		return zombifiedVariant;
 	}
 
-	public void setZombifiedVariant(@Nonnull EntityType<? extends ZombieEntity> zombifiedVariant)
+	public void setZombifiedVariant(@Nonnull EntityType<? extends MobEntity> zombifiedVariant)
 	{
 		this.zombifiedVariant = zombifiedVariant;
 	}

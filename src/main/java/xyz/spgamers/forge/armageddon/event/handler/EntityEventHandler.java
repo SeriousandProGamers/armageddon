@@ -50,7 +50,7 @@ public final class EntityEventHandler
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
 		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, MooshroomEntity.class, true));
-		// zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, HorseEntity.class, true));
+		zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, HorseEntity.class, true));
 	}
 
 	// priority = EventPriority.HIGHEST
@@ -74,9 +74,8 @@ public final class EntityEventHandler
 		}
 		else if(mob instanceof CowEntity)
 			event.setZombifiedVariant(ModEntities.ZOMBIE_COW.get());
-		// ZombieHorseEntity does not extend ZombieEntity
-		/*else if(mob instanceof HorseEntity)
-			event.setZombifiedVariant(EntityType.ZOMBIE_HORSE);*/
+		else if(mob instanceof HorseEntity)
+			event.setZombifiedVariant(EntityType.ZOMBIE_HORSE);
 	}
 
 	@SubscribeEvent
@@ -120,12 +119,12 @@ public final class EntityEventHandler
 			// if event was not canceled
 			if(!MinecraftForge.EVENT_BUS.post(event))
 			{
-				EntityType<? extends ZombieEntity> zombieType = event.getZombifiedVariant();
+				EntityType<? extends MobEntity> zombieType = event.getZombifiedVariant();
 
 				if(zombieType != null)
 				{
 					// ZombieEntity zombie = damagedEntity.func_233656_b_(zombieType, false);
-					ZombieEntity zombie = ModEntities.spawnDuplicateEntity(damagedEntity, zombieType, false);
+					MobEntity zombie = ModEntities.spawnDuplicateEntity(damagedEntity, zombieType, false);
 					// this requires a server world, which we do not have
 					// zombie.onInitialSpawn(entity.world, entity.world.getDifficultyForLocation(zombie.getPosition()), SpawnReason.CONVERSION, new ZombieEntity.GroupData(false, true), null);
 
