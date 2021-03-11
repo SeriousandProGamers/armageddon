@@ -17,6 +17,7 @@ public class ItemModelGenerator extends ItemModelProvider
 	protected void registerModels()
 	{
 		getSpawnEggBuilder(modLoc(Constants.Items.ZOMBIE_PIG_SPAWN_EGG).toString());
+		getSpawnEggBuilder(modLoc(Constants.Items.ZOMBIE_CREEPER_SPAWN_EGG).toString());
 	}
 
 	private ItemModelBuilder getSpawnEggBuilder(String path)

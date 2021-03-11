@@ -17,7 +17,9 @@ public class LanguageGenerator extends LanguageProvider
 	protected void addTranslations()
 	{
 		addItem(ModItems.ZOMBIE_PIG_SPAWN_EGG, "Zombie Pig Spawn Egg");
+		addItem(ModItems.ZOMBIE_CREEPER_SPAWN_EGG, "Zombie Creeper Spawn Egg");
 
 		addEntityType(ModEntities.ZOMBIE_PIG, "Zombie Pig");
+		addEntityType(ModEntities.ZOMBIE_CREEPER, "Zombie Creeper");
 	}
 }
