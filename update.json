@@ -1,0 +1,16 @@
+{
+	"homepage": "https://www.curseforge.com/minecraft/mc-mods/morezombies",
+	"promos": {
+		"1.16.3-recommended": "0.0.1",
+		"1.16.3-latest": "0.0.1",
+		
+		"1.16.4-recommended": "",
+		"1.16.4-latest": "",
+		
+		"1.16.5-recommended": "",
+		"1.16.5-latest": "",
+	},
+	"1.16.3": {
+		"0.0.1": "Mod birth!"
+	}
+}
