@@ -75,7 +75,7 @@ public final class EntityEventHandler
 	}
 
 	@SubscribeEvent
-	public static void onEntityDeath(LivingHurtEvent event)
+	public static void onEntityHurt(LivingHurtEvent event)
 	{
 		LivingEntity entity = event.getEntityLiving();
 		DamageSource source = event.getSource();
@@ -112,7 +112,7 @@ public final class EntityEventHandler
 			LivingZombieTurnEvent event = new LivingZombieTurnEvent(damagedEntity, damageSource, damage);
 
 			// if event was not canceled
-			if(MinecraftForge.EVENT_BUS.post(event))
+			if(!MinecraftForge.EVENT_BUS.post(event))
 			{
 				EntityType<? extends ZombieEntity> zombieType = event.getZombifiedVariant();
 

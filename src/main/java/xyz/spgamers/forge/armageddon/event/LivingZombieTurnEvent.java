@@ -5,6 +5,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
 import xyz.spgamers.forge.armageddon.event.handler.EntityEventHandler;
@@ -19,7 +20,7 @@ import javax.annotation.Nullable;
  * <br>
  * {@link #mob} The entity that will be turned into a Zombified variant. <br>
  * {@link #source} contains the DamageSource that caused this Entity to be turned. <br>
- * {@link #amount} contains the amount of damage dealt to the Entity. <br>
+ * {@link #damage} contains the amount of damage dealt to the Entity. <br>
  * {@link #zombifiedVariant} contains the zombified {@link EntityType} that will be spawned in place of this Entity. <br>
  * <br>
  *  Use {@link #setZombifiedVariant(EntityType)} to modify the zombie variant to be spawned.<br>
@@ -33,17 +34,34 @@ import javax.annotation.Nullable;
  * @see LivingHurtEvent
  */
 @Cancelable
-public class LivingZombieTurnEvent extends LivingHurtEvent
+// NPE: Extending LivingHurtEvent caused other handlers to fire
+// that shouldnt due to entity being dead at this point
+public class LivingZombieTurnEvent extends LivingEvent // LivingHurtEvent
 {
 	@Nullable
 	private EntityType<? extends ZombieEntity> zombifiedVariant = null;
 	private final MobEntity mob;
+	private final DamageSource source;
+	private final float damage;
 
-	public LivingZombieTurnEvent(MobEntity entity, DamageSource source, float amount)
+	public LivingZombieTurnEvent(MobEntity entity, DamageSource source, float damage)
 	{
-		super(entity, source, amount);
+		super(entity);
+
+		this.source = source;
+		this.damage = damage;
 
 		mob = entity;
+	}
+
+	public DamageSource getSource()
+	{
+		return source;
+	}
+
+	public float getDamage()
+	{
+		return damage;
 	}
 
 	public MobEntity getMob()
