@@ -21,6 +21,11 @@ build
 eclipse
 run
 
+# Generated assets
+# To generate these run the `runData` run configuration
+# Do not include these into the repo
+src/generated/*
+
 # Files from Forge MDK
 forge*changelog.txt
 
