@@ -33,7 +33,7 @@ import xyz.spgamers.forge.armageddon.util.Constants;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public class ZombieCreeperEntity extends ZombieEntity implements IChargeableMob
+public class ZombieCreeperEntity extends BaseZombieEntity implements IChargeableMob
 {
 	public static final DataParameter<Integer> STATE = EntityDataManager.createKey(ZombieCreeperEntity.class, DataSerializers.VARINT);
 	public static final DataParameter<Boolean> POWERED = EntityDataManager.createKey(ZombieCreeperEntity.class, DataSerializers.BOOLEAN);

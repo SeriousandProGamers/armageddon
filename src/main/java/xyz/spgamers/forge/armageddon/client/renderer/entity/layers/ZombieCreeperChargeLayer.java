@@ -10,7 +10,7 @@ import xyz.spgamers.forge.armageddon.util.Constants;
 
 public class ZombieCreeperChargeLayer<E extends ZombieCreeperEntity> extends EnergyLayer<E, ZombieCreeperModel<E>>
 {
-	private final ZombieCreeperModel<E> model = new ZombieCreeperModel<>(2F);
+	private final ZombieCreeperModel<E> model = new ZombieCreeperModel<>();
 
 	public ZombieCreeperChargeLayer(IEntityRenderer<E, ZombieCreeperModel<E>> entityRenderer)
 	{

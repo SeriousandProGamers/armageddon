@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class ZombieCowEntity extends ZombieEntity
+public class ZombieCowEntity extends BaseZombieEntity
 {
 	public ZombieCowEntity(EntityType<? extends ZombieEntity> type, World worldIn)
 	{
