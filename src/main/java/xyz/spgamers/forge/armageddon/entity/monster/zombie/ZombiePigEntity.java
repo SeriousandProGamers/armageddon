@@ -13,7 +13,7 @@ import xyz.spgamers.forge.armageddon.init.ModEntities;
 
 import java.util.Random;
 
-public class ZombiePigEntity extends AbstractZombieEntity
+public final class ZombiePigEntity extends AbstractZombieEntity
 {
 	public ZombiePigEntity(World world)
 	{
