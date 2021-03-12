@@ -13,7 +13,7 @@ displayName="Armageddon"
 # credits=""
 authors="ApexModder, RudySPG"
 description='''
-This mod implements Zombified versions of the vanilla mobs.
+Adds the Zombie variants to the game with different abilities.
 '''
 
 # Minecraft & Forge dependencies are optional
