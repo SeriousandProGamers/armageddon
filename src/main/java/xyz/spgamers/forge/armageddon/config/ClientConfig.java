@@ -12,6 +12,7 @@ public final class ClientConfig
 	public ClientConfig()
 	{
 		configBuilder = new ForgeConfigSpec.Builder();
+				// .comment("Configs for Client side", "Changes get hot-swapped into running game automagicly."); // kills the game
 
 		configSpec = configBuilder.build();
 	}

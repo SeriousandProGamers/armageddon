@@ -6,6 +6,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.spgamers.forge.armageddon.config.ClientConfig;
+import xyz.spgamers.forge.armageddon.init.ModEntities;
 
 public final class ClientSetup
 {
@@ -22,5 +23,6 @@ public final class ClientSetup
 
 	private void onClientSetup(FMLClientSetupEvent event)
 	{
+		ModEntities.clientSetup();
 	}
 }

@@ -39,7 +39,8 @@ public final class Armageddon
 
 	private void onCommonSetup(FMLCommonSetupEvent event)
 	{
-		registerPackets();
+		event.enqueueWork(ModEntities::commonSetup);
+		event.enqueueWork(this::registerPackets);
 	}
 
 	private void onGatherData(GatherDataEvent event)

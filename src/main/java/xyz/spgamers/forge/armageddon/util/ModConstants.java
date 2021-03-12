@@ -33,6 +33,8 @@ public final class ModConstants
 
 	public static final class Entities
 	{
+		public static final String ZOMBIE_PIG = "zombie_pig";
+
 		private Entities()
 		{
 			throw new IllegalStateException();
