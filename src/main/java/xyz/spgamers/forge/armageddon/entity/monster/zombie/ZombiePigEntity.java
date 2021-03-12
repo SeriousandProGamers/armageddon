@@ -17,7 +17,7 @@ public final class ZombiePigEntity extends AbstractZombieEntity
 {
 	public ZombiePigEntity(World world)
 	{
-		super(ModEntities.ZOMBIE_PIG.get(), world);
+		super(ModEntities.ZOMBIE_PIG.get(), world, Armageddon.SERVER_CONFIG.entities::isZombiePigEnabled);
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerZombiePigAttributes()

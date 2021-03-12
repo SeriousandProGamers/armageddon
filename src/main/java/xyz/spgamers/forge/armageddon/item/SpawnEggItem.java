@@ -34,6 +34,7 @@ import xyz.spgamers.forge.armageddon.util.WorldHelper;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 public final class SpawnEggItem<E extends Entity> extends Item implements IItemColor
@@ -41,14 +42,22 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 	private final int primaryColor;
 	private final int secondaryColor;
 	private final Supplier<EntityType<E>> entityTypeSupplier;
+	private final BooleanSupplier entityEnabledSupplier;
 
-	public SpawnEggItem(Supplier<EntityType<E>> entityTypeSupplier, int primaryColor, int secondaryColor, Properties properties)
+	public SpawnEggItem(Supplier<EntityType<E>> entityTypeSupplier, int primaryColor, int secondaryColor, BooleanSupplier entityEnabledSupplier, Properties properties)
 	{
 		super(properties);
 
 		this.entityTypeSupplier = entityTypeSupplier;
 		this.primaryColor = primaryColor;
 		this.secondaryColor = secondaryColor;
+		this.entityEnabledSupplier = entityEnabledSupplier;
+	}
+
+	@Override
+	protected boolean isInGroup(ItemGroup group)
+	{
+		return isEntityEnabled() && super.isInGroup(group);
 	}
 
 	@Override
@@ -62,6 +71,9 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 	@Override
 	public ActionResultType onItemUse(ItemUseContext context)
 	{
+		if(!isEntityEnabled())
+			return ActionResultType.FAIL;
+
 		World world = context.getWorld();
 
 		if(WorldHelper.isClientWorld(world))
@@ -109,6 +121,10 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
 		ItemStack stack = player.getHeldItem(hand);
+
+		if(!isEntityEnabled())
+			return ActionResult.resultFail(stack);
+
 		BlockRayTraceResult rayTraceResult = rayTrace(world, player, RayTraceContext.FluidMode.SOURCE_ONLY);
 
 		if(rayTraceResult.getType() != RayTraceResult.Type.BLOCK)
@@ -151,13 +167,22 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 		return entityTypeSupplier.get();
 	}
 
+	public boolean isEntityEnabled()
+	{
+		return entityEnabledSupplier.getAsBoolean();
+	}
+
 	public static final class SpawnEggDispenserBehavior extends DefaultDispenseItemBehavior
 	{
 		@Override
 		protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
 		{
-			Direction direction = source.getBlockState().get(DispenserBlock.FACING);
 			SpawnEggItem<?> spawnEggItem = (SpawnEggItem<?>) stack.getItem();
+
+			if(!spawnEggItem.isEntityEnabled())
+				return stack;
+
+			Direction direction = source.getBlockState().get(DispenserBlock.FACING);
 			Entity entity = spawnEggItem.getEntityType().spawn(source.getWorld(), stack, null, source.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
 
 			if(entity != null)
