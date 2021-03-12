@@ -79,7 +79,7 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 			if(tileEntity instanceof MobSpawnerTileEntity)
 			{
 				AbstractSpawner spawner = ((MobSpawnerTileEntity) tileEntity).getSpawnerBaseLogic();
-				spawner.setEntityType(entityTypeSupplier.get());
+				spawner.setEntityType(getEntityType());
 				tileEntity.markDirty();
 				world.notifyBlockUpdate(pos, blockState, blockState, 3);
 				stack.shrink(1);
@@ -97,7 +97,7 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 		// There is no reason this method should not be our type
 		// it calls another spawn() method that returns the generic type
 		//noinspection unchecked
-		E entity = (E) entityTypeSupplier.get().spawn((ServerWorld) world, stack, context.getPlayer(), pos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(pos, pos1) && side == Direction.UP);
+		E entity = (E) getEntityType().spawn((ServerWorld) world, stack, context.getPlayer(), pos1, SpawnReason.SPAWN_EGG, true, !Objects.equals(pos, pos1) && side == Direction.UP);
 
 		if(entity != null)
 			stack.shrink(1);
@@ -126,7 +126,7 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 				// There is no reason this method should not be our type
 				// it calls another spawn() method that returns the generic type
 				//noinspection unchecked
-				E entity = (E) entityTypeSupplier.get().spawn((ServerWorld) world, stack, player, pos, SpawnReason.SPAWN_EGG, false, false);
+				E entity = (E) getEntityType().spawn((ServerWorld) world, stack, player, pos, SpawnReason.SPAWN_EGG, false, false);
 
 				if(entity == null)
 					return ActionResult.resultPass(stack);
@@ -146,6 +146,11 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 		return tintIndex == 0 ? primaryColor : secondaryColor;
 	}
 
+	public EntityType<E> getEntityType()
+	{
+		return entityTypeSupplier.get();
+	}
+
 	public static final class SpawnEggDispenserBehavior extends DefaultDispenseItemBehavior
 	{
 		@Override
@@ -153,7 +158,7 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 		{
 			Direction direction = source.getBlockState().get(DispenserBlock.FACING);
 			SpawnEggItem<?> spawnEggItem = (SpawnEggItem<?>) stack.getItem();
-			Entity entity = spawnEggItem.entityTypeSupplier.get().spawn(source.getWorld(), stack, null, source.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+			Entity entity = spawnEggItem.getEntityType().spawn(source.getWorld(), stack, null, source.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
 
 			if(entity != null)
 				stack.shrink(1);

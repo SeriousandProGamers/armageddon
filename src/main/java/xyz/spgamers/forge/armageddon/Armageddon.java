@@ -13,6 +13,8 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
+import xyz.spgamers.forge.armageddon.data.ItemModelGenerator;
+import xyz.spgamers.forge.armageddon.data.LanguageGenerator;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -53,6 +55,8 @@ public final class Armageddon
 		{
 			// Client asset generators
 			// block / item model json files, blockstate json files, language json files, etc
+			generator.addProvider(new LanguageGenerator(generator));
+			generator.addProvider(new ItemModelGenerator(generator, fileHelper));
 		}
 
 		if(event.includeServer())
