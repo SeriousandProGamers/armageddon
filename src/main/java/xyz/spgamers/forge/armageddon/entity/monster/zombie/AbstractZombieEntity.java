@@ -75,7 +75,6 @@ public class AbstractZombieEntity extends ZombieEntity
 
 				if(isChickenJockeyAllowed())
 				{
-					// TODO: Allow spawning on zombie chickens, when we add them
 					if(world.getRandom().nextFloat() < .05D)
 					{
 						// List<ChickenEntity> list = world.getEntitiesWithinAABB(ChickenEntity.class, getBoundingBox().grow(5D, 3D, 5D), EntityPredicates.IS_STANDALONE);
