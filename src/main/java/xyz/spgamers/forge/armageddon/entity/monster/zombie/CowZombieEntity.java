@@ -16,11 +16,11 @@ import xyz.spgamers.forge.armageddon.init.ModEntities;
 
 import java.util.Random;
 
-public final class ZombieCowEntity extends AbstractZombieEntity
+public final class CowZombieEntity extends AbstractZombieEntity
 {
-	public ZombieCowEntity(World world)
+	public CowZombieEntity(World world)
 	{
-		super(ModEntities.ZOMBIE_COW.get(), world, Armageddon.SERVER_CONFIG.entities::isZombieCowEnabled);
+		super(ModEntities.COW_ZOMBIE.get(), world, Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled);
 	}
 
 	@Override
@@ -53,14 +53,14 @@ public final class ZombieCowEntity extends AbstractZombieEntity
 		return SoundEvents.ENTITY_COW_STEP;
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerZombieCowAttributes()
+	public static AttributeModifierMap.MutableAttribute registerCowZombieAttributes()
 	{
 		return registerZombieAttributes();
 	}
 
-	public static boolean canZombieCowSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
+	public static boolean canCowZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
 	{
-		if(!Armageddon.SERVER_CONFIG.entities.isZombieCowEnabled())
+		if(!Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
 			return false;
 		if(!canZombieSpawn(entityType, world, reason, pos, random))
 			return false;

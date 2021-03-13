@@ -14,10 +14,10 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.ZombieCowRenderer;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.ZombiePigRenderer;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombieCowEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombiePigEntity;
+import xyz.spgamers.forge.armageddon.client.renderer.entity.CowZombieRenderer;
+import xyz.spgamers.forge.armageddon.client.renderer.entity.PigZombieRenderer;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.function.Function;
@@ -26,16 +26,16 @@ public final class ModEntities
 {
 	public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, ModConstants.MOD_ID);
 
-	public static final RegistryObject<EntityType<ZombiePigEntity>> ZOMBIE_PIG = register(
-			ModConstants.Entities.ZOMBIE_PIG,
-			ZombiePigEntity::new,
+	public static final RegistryObject<EntityType<PigZombieEntity>> PIG_ZOMBIE = register(
+			ModConstants.Entities.PIG_ZOMBIE,
+			PigZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.9F, .9F).trackingRange(10) // same values as pig
 	);
 
-	public static final RegistryObject<EntityType<ZombieCowEntity>> ZOMBIE_COW = register(
-			ModConstants.Entities.ZOMBIE_COW,
-			ZombieCowEntity::new,
+	public static final RegistryObject<EntityType<CowZombieEntity>> COW_ZOMBIE = register(
+			ModConstants.Entities.COW_ZOMBIE,
+			CowZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.9F, 1.4F).trackingRange(10) // same values as cow
 	);
@@ -47,22 +47,22 @@ public final class ModEntities
 
 	public static void commonSetup()
 	{
-		ZOMBIE_PIG.ifPresent(entityType -> {
-			GlobalEntityTypeAttributes.put(entityType, ZombiePigEntity.registerZombiePigAttributes().create());
-			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombiePigEntity::canZombiePigSpawn);
+		PIG_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, PigZombieEntity.registerPigZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PigZombieEntity::canPigZombieSpawn);
 		});
 
-		ZOMBIE_COW.ifPresent(entityType -> {
-			GlobalEntityTypeAttributes.put(entityType, ZombieCowEntity.registerZombieCowAttributes().create());
-			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowEntity::canZombieCowSpawn);
+		COW_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, CowZombieEntity.registerCowZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CowZombieEntity::canCowZombieSpawn);
 		});
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public static void clientSetup()
 	{
-		registerEntityRenderer(ZOMBIE_PIG, ZombiePigRenderer::new);
-		registerEntityRenderer(ZOMBIE_COW, ZombieCowRenderer::new);
+		registerEntityRenderer(PIG_ZOMBIE, PigZombieRenderer::new);
+		registerEntityRenderer(COW_ZOMBIE, CowZombieRenderer::new);
 	}
 
 	// utility methods to make registering entities easier

@@ -16,11 +16,11 @@ import xyz.spgamers.forge.armageddon.init.ModEntities;
 
 import java.util.Random;
 
-public final class ZombiePigEntity extends AbstractZombieEntity
+public final class PigZombieEntity extends AbstractZombieEntity
 {
-	public ZombiePigEntity(World world)
+	public PigZombieEntity(World world)
 	{
-		super(ModEntities.ZOMBIE_PIG.get(), world, Armageddon.SERVER_CONFIG.entities::isZombiePigEnabled);
+		super(ModEntities.PIG_ZOMBIE.get(), world, Armageddon.SERVER_CONFIG.animals::isPigZombieEnabled);
 	}
 
 	@Override
@@ -53,14 +53,14 @@ public final class ZombiePigEntity extends AbstractZombieEntity
 		return SoundEvents.ENTITY_PIG_STEP;
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerZombiePigAttributes()
+	public static AttributeModifierMap.MutableAttribute registerPigZombieAttributes()
 	{
 		return registerZombieAttributes();
 	}
 
-	public static boolean canZombiePigSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
+	public static boolean canPigZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
 	{
-		if(!Armageddon.SERVER_CONFIG.entities.isZombiePigEnabled())
+		if(!Armageddon.SERVER_CONFIG.animals.isPigZombieEnabled())
 			return false;
 		if(!canZombieSpawn(entityType, world, reason, pos, random))
 			return false;

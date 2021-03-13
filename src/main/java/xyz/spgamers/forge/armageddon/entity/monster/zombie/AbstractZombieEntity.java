@@ -168,9 +168,9 @@ public class AbstractZombieEntity extends ZombieEntity
 
 	public static void addCustomZombieGoals(ZombieEntity zombie)
 	{
-		if(Armageddon.SERVER_CONFIG.entities.isZombiePigEnabled())
+		if(Armageddon.SERVER_CONFIG.animals.isPigZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
-		if(Armageddon.SERVER_CONFIG.entities.isZombieCowEnabled())
+		if(Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
 	}
 }

@@ -48,7 +48,7 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 		protected void addTables()
 		{
 			registerLootTable(
-					ModEntities.ZOMBIE_PIG.get(),
+					ModEntities.PIG_ZOMBIE.get(),
 					LootTable.builder()
 					         .addLootPool(
 					         		LootPool.builder()
@@ -65,7 +65,7 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 					         )
 			);
 
-			registerLootTable(ModEntities.ZOMBIE_COW.get(),
+			registerLootTable(ModEntities.COW_ZOMBIE.get(),
 					LootTable.builder()
 					         .addLootPool(
 					         		LootPool.builder()

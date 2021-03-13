@@ -16,6 +16,6 @@ public final class ModItemGroup extends ItemGroup
 	public ItemStack createIcon()
 	{
 		// TODO: Make item group icon, cycle through all mod items
-		return ModItems.ZOMBIE_PIG_SPAWN_EGG.get().getDefaultInstance();
+		return ModItems.PIG_ZOMBIE_SPAWN_EGG.get().getDefaultInstance();
 	}
 }

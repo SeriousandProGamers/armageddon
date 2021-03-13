@@ -127,9 +127,9 @@ public class SpawnTurnedZombiePacket
 	private static EntityType<? extends MobEntity> getTurnedEntityType(EntityType<?> entityType)
 	{
 		if(entityType == EntityType.PIG)
-			return ModEntities.ZOMBIE_PIG.get();
+			return ModEntities.PIG_ZOMBIE.get();
 		else if(entityType == EntityType.COW)
-			return ModEntities.ZOMBIE_COW.get();
+			return ModEntities.COW_ZOMBIE.get();
 		else
 			return null;
 	}

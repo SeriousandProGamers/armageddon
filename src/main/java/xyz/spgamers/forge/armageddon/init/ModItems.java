@@ -9,8 +9,8 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.Armageddon;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombieCowEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombiePigEntity;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
 import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -37,17 +37,17 @@ public final class ModItems
 			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<SpawnEggItem<ZombiePigEntity>> ZOMBIE_PIG_SPAWN_EGG = registerSpawnEgg(
-			ModEntities.ZOMBIE_PIG,
+	public static final RegistryObject<SpawnEggItem<PigZombieEntity>> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.PIG_ZOMBIE,
 			44975, 14377823,
-			Armageddon.SERVER_CONFIG.entities::isZombiePigEnabled,
+			Armageddon.SERVER_CONFIG.animals::isPigZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
-	public static final RegistryObject<SpawnEggItem<ZombieCowEntity>> ZOMBIE_COW_SPAWN_EGG = registerSpawnEgg(
-			ModEntities.ZOMBIE_COW,
+	public static final RegistryObject<SpawnEggItem<CowZombieEntity>> COW_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.COW_ZOMBIE,
 			44975, 10592673,
-			Armageddon.SERVER_CONFIG.entities::isZombieCowEnabled,
+			Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
