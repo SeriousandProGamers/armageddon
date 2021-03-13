@@ -39,6 +39,17 @@ public final class EntityEventHandler
 			AbstractZombieEntity.addCustomZombieGoals((ZombieEntity) entity);
 	}
 
+	// Not working as intended
+	/*@SubscribeEvent
+	public static void onLivingSetTarget(LivingSetAttackTargetEvent event)
+	{
+		LivingEntity attacker = event.getEntityLiving();
+		LivingEntity target = event.getTarget();
+
+		if(attacker instanceof ZombieEntity && target != null && target.isPotionActive(ModEffects.ZOMBIE_EVASION.get()))
+			((ZombieEntity) target).setAttackTarget(null);
+	}*/
+
 	@SubscribeEvent
 	public static void onEntityHurt(LivingHurtEvent event)
 	{

@@ -4,6 +4,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
+import net.minecraft.potion.Effect;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -37,11 +39,24 @@ public final class LanguageGenerator extends LanguageProvider
 		addItem(ModItems.ROTTEN_EGG, "Rotten Egg");
 		addItem(ModItems.ROTTEN_MUTTON, "Rotten Mutton");
 		addEntityType(ModEntities.ROTTEN_EGG, "Rotten Egg");
+		// addEffect(ModEffects.ZOMBIE_EVASION, "Zombie Evasion");
 
-		// human readable names are Zombie<> but code names are <>Zombei
+		// human readable names are Zombie<> but code names are <>Zombie
 		addEntityType(ModEntities.PIG_ZOMBIE, "Zombie Pig");
 		addEntityType(ModEntities.COW_ZOMBIE, "Zombie Cow");
 		addSpawnEggTranslations();
+	}
+
+	@Override
+	public void add(Effect key, String value)
+	{
+		String effectName = key.getName();
+
+		add(effectName, value);
+		add(String.format("%s.%s", Items.POTION.getTranslationKey(), effectName), String.format("Potion of %s", value));
+		add(String.format("%s.%s", Items.SPLASH_POTION.getTranslationKey(), effectName), String.format("Splash Potion of %s", value));
+		add(String.format("%s.%s", Items.LINGERING_POTION.getTranslationKey(), effectName), String.format("Lingering Potion of %s", value));
+		add(String.format("%s.%s", Items.TIPPED_ARROW.getTranslationKey(), effectName), String.format("Arrow of %s", value));
 	}
 
 	// this assumes entity types have already been translated

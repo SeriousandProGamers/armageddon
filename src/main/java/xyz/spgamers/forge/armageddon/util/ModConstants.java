@@ -32,10 +32,29 @@ public final class ModConstants
 		public static final String ROTTEN_CHICKEN = "rotten_chicken";
 		public static final String ROTTEN_EGG = "rotten_egg";
 		public static final String ROTTEN_MUTTON = "rotten_mutton";
-		public static final String ZOMBIE_EVASION = "zombie_evasion";
 		public static final String SPAWN_EGG_SUFFIX = "spawn_egg";
 
 		private Items()
+		{
+			throw new IllegalStateException();
+		}
+	}
+
+	public static final class Potions
+	{
+		// public static final String ZOMBIE_EVASION = "zombie_evasion";
+
+		private Potions()
+		{
+			throw new IllegalStateException();
+		}
+	}
+
+	public static final class Effects
+	{
+		// public static final String ZOMBIE_EVASION = Potions.ZOMBIE_EVASION";
+
+		private Effects()
 		{
 			throw new IllegalStateException();
 		}

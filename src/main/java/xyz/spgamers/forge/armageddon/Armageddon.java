@@ -16,8 +16,10 @@ import xyz.spgamers.forge.armageddon.config.ServerConfig;
 import xyz.spgamers.forge.armageddon.data.ItemModelGenerator;
 import xyz.spgamers.forge.armageddon.data.LanguageGenerator;
 import xyz.spgamers.forge.armageddon.data.LootTableGenerator;
+import xyz.spgamers.forge.armageddon.init.ModEffects;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
+import xyz.spgamers.forge.armageddon.init.ModPotions;
 import xyz.spgamers.forge.armageddon.packet.SpawnTurnedZombiePacket;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
@@ -36,6 +38,8 @@ public final class Armageddon
 
 		ModItems.ITEMS.register(bus);
 		ModEntities.ENTITIES.register(bus);
+		ModEffects.EFFECTS.register(bus);
+		ModPotions.POTIONS.register(bus);
 
 		bus.addListener(this::onCommonSetup);
 		bus.addListener(this::onGatherData);
@@ -45,6 +49,8 @@ public final class Armageddon
 	{
 		event.enqueueWork(ModItems::commonSetup);
 		event.enqueueWork(ModEntities::commonSetup);
+		event.enqueueWork(ModEffects::commonSetup);
+		event.enqueueWork(ModPotions::commonSetup);
 		event.enqueueWork(this::registerPackets);
 	}
 
