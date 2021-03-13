@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
-import net.minecraft.entity.projectile.EggEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
@@ -57,13 +56,6 @@ public final class ModEntities
 			SheepZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.9F, 1.3F).trackingRange(10) // same values as sheep
-	);
-
-	public static final RegistryObject<EntityType<EggEntity>> ROTTEN_EGG = register(
-			ModConstants.Entities.ROTTEN_EGG,
-			ModEntities::rottenEggFactory,
-			EntityClassification.MISC,
-			builder -> builder.size(.25F, .25F).trackingRange(4).func_233608_b_(10) // same values as egg
 	);
 
 	private ModEntities()
@@ -130,12 +122,5 @@ public final class ModEntities
 	private static <E extends Entity> RegistryObject<EntityType<E>> register(String entityName, Function<World, E> entityBuilder, EntityClassification entityClassification)
 	{
 		return register(entityName, entityBuilder, entityClassification, $ -> $);
-	}
-
-	// cant refrence ROTTEN_EGG while its being constructed
-	// little hack to get around that
-	private static EggEntity rottenEggFactory(World world)
-	{
-		return new EggEntity(ROTTEN_EGG.get(), world);
 	}
 }

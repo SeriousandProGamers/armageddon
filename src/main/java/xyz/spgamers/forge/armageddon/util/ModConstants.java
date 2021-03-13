@@ -62,7 +62,6 @@ public final class ModConstants
 
 	public static final class Entities
 	{
-		public static final String ROTTEN_EGG = Items.ROTTEN_EGG;
 		public static final String PIG_ZOMBIE = "pig_zombie";
 		public static final String COW_ZOMBIE = "cow_zombie";
 		public static final String PANDA_ZOMBIE = "panda_zombie";

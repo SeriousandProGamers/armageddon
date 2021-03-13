@@ -13,7 +13,6 @@ import xyz.spgamers.forge.armageddon.entity.monster.zombie.ChickenZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
-import xyz.spgamers.forge.armageddon.item.RottenEggItem;
 import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -58,9 +57,9 @@ public final class ModItems
 			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<RottenEggItem> ROTTEN_EGG = registerItem(
+	public static final RegistryObject<Item> ROTTEN_EGG = registerItem(
 			ModConstants.Items.ROTTEN_EGG,
-			RottenEggItem::new,
+			Item::new,
 			ModItems::defaultItemProperties
 	);
 
@@ -105,6 +104,8 @@ public final class ModItems
 
 	public static void commonSetup()
 	{
+		ITEM_GROUP.setItems(ITEMS);
+
 		ITEMS.getEntries().forEach(obj -> obj.ifPresent(item -> {
 			if(item instanceof SpawnEggItem)
 				DispenserBlock.registerDispenseBehavior(item, new SpawnEggItem.SpawnEggDispenserBehavior());
