@@ -126,7 +126,6 @@ public class SpawnTurnedZombiePacket
 
 		if(turnedEntity != null)
 		{
-			// TODO: Figure out why turning entities are dropping loot
 			turnedEntity.onInitialSpawn(world, world.getDifficultyForLocation(packet.position), SpawnReason.CONVERSION, null, null);
 
 			// child zombies ride the chickens they kill

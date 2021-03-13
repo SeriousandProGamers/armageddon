@@ -5,9 +5,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.Difficulty;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,6 +42,24 @@ public final class EntityEventHandler
 			return;
 		if(entity instanceof ZombieEntity)
 			AbstractZombieEntity.addCustomZombieGoals((ZombieEntity) entity);
+	}
+
+	@SubscribeEvent
+	public static void onLivingDrops(LivingDropsEvent event)
+	{
+		CompoundNBT tag = event.getEntityLiving().getPersistentData();
+
+		if(tag.contains(ModConstants.NBT.WAS_TURNED_TO_ZOMBIE, Constants.NBT.TAG_BYTE) && tag.getBoolean(ModConstants.NBT.WAS_TURNED_TO_ZOMBIE))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void onLivingExperienceDrop(LivingExperienceDropEvent event)
+	{
+		CompoundNBT tag = event.getEntityLiving().getPersistentData();
+
+		if(tag.contains(ModConstants.NBT.WAS_TURNED_TO_ZOMBIE, Constants.NBT.TAG_BYTE) && tag.getBoolean(ModConstants.NBT.WAS_TURNED_TO_ZOMBIE))
+			event.setCanceled(true);
 	}
 
 	@SubscribeEvent
@@ -109,6 +131,7 @@ public final class EntityEventHandler
 				if(difficulty != Difficulty.HARD && mob.world.rand.nextBoolean())
 					return;
 
+				mob.getPersistentData().putBoolean(ModConstants.NBT.WAS_TURNED_TO_ZOMBIE, true);
 				ModConstants.NETWORK.sendToServer(new SpawnTurnedZombiePacket(mob, zombie));
 
 				if(!zombie.isSilent())

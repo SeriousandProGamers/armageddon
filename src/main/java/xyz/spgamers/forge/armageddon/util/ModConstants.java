@@ -139,6 +139,7 @@ public final class ModConstants
 
 	public static final class NBT
 	{
+		public static final String WAS_TURNED_TO_ZOMBIE = "WasTurnedToZombie";
 		public static final String SHEARED = "Sheared";
 		public static final String COLOR = "Color";
 		public static final String IS_CHICKEN_JOCKEY = "IsChickenJockey";
