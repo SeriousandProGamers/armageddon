@@ -115,6 +115,7 @@ public class SpawnTurnedZombiePacket
 
 		if(turnedEntity != null)
 		{
+			// TODO: Figure out why turning entities are dropping loot
 			turnedEntity.onInitialSpawn(world, world.getDifficultyForLocation(packet.position), SpawnReason.CONVERSION, null, null);
 			world.func_242417_l(turnedEntity);
 		}
@@ -130,6 +131,10 @@ public class SpawnTurnedZombiePacket
 			return ModEntities.PIG_ZOMBIE.get();
 		else if(entityType == EntityType.COW)
 			return ModEntities.COW_ZOMBIE.get();
+		/*else if(entityType == EntityType.CHICKEN)
+			return ModEntities.CHICKEN_ZOMBIE.get();*/
+		else if(entityType == EntityType.SHEEP)
+			return ModEntities.SHEEP_ZOMBIE.get();
 		else
 			return null;
 	}

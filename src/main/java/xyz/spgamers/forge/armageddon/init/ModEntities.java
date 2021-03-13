@@ -17,8 +17,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.client.renderer.entity.CowZombieRenderer;
 import xyz.spgamers.forge.armageddon.client.renderer.entity.PigZombieRenderer;
+import xyz.spgamers.forge.armageddon.client.renderer.entity.SheepZombieRenderer;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.function.Function;
@@ -39,6 +41,20 @@ public final class ModEntities
 			CowZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.9F, 1.4F).trackingRange(10) // same values as cow
+	);
+
+	/*public static final RegistryObject<EntityType<ChickenZombieEntity>> CHICKEN_ZOMBIE = register(
+			ModConstants.Entities.CHICKEN_ZOMBIE,
+			ChickenZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.4F, .7F).trackingRange(10) // same values as chicken
+	);*/
+
+	public static final RegistryObject<EntityType<SheepZombieEntity>> SHEEP_ZOMBIE = register(
+			ModConstants.Entities.SHEEP_ZOMBIE,
+			SheepZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.9F, 1.3F).trackingRange(10) // same values as sheep
 	);
 
 	public static final RegistryObject<EntityType<EggEntity>> ROTTEN_EGG = register(
@@ -64,6 +80,16 @@ public final class ModEntities
 			GlobalEntityTypeAttributes.put(entityType, CowZombieEntity.registerCowZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CowZombieEntity::canCowZombieSpawn);
 		});
+
+		/*CHICKEN_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, ChickenZombieEntity.registerChickenZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChickenZombieEntity::canChickenZombieSpawn);
+		});*/
+
+		SHEEP_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, SheepZombieEntity.registerSheepZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SheepZombieEntity::canSheepZombieSpawn);
+		});
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -71,6 +97,8 @@ public final class ModEntities
 	{
 		registerEntityRenderer(PIG_ZOMBIE, PigZombieRenderer::new);
 		registerEntityRenderer(COW_ZOMBIE, CowZombieRenderer::new);
+		// registerEntityRenderer(CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
+		registerEntityRenderer(SHEEP_ZOMBIE, SheepZombieRenderer::new);
 	}
 
 	// utility methods to make registering entities easier

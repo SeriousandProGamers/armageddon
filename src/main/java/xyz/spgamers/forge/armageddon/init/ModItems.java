@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
 import xyz.spgamers.forge.armageddon.item.RottenEggItem;
 import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
@@ -79,6 +80,20 @@ public final class ModItems
 			ModEntities.COW_ZOMBIE,
 			44975, 10592673,
 			Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled,
+			ModItems::defaultItemProperties
+	);
+
+	/*public static final RegistryObject<SpawnEggItem<ChickenZombieEntity>> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.CHICKEN_ZOMBIE,
+			44975, 16711680,
+			Armageddon.SERVER_CONFIG.animals::isChickenZombieEnabled,
+			ModItems::defaultItemProperties
+	);*/
+
+	public static final RegistryObject<SpawnEggItem<SheepZombieEntity>> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.SHEEP_ZOMBIE,
+			44975, 16758197,
+			Armageddon.SERVER_CONFIG.animals::isSheepZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 

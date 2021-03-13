@@ -84,6 +84,9 @@ public final class ModConstants
 
 	public static final class NBT
 	{
+		public static final String SHEARED = "Sheared";
+		public static final String COLOR = "Color";
+
 		private NBT()
 		{
 			throw new IllegalStateException();

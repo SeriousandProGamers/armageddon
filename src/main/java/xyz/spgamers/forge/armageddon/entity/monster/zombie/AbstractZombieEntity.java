@@ -13,6 +13,7 @@ import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -172,5 +173,9 @@ public class AbstractZombieEntity extends ZombieEntity
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
+			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, ChickenEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isSheepZombieEnabled())
+			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, SheepEntity.class, true));
 	}
 }

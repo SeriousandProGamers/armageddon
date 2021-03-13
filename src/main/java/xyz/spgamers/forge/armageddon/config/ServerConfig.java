@@ -42,17 +42,29 @@ public final class ServerConfig
 		private final ForgeConfigSpec.BooleanValue enablePolarBearZombie;
 		private final ForgeConfigSpec.BooleanValue enablePandaZombie;
 
+		private final ForgeConfigSpec.BooleanValue sheepZombieShearable;
+
 		Animals(ForgeConfigSpec.Builder builder)
 		{
 			enablePigZombie = builder.comment("Enable or Disable Zombie Pig EntityType.").define("enablePigZombie", true);
 			enableCowZombie = builder.comment("Enable or Disable Zombie Cow EntityType.").define("enableCowZombie", true);
-			enableSheepZombie = builder.comment("Enable or Disable Zombie Sheep EntityType.").define("enableSheepZombie", true);
 			enableChickenZombie = builder.comment("Enable or Disable Zombie Chicken EntityType.").define("enableChickenZombie", true);
 			enableRabbitZombie = builder.comment("Enable or Disable Zombie Rabbit EntityType.").define("enableRabbitZombie", true);
 			enableWolfZombie = builder.comment("Enable or Disable Zombie Wolf EntityType.").define("enableWolfZombie", true);
 			enableFoxZombie = builder.comment("Enable or Disable Zombie Fox EntityType.").define("enableFoxZombie", true);
 			enablePolarBearZombie = builder.comment("Enable or Disable Zombie PolarBear EntityType.").define("enablePolarBearZombie", true);
 			enablePandaZombie = builder.comment("Enable or Disable Zombie Panda EntityType.").define("enablePandaZombie", true);
+
+			builder.push("sheep");
+
+			enableSheepZombie = builder.comment("Enable or Disable Zombie Sheep EntityType.").define("enable", true);
+			sheepZombieShearable = builder.comment(
+					"Makes the Sheep Zombie Shearable with Shears.",
+					"This is off by default due to Wool hiding most of the Zombie texture",
+					"and making sort of hard to determine what sheep are Zombies.")
+			                              .define("shearable", false);
+
+			builder.pop();
 		}
 
 		public boolean isPigZombieEnabled()
@@ -68,6 +80,11 @@ public final class ServerConfig
 		public boolean isSheepZombieEnabled()
 		{
 			return enableSheepZombie.get();
+		}
+
+		public boolean isSheepZombieShearble()
+		{
+			return sheepZombieShearable.get();
 		}
 
 		public boolean isChickenZombieEnabled()
