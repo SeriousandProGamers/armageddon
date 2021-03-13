@@ -9,6 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.Armageddon;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.ChickenZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
@@ -83,12 +84,12 @@ public final class ModItems
 			ModItems::defaultItemProperties
 	);
 
-	/*public static final RegistryObject<SpawnEggItem<ChickenZombieEntity>> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem<ChickenZombieEntity>> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.CHICKEN_ZOMBIE,
 			44975, 16711680,
 			Armageddon.SERVER_CONFIG.animals::isChickenZombieEnabled,
 			ModItems::defaultItemProperties
-	);*/
+	);
 
 	public static final RegistryObject<SpawnEggItem<SheepZombieEntity>> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.SHEEP_ZOMBIE,

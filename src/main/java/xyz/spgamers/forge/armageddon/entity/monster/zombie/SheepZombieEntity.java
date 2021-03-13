@@ -238,7 +238,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	}
 
 	@Override
-	protected boolean isChickenJockeyAllowed()
+	public boolean isChickenJockeyAllowed()
 	{
 		return false;
 	}

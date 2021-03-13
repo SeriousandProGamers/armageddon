@@ -44,7 +44,7 @@ public final class LanguageGenerator extends LanguageProvider
 		// human readable names are Zombie<> but code names are <>Zombie
 		addEntityType(ModEntities.PIG_ZOMBIE, "Zombie Pig");
 		addEntityType(ModEntities.COW_ZOMBIE, "Zombie Cow");
-		// addEntityType(ModEntities.CHICKEN_ZOMBIE, "Zombie Chicken");
+		addEntityType(ModEntities.CHICKEN_ZOMBIE, "Zombie Chicken");
 		addEntityType(ModEntities.SHEEP_ZOMBIE, "Zombie Sheep");
 		addSpawnEggTranslations();
 	}

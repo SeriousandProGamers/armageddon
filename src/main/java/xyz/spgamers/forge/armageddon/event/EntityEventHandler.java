@@ -9,6 +9,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.Difficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.AbstractZombieEntity;
@@ -37,6 +38,33 @@ public final class EntityEventHandler
 			return;
 		if(entity instanceof ZombieEntity)
 			AbstractZombieEntity.addCustomZombieGoals((ZombieEntity) entity);
+	}
+
+	@SubscribeEvent
+	public static void onLivingEntitySpawn(LivingSpawnEvent.SpecialSpawn event)
+	{
+		/*LivingEntity entity = event.getEntityLiving();
+
+		if(entity instanceof ZombieEntity)
+		{
+			ZombieEntity zombie = (ZombieEntity) entity;
+			Entity riding = zombie.getRidingEntity();
+
+			if(riding instanceof ChickenEntity)
+			{
+				ChickenEntity chicken = (ChickenEntity) riding;
+				ChickenZombieEntity zombieChicken = chicken.func_233656_b_(ModEntities.CHICKEN_ZOMBIE.get(), false);
+
+				if(zombieChicken != null)
+				{
+					zombie.stopRiding();
+					chicken.setChickenJockey(false);
+					chicken.onKillCommand();
+					zombieChicken.setChickenJockey(true);
+					zombie.startRiding(zombieChicken);
+				}
+			}
+		}*/
 	}
 
 	// Not working as intended
@@ -69,6 +97,7 @@ public final class EntityEventHandler
 			if(damage <= 0 || entity.getHealth() - damage > 0)
 				return;
 
+			ZombieEntity zombie = (ZombieEntity) source;
 			MobEntity mob = (MobEntity) entity;
 			Difficulty difficulty = mob.world.getDifficulty();
 
@@ -80,9 +109,9 @@ public final class EntityEventHandler
 				if(difficulty != Difficulty.HARD && mob.world.rand.nextBoolean())
 					return;
 
-				ModConstants.NETWORK.sendToServer(new SpawnTurnedZombiePacket(mob));
+				ModConstants.NETWORK.sendToServer(new SpawnTurnedZombiePacket(mob, zombie));
 
-				if(!source.isSilent())
+				if(!zombie.isSilent())
 					mob.world.playEvent(null, 1026, mob.getPosition(), 0);
 			}
 		}

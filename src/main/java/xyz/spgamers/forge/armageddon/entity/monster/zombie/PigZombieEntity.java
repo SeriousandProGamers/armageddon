@@ -24,7 +24,7 @@ public final class PigZombieEntity extends AbstractZombieEntity
 	}
 
 	@Override
-	protected boolean isChickenJockeyAllowed()
+	public boolean isChickenJockeyAllowed()
 	{
 		return false;
 	}

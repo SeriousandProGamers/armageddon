@@ -23,6 +23,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import xyz.spgamers.forge.armageddon.Armageddon;
+import xyz.spgamers.forge.armageddon.init.ModEntities;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -77,18 +78,21 @@ public class AbstractZombieEntity extends ZombieEntity
 					// TODO: Allow spawning on zombie chickens, when we add them
 					if(world.getRandom().nextFloat() < .05D)
 					{
-						List<ChickenEntity> list = world.getEntitiesWithinAABB(ChickenEntity.class, getBoundingBox().grow(5D, 3D, 5D), EntityPredicates.IS_STANDALONE);
+						// List<ChickenEntity> list = world.getEntitiesWithinAABB(ChickenEntity.class, getBoundingBox().grow(5D, 3D, 5D), EntityPredicates.IS_STANDALONE);
+						List<ChickenZombieEntity> list = world.getEntitiesWithinAABB(ChickenZombieEntity.class, getBoundingBox().grow(5D, 3D, 5D), EntityPredicates.IS_STANDALONE);
 
 						if(!list.isEmpty())
 						{
-							ChickenEntity chicken = list.get(0);
+							// ChickenEntity chicken = list.get(0);
+							ChickenZombieEntity chicken = list.get(0);
 							chicken.setChickenJockey(true);
 							startRiding(chicken);
 						}
 					}
 					else if(world.getRandom().nextFloat() < .05D)
 					{
-						ChickenEntity chicken = EntityType.CHICKEN.create(this.world);
+						// ChickenEntity chicken = EntityType.CHICKEN.create(this.world);
+						ChickenZombieEntity chicken = ModEntities.CHICKEN_ZOMBIE.get().create(this.world);
 
 						if(chicken != null)
 						{
@@ -132,7 +136,7 @@ public class AbstractZombieEntity extends ZombieEntity
 		addCustomZombieGoals(this);
 	}
 
-	protected boolean isChickenJockeyAllowed()
+	public boolean isChickenJockeyAllowed()
 	{
 		return true;
 	}
@@ -169,12 +173,20 @@ public class AbstractZombieEntity extends ZombieEntity
 
 	public static void addCustomZombieGoals(ZombieEntity zombie)
 	{
+		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
+		{
+			// child zombies have higher priority to go for chickens
+			// players have priority of 2, child zombies prefer chickens and have priority of 1
+			if(zombie.isChild())
+				zombie.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(zombie, ChickenEntity.class, true));
+			else
+				zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, ChickenEntity.class, true));
+		}
+
 		if(Armageddon.SERVER_CONFIG.animals.isPigZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
-		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
-			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, ChickenEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isSheepZombieEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, SheepEntity.class, true));
 	}

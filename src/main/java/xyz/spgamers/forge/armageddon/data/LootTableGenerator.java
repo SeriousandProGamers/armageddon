@@ -7,10 +7,8 @@ import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
-import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
-import net.minecraft.loot.functions.Smelt;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ForgeLootTableProvider;
 import net.minecraftforge.fml.RegistryObject;
@@ -89,7 +87,7 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 					         )
 			);
 
-			/*registerLootTable(
+			registerLootTable(
 					ModEntities.CHICKEN_ZOMBIE.get(),
 					LootTable.builder()
 					         .addLootPool(
@@ -106,13 +104,13 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 						                    .rolls(ConstantRange.of(1))
 						                    .addEntry(
 						                    		ItemLootEntry.builder(ModItems.ROTTEN_CHICKEN.get())
-								                                 .acceptFunction(
+								                                 /*.acceptFunction(
 								                                 		Smelt.func_215953_b()
 									                                         .acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE))
-								                                 )
+								                                 )*/
 								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F))))
 					         )
-			);*/
+			);
 
 			registerLootTable(
 					ModEntities.SHEEP_ZOMBIE.get(),
@@ -123,10 +121,10 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 						                    .addEntry(
 						                    		ItemLootEntry.builder(ModItems.ROTTEN_MUTTON.get())
 								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(1F, 2F)))
-								                                 .acceptFunction(
+								                                 /*.acceptFunction(
 								                                 		Smelt.func_215953_b()
 									                                         .acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE))
-								                                 )
+								                                 )*/
 								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
 						                    )
 					         )
