@@ -27,24 +27,25 @@ public final class ItemModelGenerator extends ItemModelProvider
 	@Override
 	protected void registerModels()
 	{
-		generateDefaultItemModel(ModItems.ROTTEN_PORKCHOP::get);
-		generateDefaultItemModel(ModItems.ROTTEN_BEEF::get);
-		generateSpawnEggItemModels();
+		for(RegistryObject<Item> obj : ModItems.ITEMS.getEntries())
+		{
+			obj.ifPresent(item -> {
+				if(item instanceof SpawnEggItem)
+					generateSpawnEggItemModel(item);
+				else
+					generateDefaultItemModel(item);
+			});
+		}
 	}
 
 	// .getRegistryName() is marked nullable
 	// but should never return null
 	// only null on items with no registry (items not registered correctly)
 	@SuppressWarnings("ConstantConditions")
-	private void generateSpawnEggItemModels()
+	private void generateSpawnEggItemModel(IItemProvider itemProvider)
 	{
-		for(RegistryObject<Item> obj : ModItems.ITEMS.getEntries())
-		{
-			obj.ifPresent(item -> {
-				if(item instanceof SpawnEggItem)
-					getBuilder(item.getRegistryName().toString()).parent(getExistingFile(appendItemFolder(mcLoc(SPAWN_EGG_ITEM_MODEL))));
-			});
-		}
+		getBuilder(itemProvider.asItem().getRegistryName().toString())
+				.parent(getExistingFile(appendItemFolder(mcLoc(SPAWN_EGG_ITEM_MODEL))));
 	}
 
 	private void generateDefaultItemModel(IItemProvider itemProvider)

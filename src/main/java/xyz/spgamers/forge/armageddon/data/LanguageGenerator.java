@@ -31,8 +31,16 @@ public final class LanguageGenerator extends LanguageProvider
 		add(ModItems.ITEM_GROUP, "Armageddon");
 		addItem(ModItems.ROTTEN_PORKCHOP, "Rotten Porkchop");
 		addItem(ModItems.ROTTEN_BEEF, "Rotten Beef");
-		addEntityType(ModEntities.PIG_ZOMBIE, "Pig Zombie");
-		addEntityType(ModEntities.COW_ZOMBIE, "Cow Zombie");
+		addItem(ModItems.ROTTEN_FISH, "Rotten Fish");
+		addItem(ModItems.ROTTEN_RABBIT, "Rotten Rabbit");
+		addItem(ModItems.ROTTEN_CHICKEN, "Rotten Chicken");
+		addItem(ModItems.ROTTEN_EGG, "Rotten Egg");
+		addItem(ModItems.ROTTEN_MUTTON, "Rotten Mutton");
+		addEntityType(ModEntities.ROTTEN_EGG, "Rotten Egg");
+
+		// human readable names are Zombie<> but code names are <>Zombei
+		addEntityType(ModEntities.PIG_ZOMBIE, "Zombie Pig");
+		addEntityType(ModEntities.COW_ZOMBIE, "Zombie Cow");
 		addSpawnEggTranslations();
 	}
 

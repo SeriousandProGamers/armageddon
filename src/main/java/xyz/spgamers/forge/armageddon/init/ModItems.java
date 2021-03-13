@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
+import xyz.spgamers.forge.armageddon.item.RottenEggItem;
 import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -33,6 +34,36 @@ public final class ModItems
 
 	public static final RegistryObject<Item> ROTTEN_BEEF = registerItem(
 			ModConstants.Items.ROTTEN_BEEF,
+			Item::new,
+			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+	);
+
+	public static final RegistryObject<Item> ROTTEN_FISH = registerItem(
+			ModConstants.Items.ROTTEN_FISH,
+			Item::new,
+			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+	);
+
+	public static final RegistryObject<Item> ROTTEN_RABBIT = registerItem(
+			ModConstants.Items.ROTTEN_RABBIT,
+			Item::new,
+			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+	);
+
+	public static final RegistryObject<Item> ROTTEN_CHICKEN = registerItem(
+			ModConstants.Items.ROTTEN_CHICKEN,
+			Item::new,
+			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+	);
+
+	public static final RegistryObject<RottenEggItem> ROTTEN_EGG = registerItem(
+			ModConstants.Items.ROTTEN_EGG,
+			RottenEggItem::new,
+			ModItems::defaultItemProperties
+	);
+
+	public static final RegistryObject<Item> ROTTEN_MUTTON = registerItem(
+			ModConstants.Items.ROTTEN_MUTTON,
 			Item::new,
 			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
 	);
