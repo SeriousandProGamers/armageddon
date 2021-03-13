@@ -12,16 +12,13 @@ import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
@@ -30,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.IForgeShearable;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -39,6 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public final class SheepZombieEntity extends AbstractZombieEntity implements IForgeShearable
@@ -131,12 +130,18 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 			int i = 1 + rand.nextInt(3);
 
 			List<ItemStack> drops = Lists.newArrayList();
+			Map<DyeColor, IItemProvider> woolMap = ObfuscationReflectionHelper.getPrivateValue(SheepEntity.class, null, "WOOL_BY_COLOR");
 
 			for(int j = 0; j < i; j++)
 			{
 				DyeColor color = getFleeceColor();
-				Item wool = color.getTag().getRandomElement(rand);
-				drops.add(new ItemStack(wool));
+				// Dye color tags are the dye items, not wool
+				// Item wool = color.getTag().getRandomElement(rand);
+
+				if(woolMap == null)
+					drops.add(Items.WHITE_WOOL.getDefaultInstance());
+				else
+					drops.add(woolMap.getOrDefault(color, Items.WHITE_WOOL).asItem().getDefaultInstance());
 			}
 
 			return drops;
