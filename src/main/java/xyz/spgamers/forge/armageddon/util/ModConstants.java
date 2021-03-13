@@ -1,6 +1,9 @@
 package xyz.spgamers.forge.armageddon.util;
 
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
@@ -37,6 +40,29 @@ public final class ModConstants
 		private Items()
 		{
 			throw new IllegalStateException();
+		}
+
+		public static final class ItemTags
+		{
+			private ItemTags()
+			{
+				throw new IllegalStateException();
+			}
+
+			private static Tags.IOptionalNamedTag<Item> forge(String path)
+			{
+				return tag("forge", path);
+			}
+
+			private static Tags.IOptionalNamedTag<Item> mod(String path)
+			{
+				return tag(MOD_ID, path);
+			}
+
+			private static Tags.IOptionalNamedTag<Item> tag(String domain, String path)
+			{
+				return net.minecraft.tags.ItemTags.createOptional(new ResourceLocation(domain, path));
+			}
 		}
 	}
 
@@ -78,6 +104,36 @@ public final class ModConstants
 		private Entities()
 		{
 			throw new IllegalStateException();
+		}
+
+		public static final class EntityTypeTags
+		{
+			public static final Tags.IOptionalNamedTag<EntityType<?>> FORGE_ZOMBIES = forge("zombies");
+			public static final Tags.IOptionalNamedTag<EntityType<?>> FORGE_ZOMBIE = forge("zombies/zombie");
+
+			public static final Tags.IOptionalNamedTag<EntityType<?>> MOD_ZOMBIES = mod("zombies");
+			// public static final Tags.IOptionalNamedTag<EntityType<?>> MOD_SPECIAL_ZOMBIES = mod("zombies/special");
+			public static final Tags.IOptionalNamedTag<EntityType<?>> MOD_PASSIVE_ZOMBIES = mod("zombies/passive");
+
+			private EntityTypeTags()
+			{
+				throw new IllegalStateException();
+			}
+
+			private static Tags.IOptionalNamedTag<EntityType<?>> forge(String path)
+			{
+				return tag("forge", path);
+			}
+
+			private static Tags.IOptionalNamedTag<EntityType<?>> mod(String path)
+			{
+				return tag(MOD_ID, path);
+			}
+
+			private static Tags.IOptionalNamedTag<EntityType<?>> tag(String domain, String path)
+			{
+				return net.minecraft.tags.EntityTypeTags.createOptional(new ResourceLocation(domain, path));
+			}
 		}
 	}
 

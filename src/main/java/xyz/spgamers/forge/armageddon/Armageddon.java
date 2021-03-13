@@ -13,9 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
-import xyz.spgamers.forge.armageddon.data.ItemModelGenerator;
-import xyz.spgamers.forge.armageddon.data.LanguageGenerator;
-import xyz.spgamers.forge.armageddon.data.LootTableGenerator;
+import xyz.spgamers.forge.armageddon.data.*;
 import xyz.spgamers.forge.armageddon.init.ModEffects;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
@@ -72,6 +70,8 @@ public final class Armageddon
 			// Server asset generators
 			// recipes, advancements, tags, loot tables, etc
 			generator.addProvider(new LootTableGenerator(generator));
+			generator.addProvider(new EntityTypeTagGenerator(generator, fileHelper));
+			generator.addProvider(new ItemTagGenerator(generator, fileHelper));
 		}
 	}
 
