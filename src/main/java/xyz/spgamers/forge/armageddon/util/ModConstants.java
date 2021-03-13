@@ -25,6 +25,7 @@ public final class ModConstants
 
 	public static final class Items
 	{
+		public static final String ROTTEN_PORKCHOP = "rotten_porkchop";
 		public static final String SPAWN_EGG_SUFFIX = "spawn_egg";
 
 		private Items()

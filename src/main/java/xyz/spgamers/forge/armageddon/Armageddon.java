@@ -15,6 +15,7 @@ import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
 import xyz.spgamers.forge.armageddon.data.ItemModelGenerator;
 import xyz.spgamers.forge.armageddon.data.LanguageGenerator;
+import xyz.spgamers.forge.armageddon.data.LootTableGenerator;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.packet.SpawnTurnedZombiePacket;
@@ -64,6 +65,7 @@ public final class Armageddon
 		{
 			// Server asset generators
 			// recipes, advancements, tags, loot tables, etc
+			generator.addProvider(new LootTableGenerator(generator));
 		}
 	}
 

@@ -24,12 +24,6 @@ public final class ZombiePigEntity extends AbstractZombieEntity
 	}
 
 	@Override
-	protected void registerGoals()
-	{
-		super.registerGoals();
-	}
-
-	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return SoundEvents.ENTITY_PIG_AMBIENT;
