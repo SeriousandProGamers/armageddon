@@ -8,9 +8,7 @@ import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -34,6 +32,7 @@ import xyz.spgamers.forge.armageddon.util.WorldHelper;
 
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
@@ -170,6 +169,39 @@ public final class SpawnEggItem<E extends Entity> extends Item implements IItemC
 	public boolean isEntityEnabled()
 	{
 		return entityEnabledSupplier.getAsBoolean();
+	}
+
+	// Copy of logic from Vanilla SpawnEggItem
+	//
+	// should be able to cast AgeableEntity into E with no issues
+	// the function just creates instance from the EntityType and some per entity magic
+	@SuppressWarnings("unchecked")
+	public static <E extends MobEntity> Optional<E> getChildToSpawn(PlayerEntity player, E parent, EntityType<E> entityType, ServerWorld world, BlockPos pos, ItemStack stack)
+	{
+		E child;
+
+		if(parent instanceof AgeableEntity)
+			child = (E) ((AgeableEntity) parent).func_241840_a(world, (AgeableEntity) parent);
+		else
+			child = (E) entityType.create(world);
+
+
+		if(child == null)
+			return Optional.empty();
+
+		child.setChild(true);
+
+		if(!child.isChild())
+			return Optional.empty();
+
+		child.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
+		world.func_242417_l(child);
+
+		if(stack.hasDisplayName())
+			child.setCustomName(stack.getDisplayName());
+
+		stack.shrink(1);
+		return Optional.of(child);
 	}
 
 	public static final class SpawnEggDispenserBehavior extends DefaultDispenseItemBehavior

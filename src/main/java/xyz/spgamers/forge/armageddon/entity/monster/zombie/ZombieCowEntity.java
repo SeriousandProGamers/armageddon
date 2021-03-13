@@ -24,6 +24,12 @@ public final class ZombieCowEntity extends AbstractZombieEntity
 	}
 
 	@Override
+	protected boolean isChickenJockeyAllowed()
+	{
+		return false;
+	}
+
+	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return SoundEvents.ENTITY_COW_AMBIENT;
