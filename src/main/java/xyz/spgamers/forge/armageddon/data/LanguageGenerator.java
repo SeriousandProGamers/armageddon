@@ -30,7 +30,9 @@ public final class LanguageGenerator extends LanguageProvider
 	{
 		add(ModItems.ITEM_GROUP, "Armageddon");
 		addItem(ModItems.ROTTEN_PORKCHOP, "Rotten Porkchop");
+		addItem(ModItems.ROTTEN_BEEF, "Rotten Beef");
 		addEntityType(ModEntities.ZOMBIE_PIG, "Zombie Pig");
+		addEntityType(ModEntities.ZOMBIE_COW, "Zombie Cow");
 		addSpawnEggTranslations();
 	}
 

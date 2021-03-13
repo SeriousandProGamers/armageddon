@@ -128,6 +128,8 @@ public class SpawnTurnedZombiePacket
 	{
 		if(entityType == EntityType.PIG)
 			return ModEntities.ZOMBIE_PIG.get();
+		else if(entityType == EntityType.COW)
+			return ModEntities.ZOMBIE_COW.get();
 		else
 			return null;
 	}

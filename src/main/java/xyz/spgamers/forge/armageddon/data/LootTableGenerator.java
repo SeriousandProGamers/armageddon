@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
+import net.minecraft.item.Items;
 import net.minecraft.loot.*;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
@@ -61,6 +62,27 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 									                             )*/
 									                             .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
 							                )
+					         )
+			);
+
+			registerLootTable(ModEntities.ZOMBIE_COW.get(),
+					LootTable.builder()
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    .addEntry(
+						                    		ItemLootEntry.builder(Items.LEATHER)
+								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 2F)))
+								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+						                    )
+					         )
+					         .addLootPool(LootPool.builder().rolls(ConstantRange.of(1))
+					                              .addEntry(
+					                              		ItemLootEntry.builder(ModItems.ROTTEN_BEEF.get())
+						                                             .acceptFunction(SetCount.builder(RandomValueRange.of(1F, 3.0F)))
+						                                             // .acceptFunction(Smelt.func_215953_b().acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE)))
+						                                             .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+					                              )
 					         )
 			);
 		}

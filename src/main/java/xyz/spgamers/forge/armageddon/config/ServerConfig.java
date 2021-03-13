@@ -31,15 +31,22 @@ public final class ServerConfig
 	public static final class Entities
 	{
 		private final ForgeConfigSpec.BooleanValue enableZombiePig;
+		private final ForgeConfigSpec.BooleanValue enableZombieCow;
 
 		Entities(ForgeConfigSpec.Builder builder)
 		{
 			enableZombiePig = builder.comment("Enable or Disable Zombie Pig EntityType.").define("enableZombiePig", true);
+			enableZombieCow = builder.comment("Enable or Disable Zombie Cow EntityType.").define("enableZombieCow", true);
 		}
 
 		public boolean isZombiePigEnabled()
 		{
 			return enableZombiePig.get();
+		}
+
+		public boolean isZombieCowEnabled()
+		{
+			return enableZombieCow.get();
 		}
 	}
 }

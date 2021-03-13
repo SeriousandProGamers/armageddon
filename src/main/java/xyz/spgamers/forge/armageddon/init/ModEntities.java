@@ -14,7 +14,9 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.spgamers.forge.armageddon.client.renderer.entity.ZombieCowRenderer;
 import xyz.spgamers.forge.armageddon.client.renderer.entity.ZombiePigRenderer;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombieCowEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.ZombiePigEntity;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
@@ -31,6 +33,13 @@ public final class ModEntities
 			builder -> builder.size(.9F, .9F).trackingRange(10) // same values as pig
 	);
 
+	public static final RegistryObject<EntityType<ZombieCowEntity>> ZOMBIE_COW = register(
+			ModConstants.Entities.ZOMBIE_COW,
+			ZombieCowEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.9F, 1.4F).trackingRange(10) // same values as cow
+	);
+
 	private ModEntities()
 	{
 		throw new IllegalStateException();
@@ -42,12 +51,18 @@ public final class ModEntities
 			GlobalEntityTypeAttributes.put(entityType, ZombiePigEntity.registerZombiePigAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombiePigEntity::canZombiePigSpawn);
 		});
+
+		ZOMBIE_COW.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, ZombieCowEntity.registerZombieCowAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowEntity::canZombieCowSpawn);
+		});
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public static void clientSetup()
 	{
 		registerEntityRenderer(ZOMBIE_PIG, ZombiePigRenderer::new);
+		registerEntityRenderer(ZOMBIE_COW, ZombieCowRenderer::new);
 	}
 
 	// utility methods to make registering entities easier

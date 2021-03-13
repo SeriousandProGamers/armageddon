@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IServerWorld;
@@ -70,5 +71,7 @@ public class AbstractZombieEntity extends ZombieEntity
 	{
 		if(Armageddon.SERVER_CONFIG.entities.isZombiePigEnabled())
 			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, PigEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.entities.isZombieCowEnabled())
+			zombie.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(zombie, CowEntity.class, true));
 	}
 }

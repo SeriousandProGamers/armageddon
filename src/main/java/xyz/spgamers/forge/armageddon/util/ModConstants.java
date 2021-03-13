@@ -26,6 +26,7 @@ public final class ModConstants
 	public static final class Items
 	{
 		public static final String ROTTEN_PORKCHOP = "rotten_porkchop";
+		public static final String ROTTEN_BEEF = "rotten_beef";
 		public static final String SPAWN_EGG_SUFFIX = "spawn_egg";
 
 		private Items()
@@ -37,6 +38,7 @@ public final class ModConstants
 	public static final class Entities
 	{
 		public static final String ZOMBIE_PIG = "zombie_pig";
+		public static final String ZOMBIE_COW = "zombie_cow";
 
 		private Entities()
 		{

@@ -28,6 +28,7 @@ public final class ItemModelGenerator extends ItemModelProvider
 	protected void registerModels()
 	{
 		generateDefaultItemModel(ModItems.ROTTEN_PORKCHOP::get);
+		generateDefaultItemModel(ModItems.ROTTEN_BEEF::get);
 		generateSpawnEggItemModels();
 	}
 
