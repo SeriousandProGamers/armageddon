@@ -35,6 +35,7 @@ public final class ModConstants
 		public static final String ROTTEN_CHICKEN = "rotten_chicken";
 		public static final String ROTTEN_EGG = "rotten_egg";
 		public static final String ROTTEN_MUTTON = "rotten_mutton";
+		public static final String SPOILED_MILK_BUCKET = "spoiled_milk_bucket";
 		public static final String SPAWN_EGG_SUFFIX = "spawn_egg";
 
 		private Items()

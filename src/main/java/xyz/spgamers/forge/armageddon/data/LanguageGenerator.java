@@ -38,6 +38,7 @@ public final class LanguageGenerator extends LanguageProvider
 		addItem(ModItems.ROTTEN_CHICKEN, "Rotten Chicken");
 		addItem(ModItems.ROTTEN_EGG, "Rotten Egg");
 		addItem(ModItems.ROTTEN_MUTTON, "Rotten Mutton");
+		addItem(ModItems.SPOILED_MILK_BUCKET, "Spoiled Milk Bucket");
 		// addEffect(ModEffects.ZOMBIE_EVASION, "Zombie Evasion");
 
 		// human readable names are Zombie<> but code names are <>Zombie

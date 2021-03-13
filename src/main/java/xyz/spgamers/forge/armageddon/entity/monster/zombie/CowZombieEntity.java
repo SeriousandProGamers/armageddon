@@ -5,14 +5,16 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
+import xyz.spgamers.forge.armageddon.init.ModItems;
 
 import java.util.Random;
 
@@ -51,6 +53,22 @@ public final class CowZombieEntity extends AbstractZombieEntity
 	protected SoundEvent getStepSound()
 	{
 		return SoundEvents.ENTITY_COW_STEP;
+	}
+
+	@Override
+	protected ActionResultType func_230254_b_(PlayerEntity player, Hand hand)
+	{
+		ItemStack bucket = player.getHeldItem(hand);
+
+		if(!bucket.isEmpty() && bucket.getItem() == Items.BUCKET)
+		{
+			player.playSound(SoundEvents.ENTITY_COW_MILK, 1F, 1F);
+			ItemStack filled = DrinkHelper.fill(bucket, player, ModItems.SPOILED_MILK_BUCKET.get().getDefaultInstance());
+			player.setHeldItem(hand, filled);
+			return ActionResultType.func_233537_a_(world.isRemote());
+		}
+
+		return super.func_230254_b_(player, hand);
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerCowZombieAttributes()

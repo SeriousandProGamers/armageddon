@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,6 +15,7 @@ import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
 import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
+import xyz.spgamers.forge.armageddon.item.SpoiledMilkBucketItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
@@ -67,6 +69,12 @@ public final class ModItems
 			ModConstants.Items.ROTTEN_MUTTON,
 			Item::new,
 			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+	);
+
+	public static final RegistryObject<SpoiledMilkBucketItem> SPOILED_MILK_BUCKET = registerItem(
+			ModConstants.Items.SPOILED_MILK_BUCKET,
+			SpoiledMilkBucketItem::new,
+			() -> defaultItemProperties().containerItem(Items.BUCKET).maxStackSize(1)
 	);
 
 	public static final RegistryObject<SpawnEggItem<PigZombieEntity>> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
