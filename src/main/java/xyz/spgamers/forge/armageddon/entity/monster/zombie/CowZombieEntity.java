@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
+import xyz.spgamers.forge.armageddon.util.ZombieHelper;
 
 import java.util.Random;
 
@@ -23,12 +24,6 @@ public final class CowZombieEntity extends AbstractZombieEntity
 	public CowZombieEntity(World world)
 	{
 		super(ModEntities.COW_ZOMBIE.get(), world, Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled);
-	}
-
-	@Override
-	public boolean isChickenJockeyAllowed()
-	{
-		return false;
 	}
 
 	@Override
@@ -73,14 +68,14 @@ public final class CowZombieEntity extends AbstractZombieEntity
 
 	public static AttributeModifierMap.MutableAttribute registerCowZombieAttributes()
 	{
-		return registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes();
 	}
 
 	public static boolean canCowZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
 	{
 		if(!Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
 			return false;
-		if(!canZombieSpawn(entityType, world, reason, pos, random))
+		if(!ZombieHelper.canZombieSpawn(entityType, world, reason, pos, random))
 			return false;
 		// MonsterEntity does not extend AnimalEntity
 		// return AnimalEntity.canAnimalSpawn(entityType, world, reason, pos, random);

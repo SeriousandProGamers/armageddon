@@ -32,6 +32,7 @@ import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 import xyz.spgamers.forge.armageddon.util.WorldHelper;
+import xyz.spgamers.forge.armageddon.util.ZombieHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -243,12 +244,6 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	}
 
 	@Override
-	public boolean isChickenJockeyAllowed()
-	{
-		return false;
-	}
-
-	@Override
 	protected SoundEvent getAmbientSound()
 	{
 		return SoundEvents.ENTITY_SHEEP_AMBIENT;
@@ -274,14 +269,14 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 
 	public static AttributeModifierMap.MutableAttribute registerSheepZombieAttributes()
 	{
-		return registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes();
 	}
 
 	public static boolean canSheepZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
 	{
 		if(!Armageddon.SERVER_CONFIG.animals.isSheepZombieEnabled())
 			return false;
-		if(!canZombieSpawn(entityType, world, reason, pos, random))
+		if(!ZombieHelper.canZombieSpawn(entityType, world, reason, pos, random))
 			return false;
 		// MonsterEntity does not extend AnimalEntity
 		// return AnimalEntity.canAnimalSpawn(entityType, world, reason, pos, random);

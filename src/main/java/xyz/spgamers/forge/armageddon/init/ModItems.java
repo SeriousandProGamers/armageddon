@@ -1,6 +1,5 @@
 package xyz.spgamers.forge.armageddon.init;
 
-import net.minecraft.block.DispenserBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Foods;
@@ -10,11 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.Armageddon;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ChickenZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
-import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
+import xyz.spgamers.forge.armageddon.item.DeferredSpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.SpoiledMilkBucketItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -77,28 +72,28 @@ public final class ModItems
 			() -> defaultItemProperties().containerItem(Items.BUCKET).maxStackSize(1)
 	);
 
-	public static final RegistryObject<SpawnEggItem<PigZombieEntity>> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.PIG_ZOMBIE,
 			44975, 14377823,
 			Armageddon.SERVER_CONFIG.animals::isPigZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
-	public static final RegistryObject<SpawnEggItem<CowZombieEntity>> COW_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> COW_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.COW_ZOMBIE,
 			44975, 10592673,
 			Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
-	public static final RegistryObject<SpawnEggItem<ChickenZombieEntity>> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.CHICKEN_ZOMBIE,
 			44975, 16711680,
 			Armageddon.SERVER_CONFIG.animals::isChickenZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
-	public static final RegistryObject<SpawnEggItem<SheepZombieEntity>> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.SHEEP_ZOMBIE,
 			44975, 16758197,
 			Armageddon.SERVER_CONFIG.animals::isSheepZombieEnabled,
@@ -113,19 +108,15 @@ public final class ModItems
 	public static void commonSetup()
 	{
 		ITEM_GROUP.setItems(ITEMS);
-
-		ITEMS.getEntries().forEach(obj -> obj.ifPresent(item -> {
-			if(item instanceof SpawnEggItem)
-				DispenserBlock.registerDispenseBehavior(item, new SpawnEggItem.SpawnEggDispenserBehavior());
-		}));
+		DeferredSpawnEggItem.initUnaddedEggs();
 	}
 
-	private static <E extends Entity> RegistryObject<SpawnEggItem<E>> registerSpawnEgg(RegistryObject<EntityType<E>> entityTypeObj, int primaryColor, int secondaryColor, BooleanSupplier isEntityEnabledSupplier, Supplier<Item.Properties> propertiesSupplier)
+	private static <E extends Entity> RegistryObject<DeferredSpawnEggItem> registerSpawnEgg(RegistryObject<EntityType<E>> entityTypeObj, int primaryColor, int secondaryColor, BooleanSupplier isEntityEnabledSupplier, Supplier<Item.Properties> propertiesSupplier)
 	{
 		return registerItem(
 				// <entity_type>_spawn_egg
 				String.format("%s_%s", entityTypeObj.getId().getPath(), ModConstants.Items.SPAWN_EGG_SUFFIX),
-				properties -> new SpawnEggItem<>(entityTypeObj, primaryColor, secondaryColor, isEntityEnabledSupplier, properties),
+				properties -> new DeferredSpawnEggItem(entityTypeObj, primaryColor, secondaryColor, properties),
 				propertiesSupplier
 		);
 	}

@@ -5,13 +5,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.potion.Effect;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
-import xyz.spgamers.forge.armageddon.item.SpawnEggItem;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.Map;
@@ -70,7 +70,7 @@ public final class LanguageGenerator extends LanguageProvider
 			obj.ifPresent(item -> {
 				if(item instanceof SpawnEggItem)
 				{
-					EntityType<?> entityType = ((SpawnEggItem<?>) item).getEntityType();
+					EntityType<?> entityType = ((SpawnEggItem) item).getType(null);
 					String translatedEntityName = getTranslationValue(entityType.getTranslationKey());
 					add(item, String.format("%s %s", translatedEntityName, SPAWN_EGG_SUFFIX));
 				}

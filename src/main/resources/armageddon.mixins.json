@@ -4,7 +4,9 @@
 	"compatibilityLevel": "JAVA_8",
 	"refmap": "armageddon.refmap.json",
 	"minVersion": "0.8",
-	"mixins": [ ],
+	"mixins": [
+		"MixinZombieEntity"
+	],
 	"client": [
 		"MixinBiomeClient",
 		"MixinClientWorld",
