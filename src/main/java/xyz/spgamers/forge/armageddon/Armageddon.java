@@ -18,6 +18,7 @@ import xyz.spgamers.forge.armageddon.init.ModEffects;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.init.ModPotions;
+import xyz.spgamers.forge.armageddon.packet.BloodMoonStateChangePacket;
 import xyz.spgamers.forge.armageddon.packet.SpawnTurnedZombiePacket;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
@@ -83,6 +84,14 @@ public final class Armageddon
 				SpawnTurnedZombiePacket::encode,
 				SpawnTurnedZombiePacket::new,
 				SpawnTurnedZombiePacket::process
+		);
+
+		ModConstants.NETWORK.registerMessage(
+				1,
+				BloodMoonStateChangePacket.class,
+				BloodMoonStateChangePacket::encode,
+				BloodMoonStateChangePacket::new,
+				BloodMoonStateChangePacket::process
 		);
 	}
 }

@@ -14,7 +14,9 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.network.PacketDistributor;
 import xyz.spgamers.forge.armageddon.event.types.BloodMoonEvent;
+import xyz.spgamers.forge.armageddon.packet.BloodMoonStateChangePacket;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.Map;
@@ -35,6 +37,9 @@ public final class WorldEventHandler
 	public static void onWorldTick(TickEvent.WorldTickEvent event)
 	{
 		World world = event.world;
+
+		if(event.side.isClient())
+			return;
 
 		// does world support blood moons
 		if(isBloodMoonSupported(world))
@@ -131,6 +136,7 @@ public final class WorldEventHandler
 	{
 		RegistryKey<World> dimension = world.getDimensionKey();
 		isWorldBloodMoonEnabled.put(dimension, true);
+		ModConstants.NETWORK.send(PacketDistributor.ALL.noArg(), new BloodMoonStateChangePacket(world, true));
 
 		for(PlayerEntity player : world.getPlayers())
 		{
@@ -149,6 +155,7 @@ public final class WorldEventHandler
 	{
 		RegistryKey<World> dimension = world.getDimensionKey();
 		isWorldBloodMoonEnabled.put(dimension, false);
+		ModConstants.NETWORK.send(PacketDistributor.ALL.noArg(), new BloodMoonStateChangePacket(world, false));
 
 		for(PlayerEntity player : world.getPlayers())
 		{

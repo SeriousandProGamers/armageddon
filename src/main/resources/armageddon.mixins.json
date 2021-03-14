@@ -1,0 +1,17 @@
+{
+	"required": true,
+	"package": "xyz.spgamers.forge.armageddon.mixin",
+	"compatibilityLevel": "JAVA_8",
+	"refmap": "armageddon.refmap.json",
+	"minVersion": "0.8",
+	"mixins": [ ],
+	"client": [
+		"MixinBiomeClient",
+		"MixinClientWorld",
+		"MixinLightMapTexture",
+		"MixinWorldRender"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
