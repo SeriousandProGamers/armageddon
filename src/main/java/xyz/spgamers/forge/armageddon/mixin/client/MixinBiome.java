@@ -1,4 +1,4 @@
-package xyz.spgamers.forge.armageddon.mixin;
+package xyz.spgamers.forge.armageddon.mixin.client;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
@@ -11,7 +11,7 @@ import xyz.spgamers.forge.armageddon.util.BloodMoonHelper;
 
 @Mixin(Biome.class)
 @OnlyIn(Dist.CLIENT)
-public abstract class MixinBiomeClient
+public abstract class MixinBiome
 {
 	@Inject(
 			method = "getSkyColor",

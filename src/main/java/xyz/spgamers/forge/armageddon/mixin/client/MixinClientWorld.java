@@ -1,4 +1,4 @@
-package xyz.spgamers.forge.armageddon.mixin;
+package xyz.spgamers.forge.armageddon.mixin.client;
 
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.vector.Vector3d;

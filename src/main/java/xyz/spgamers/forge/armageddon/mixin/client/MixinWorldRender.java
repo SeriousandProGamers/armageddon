@@ -1,4 +1,4 @@
-package xyz.spgamers.forge.armageddon.mixin;
+package xyz.spgamers.forge.armageddon.mixin.client;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;

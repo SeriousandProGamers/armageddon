@@ -1,4 +1,4 @@
-package xyz.spgamers.forge.armageddon.mixin;
+package xyz.spgamers.forge.armageddon.mixin.client;
 
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.world.ClientWorld;
@@ -14,7 +14,7 @@ import xyz.spgamers.forge.armageddon.util.BloodMoonHelper;
 
 @Mixin(LightTexture.class)
 @OnlyIn(Dist.CLIENT)
-public abstract class MixinLightMapTexture
+public abstract class MixinLightTexture
 {
 	@Inject(
 			method = "updateLightmap",

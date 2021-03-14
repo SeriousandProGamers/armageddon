@@ -8,10 +8,10 @@
 		"MixinZombieEntity"
 	],
 	"client": [
-		"MixinBiomeClient",
-		"MixinClientWorld",
-		"MixinLightMapTexture",
-		"MixinWorldRender"
+		"client.MixinBiome",
+		"client.MixinClientWorld",
+		"client.MixinLightTexture",
+		"client.MixinWorldRender"
 	],
 	"injectors": {
 		"defaultRequire": 1
