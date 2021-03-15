@@ -145,6 +145,8 @@ public final class ModConstants
 		public static final String IS_CHICKEN_JOCKEY = "IsChickenJockey";
 		public static final String EGG_LAY_TIME = "EggLayTime";
 
+		public static final String IS_BLOOD_MOON = "IsBloodMoon";
+
 		private NBT()
 		{
 			throw new IllegalStateException();

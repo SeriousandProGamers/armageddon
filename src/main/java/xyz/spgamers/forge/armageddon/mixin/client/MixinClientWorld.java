@@ -22,14 +22,6 @@ public abstract class MixinClientWorld
 	private void getCloudColor(float partialTicks, CallbackInfoReturnable<Vector3d> cir)
 	{
 		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-		{
-			int rgbColor = BloodMoonHelper.MOON_COLOR.getColor();
-
-			float r = (float) (rgbColor >> 16 & 255) / 255F;
-			float g = (float) (rgbColor >> 8 & 255) / 255F;
-			float b = (float) (rgbColor & 255) / 255F;
-
-			cir.setReturnValue(new Vector3d(r, g, b));
-		}
+			cir.setReturnValue(BloodMoonHelper.getMoonColorVec3D());
 	}
 }

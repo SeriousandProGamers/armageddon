@@ -31,7 +31,7 @@ public abstract class MixinLightTexture
 		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
 		{
 			if(skyVector != null)
-				skyVector.lerp(new Vector3f(2F, 0F, 0F), 1F);
+				skyVector.lerp(BloodMoonHelper.getMoonColorVec3F(), 1F);
 		}
 	}
 }

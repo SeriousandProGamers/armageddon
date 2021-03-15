@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,13 +30,8 @@ public abstract class MixinWorldRender
 		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
 		{
 			ClientWorld world = Minecraft.getInstance().world;
-			int rgbColor = BloodMoonHelper.MOON_COLOR.getColor();
-
-			float r = (float) (rgbColor >> 16 & 255) / 255F;
-			float g = (float) (rgbColor >> 8 & 255) / 255F;
-			float b = (float) (rgbColor & 255) / 255F;
-
-			RenderSystem.color4f(r, g, b, 1F / world.getRainStrength(partialTicks));
+			Vector3f color = BloodMoonHelper.getMoonColorVec3F();
+			RenderSystem.color4f(color.getX(), color.getY(), color.getZ(), 1F / world.getRainStrength(partialTicks));
 		}
 	}
 }
