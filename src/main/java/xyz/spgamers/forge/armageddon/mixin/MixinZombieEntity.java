@@ -4,10 +4,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.ZombieEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.CowEntity;
-import net.minecraft.entity.passive.PigEntity;
-import net.minecraft.entity.passive.SheepEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.Difficulty;
@@ -102,22 +99,87 @@ public abstract class MixinZombieEntity extends MonsterEntity
 	)
 	private void registerGoals(CallbackInfo ci)
 	{
-		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
+		EntityType<?> type = getType();
+
+		boolean isChicken = type == ModEntities.CHICKEN_ZOMBIE.get();
+		boolean isPig = type == ModEntities.PIG_ZOMBIE.get();
+		boolean isCow = type == ModEntities.COW_ZOMBIE.get();
+		boolean isSheep = type == ModEntities.SHEEP_ZOMBIE.get();
+		boolean isFox = type == ModEntities.FOX_ZOMBIE.get();
+		boolean isPanda = false/*type == ModEntities.PANDA_ZOMBIE.get()*/;
+		boolean isPolarBear = false/*type == ModEntities.POLAR_BEAR_ZOMBIE.get()*/;
+		boolean isRabbit = false/*type == ModEntities.RABBIT_ZOMBIE.get()*/;
+		boolean isWolf = false/*type == ModEntities.WOLF_ZOMBIE.get()*/;
+
+		boolean isZombie = type == EntityType.ZOMBIE;
+		boolean isDrowned = type == EntityType.DROWNED;
+		boolean isHusk = type == EntityType.HUSK;
+		boolean isVillager = type == EntityType.ZOMBIE_VILLAGER;
+		boolean isPiglin = type == EntityType.ZOMBIFIED_PIGLIN;
+
+		boolean isHostile = isZombie || isDrowned || isHusk || isVillager || isPiglin;
+		boolean isPassive = isChicken || isPig || isCow || isSheep || isFox || isPanda || isPolarBear || isRabbit || isWolf;
+
+		int chickenPriority = 2;
+		int pigPriority = 2;
+		int cowPriority = 2;
+		int sheepPriority = 2;
+		int foxPriority = 2;
+		int pandaPriority = 2;
+		int polarBearPriority = 2;
+		int rabbitPriority = 2;
+		int wolfPriority = 2;
+
+		if(isHostile)
 		{
-			// child zombies have higher priority to go for chickens
-			// players have priority of 2, child zombies prefer chickens and have priority of 1
-			if(isChild())
-				targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, ChickenEntity.class, true));
-			else
-				targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ChickenEntity.class, true));
+			chickenPriority++;
+			pigPriority++;
+			cowPriority++;
+			sheepPriority++;
+			foxPriority++;
+			pandaPriority++;
+			polarBearPriority++;
+			rabbitPriority++;
+			wolfPriority++;
 		}
 
+		if(isChicken)
+			chickenPriority--;
+		if(isPig)
+			pigPriority--;
+		if(isCow)
+			cowPriority--;
+		if(isSheep)
+			sheepPriority--;
+		if(isFox)
+			foxPriority--;
+		if(isPanda)
+			pandaPriority--;
+		if(isPolarBear)
+			polarBearPriority--;
+		if(isRabbit)
+			rabbitPriority--;
+		if(isWolf)
+			wolfPriority--;
+
+		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
+			targetSelector.addGoal(chickenPriority, new NearestAttackableTargetGoal<>(this, ChickenEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isPigZombieEnabled())
-			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PigEntity.class, true));
+			targetSelector.addGoal(pigPriority, new NearestAttackableTargetGoal<>(this, PigEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isCowZombieEnabled())
-			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, CowEntity.class, true));
+			targetSelector.addGoal(cowPriority, new NearestAttackableTargetGoal<>(this, CowEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isSheepZombieEnabled())
-			targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, SheepEntity.class, true));
+			targetSelector.addGoal(sheepPriority, new NearestAttackableTargetGoal<>(this, SheepEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isFoxZombieEnabled())
+			targetSelector.addGoal(foxPriority, new NearestAttackableTargetGoal<>(this, FoxEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isPandaZombieEnabled())
+			targetSelector.addGoal(pandaPriority, new NearestAttackableTargetGoal<>(this, PandaEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isPolarBearZombieEnabled())
+			targetSelector.addGoal(polarBearPriority, new NearestAttackableTargetGoal<>(this, PolarBearEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isRabbitZombieEnabled())
+			targetSelector.addGoal(rabbitPriority, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
+		if(Armageddon.SERVER_CONFIG.animals.isWolfZombieEnabled())
+			targetSelector.addGoal(wolfPriority, new NearestAttackableTargetGoal<>(this, WolfEntity.class, true));
 	}
 
 	@Inject(

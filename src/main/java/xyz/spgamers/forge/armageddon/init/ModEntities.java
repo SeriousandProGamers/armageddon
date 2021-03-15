@@ -1,5 +1,6 @@
 package xyz.spgamers.forge.armageddon.init;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -14,14 +15,8 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.ChickenZombieRenderer;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.CowZombieRenderer;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.PigZombieRenderer;
-import xyz.spgamers.forge.armageddon.client.renderer.entity.SheepZombieRenderer;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.ChickenZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.CowZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.PigZombieEntity;
-import xyz.spgamers.forge.armageddon.entity.monster.zombie.SheepZombieEntity;
+import xyz.spgamers.forge.armageddon.client.renderer.entity.*;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.*;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.function.Function;
@@ -58,6 +53,41 @@ public final class ModEntities
 			builder -> builder.size(.9F, 1.3F).trackingRange(10) // same values as sheep
 	);
 
+	public static final RegistryObject<EntityType<FoxZombieEntity>> FOX_ZOMBIE = register(
+			ModConstants.Entities.FOX_ZOMBIE,
+			FoxZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.6F, .7F).trackingRange(8).func_233607_a_(Blocks.SWEET_BERRY_BUSH) // same values as fox
+	);
+
+	/*public static final RegistryObject<EntityType<PandaZombieEntity>> PANDA_ZOMBIE = register(
+			ModConstants.Entities.PANDA_ZOMBIE,
+			PandaZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(1.3F, 1.25F).trackingRange(10) // same values as panda
+	);*/
+
+	/*public static final RegistryObject<EntityType<PolarBearZombieEntity>> POLAR_BEAR_ZOMBIE = register(
+			ModConstants.Entities.POLAR_BEAR_ZOMBIE,
+			PolarBearZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(1.4F, 1.4F).trackingRange(10) // same values as polar bear
+	);*/
+
+	/*public static final RegistryObject<EntityType<RabbitZombieEntity>> RABBIT_ZOMBIE = register(
+			ModConstants.Entities.RABBIT_ZOMBIE,
+			RabbitZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.4F, 0.5F).trackingRange(8) // same values as rabbit
+	);*/
+
+	/*public static final RegistryObject<EntityType<WolfZombieEntity>> WOLF_ZOMBIE = register(
+			ModConstants.Entities.WOLF_ZOMBIE,
+			WolfZombieEntity::new,
+			EntityClassification.MONSTER,
+			builder -> builder.size(.6F, .85F).trackingRange(10) // same values as wolf
+	);*/
+
 	private ModEntities()
 	{
 		throw new IllegalStateException();
@@ -84,6 +114,31 @@ public final class ModEntities
 			GlobalEntityTypeAttributes.put(entityType, SheepZombieEntity.registerSheepZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, SheepZombieEntity::canSheepZombieSpawn);
 		});
+
+		FOX_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, FoxZombieEntity.registerFoxZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FoxZombieEntity::canFoxZombieSpawn);
+		});
+
+		/*PANDA_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, PandaZombieEntity.registerPandaZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PandaZombieEntity::canPandaZombieSpawn);
+		});*/
+
+		/*POLAR_BEAR_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, PolarBearZombieEntity.registerPolarBearZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PolarBearZombieEntity::canPolarBearZombieSpawn);
+		});*/
+
+		/*RABBIT_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, RabbitZombieEntity.registerRabbitZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RabbitZombieEntity::canRabbitZombieSpawn);
+		});*/
+
+		/*WOLF_ZOMBIE.ifPresent(entityType -> {
+			GlobalEntityTypeAttributes.put(entityType, WolfZombieEntity.registerWolfZombieAttributes().create());
+			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WolfZombieEntity::canWolfZombieSpawn);
+		});*/
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -93,6 +148,11 @@ public final class ModEntities
 		registerEntityRenderer(COW_ZOMBIE, CowZombieRenderer::new);
 		registerEntityRenderer(CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
 		registerEntityRenderer(SHEEP_ZOMBIE, SheepZombieRenderer::new);
+		registerEntityRenderer(FOX_ZOMBIE, FoxZombieRenderer::new);
+		/*registerEntityRenderer(PANDA_ZOMBIE, PandaZombieRenderer::new);*/
+		/*registerEntityRenderer(POLAR_BEAR_ZOMBIE, PolarBearZombieRenderer::new);*/
+		/*registerEntityRenderer(RABBIT_ZOMBIE, RabbitZombieRenderer::new);*/
+		/*registerEntityRenderer(WOLF_ZOMBIE, WolfZombieRenderer::new);*/
 	}
 
 	// utility methods to make registering entities easier

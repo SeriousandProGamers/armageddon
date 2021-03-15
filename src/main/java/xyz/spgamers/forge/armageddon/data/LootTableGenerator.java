@@ -129,6 +129,8 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 						                    )
 					         )
 			);
+
+			registerLootTable(ModEntities.FOX_ZOMBIE.get(), LootTable.builder());
 		}
 
 		@Override

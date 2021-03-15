@@ -46,6 +46,11 @@ public final class LanguageGenerator extends LanguageProvider
 		addEntityType(ModEntities.COW_ZOMBIE, "Zombie Cow");
 		addEntityType(ModEntities.CHICKEN_ZOMBIE, "Zombie Chicken");
 		addEntityType(ModEntities.SHEEP_ZOMBIE, "Zombie Sheep");
+		addEntityType(ModEntities.FOX_ZOMBIE, "Zombie Fox");
+		/*addEntityType(ModEntities.PANDA_ZOMBIE, "Zombie Panda");*/
+		/*addEntityType(ModEntities.POLAR_BEAR_ZOMBIE, "Zombie Polar Bear");*/
+		/*addEntityType(ModEntities.RABBIT_ZOMBIE, "Zombie Rabbit");*/
+		/*addEntityType(ModEntities.WOLF_ZOMBIE, "Zombie Wolf");*/
 		addSpawnEggTranslations();
 	}
 

@@ -8,13 +8,11 @@ import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.item.DeferredSpawnEggItem;
 import xyz.spgamers.forge.armageddon.item.SpoiledMilkBucketItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -75,30 +73,56 @@ public final class ModItems
 	public static final RegistryObject<DeferredSpawnEggItem> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.PIG_ZOMBIE,
 			44975, 14377823,
-			Armageddon.SERVER_CONFIG.animals::isPigZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
 	public static final RegistryObject<DeferredSpawnEggItem> COW_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.COW_ZOMBIE,
 			44975, 10592673,
-			Armageddon.SERVER_CONFIG.animals::isCowZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
 	public static final RegistryObject<DeferredSpawnEggItem> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.CHICKEN_ZOMBIE,
 			44975, 16711680,
-			Armageddon.SERVER_CONFIG.animals::isChickenZombieEnabled,
 			ModItems::defaultItemProperties
 	);
 
 	public static final RegistryObject<DeferredSpawnEggItem> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.SHEEP_ZOMBIE,
 			44975, 16758197,
-			Armageddon.SERVER_CONFIG.animals::isSheepZombieEnabled,
 			ModItems::defaultItemProperties
 	);
+
+	public static final RegistryObject<DeferredSpawnEggItem> FOX_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.FOX_ZOMBIE,
+			44975, 13396256,
+			ModItems::defaultItemProperties
+	);
+
+	/*public static final RegistryObject<DeferredSpawnEggItem> PANDA_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.PANDA_ZOMBIE,
+			44975, 1776418,
+			ModItems::defaultItemProperties
+	);*/
+
+	/*public static final RegistryObject<DeferredSpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.POLAR_BEAR_ZOMBIE,
+			44975, 9803152,
+			ModItems::defaultItemProperties
+	);*/
+
+	/*public static final RegistryObject<DeferredSpawnEggItem> RABBIT_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.RABBIT_ZOMBIE,
+			44975, 7555121,
+			ModItems::defaultItemProperties
+	);*/
+
+	/*public static final RegistryObject<DeferredSpawnEggItem> WOLF_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+			ModEntities.WOLF_ZOMBIE,
+			44975, 13545366,
+			ModItems::defaultItemProperties
+	);*/
 
 	private ModItems()
 	{
@@ -111,7 +135,7 @@ public final class ModItems
 		DeferredSpawnEggItem.initUnaddedEggs();
 	}
 
-	private static <E extends Entity> RegistryObject<DeferredSpawnEggItem> registerSpawnEgg(RegistryObject<EntityType<E>> entityTypeObj, int primaryColor, int secondaryColor, BooleanSupplier isEntityEnabledSupplier, Supplier<Item.Properties> propertiesSupplier)
+	private static <E extends Entity> RegistryObject<DeferredSpawnEggItem> registerSpawnEgg(RegistryObject<EntityType<E>> entityTypeObj, int primaryColor, int secondaryColor, Supplier<Item.Properties> propertiesSupplier)
 	{
 		return registerItem(
 				// <entity_type>_spawn_egg
