@@ -17,19 +17,10 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = "${mod_version}"
-group = "${apex_package}.${mod_id}"
+group = "${mod_package}.${mod_id}"
 archivesBaseName = "${mod_name}-${mc_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-
-sourceSets {
-	api
-	main
-}
-
-configurations {
-	apiCompile.extendsFrom(compile)
-}
 
 minecraft {
 	mappings channel: 'snapshot', version: "${mappings_version}"
@@ -49,7 +40,6 @@ minecraft {
 			mods {
 				Armageddon {
 					source sourceSets.main
-					source sourceSets.api
 				}
 			}
 		}
@@ -84,7 +74,6 @@ minecraft {
 			mods {
 				Armageddon {
 					source sourceSets.main
-					source sourceSets.api
 				}
 			}
 		}
@@ -101,7 +90,6 @@ minecraft {
 			mods {
 				Armageddon {
 					source sourceSets.main
-					source sourceSets.api
 				}
 			}
 		}
@@ -109,7 +97,6 @@ minecraft {
 }
 
 mixin {
-	add sourceSets.api, "${mod_id}.refmap.json"
 	add sourceSets.main, "${mod_id}.refmap.json"
 }
 
@@ -118,15 +105,13 @@ sourceSets.main.resources {
 }
 
 repositories {
-	mavenLocal()
+	mavenLocal() // Local Deps
 	maven { url 'https://dvs1.progwml6.com/files/maven' } // JEI
 	maven { url 'https://maven.tterrag.com/' } // TOP
 }
 
 dependencies {
 	minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-	implementation sourceSets.api.output
 
 	// JEI
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
@@ -136,22 +121,15 @@ dependencies {
 	compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_version_short}:${mc_version_short}-${top_version}:api")
 	runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_version_short}:${mc_version_short}-${top_version}")
 
-	// Local Deps
 	if(project.hasProperty('apex_local_deps') && project.getProperty('apex_local_deps')) {
-		runtimeOnly fg.deobf("com.apex.forge.devworld:devworld:${mc_version}-${devworld_version}")
+		// Local Deps
+		runtimeOnly fg.deobf("${apex_package}:devworld:${mc_version}-${devworld_version}")
 	}
-}
-
-task apiJar(type: Jar, dependsOn: classes) {
-	classifier = 'api'
-	// from sourceSets.api.output
-	from sourceSets.api.allJava
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
 	from sourceSets.main.allJava
-	from sourceSets.api.allJava
 }
 
 task deobfJar(type: Jar) {
@@ -169,14 +147,11 @@ artifacts {
 	archives javadocJar
 	archives sourcesJar
 	archives deobfJar
-	archives apiJar
 }
 
 jar {
 	from sourceSets.main.output.classesDirs
-	from sourceSets.api.output.classesDirs
 	from sourceSets.main.output.resourcesDir
-	from sourceSets.api.output.resourcesDir
 
 	manifest {
 		attributes([
@@ -197,7 +172,7 @@ jar.finalizedBy('reobfJar')
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
-			groupId = "${apex_package}"
+			groupId = "${mod_package}"
 			artifactId = "${mod_id}"
 			version = "${mc_version}-${mod_version}"
 
@@ -205,7 +180,6 @@ publishing {
 			artifact javadocJar
 			artifact sourcesJar
 			artifact deobfJar
-			artifact apiJar
 		}
 	}
 	repositories {
