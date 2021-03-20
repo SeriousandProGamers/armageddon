@@ -22,26 +22,9 @@ public final class ZombieHelper
 
 	public static boolean isChickenJockeySupported(EntityType<?> entityType)
 	{
-		if(entityType == ModEntities.PIG_ZOMBIE.get())
+		if(ModConstants.Entities.EntityTypeTags.MOD_PASSIVE_ZOMBIES.contains(entityType))
 			return false;
-		else if(entityType == ModEntities.COW_ZOMBIE.get())
-			return false;
-		else if(entityType == ModEntities.CHICKEN_ZOMBIE.get())
-			return false;
-		else if(entityType == ModEntities.SHEEP_ZOMBIE.get())
-			return false;
-		else if(entityType == ModEntities.FOX_ZOMBIE.get())
-			return false;
-		/*else if(entityType == ModEntities.PANDA_ZOMBIE.get())
-			return false;*/
-		/*else if(entityType == ModEntities.POLAR_BEAR_ZOMBIE.get())
-			return false;*/
-		/*else if(entityType == ModEntities.RABBIT_ZOMBIE.get())
-			return false;*/
-		/*else if(entityType == ModEntities.WOLF_ZOMBIE.get())
-			return false;*/
-		else
-			return true;
+		return true;
 	}
 
 	@Nullable
@@ -60,8 +43,8 @@ public final class ZombieHelper
 			turnedType = ModEntities.SHEEP_ZOMBIE.get();
 		else if(originalType == EntityType.FOX)
 			turnedType = ModEntities.FOX_ZOMBIE.get();
-		/*else if(originalType == EntityType.PANDA)
-			turnedType = ModEntities.PANDA_ZOMBIE.get();*/
+		else if(originalType == EntityType.PANDA)
+			turnedType = ModEntities.PANDA_ZOMBIE.get();
 		/*else if(originalType == EntityType.POLAR_BEAR)
 			turnedType = ModEntities.POLAR_BEAR_ZOMBIE.get();*/
 		/*else if(originalType == EntityType.RABBIT)
@@ -86,24 +69,8 @@ public final class ZombieHelper
 			return true;
 		else
 		{
-			if(entityType == ModEntities.PIG_ZOMBIE.get())
+			if(ModConstants.Entities.EntityTypeTags.MOD_PASSIVE_ZOMBIES.contains(entityType))
 				return false;
-			else if(entityType == ModEntities.CHICKEN_ZOMBIE.get())
-				return false;
-			else if(entityType == ModEntities.COW_ZOMBIE.get())
-				return false;
-			else if(entityType == ModEntities.SHEEP_ZOMBIE.get())
-				return false;
-			else if(entityType == ModEntities.FOX_ZOMBIE.get())
-				return false;
-			/*else if(entityType == ModEntities.PANDA_ZOMBIE.get())
-				return false;*/
-			/*else if(entityType == ModEntities.POLAR_BEAR_ZOMBIE.get())
-				return false;*/
-			/*else if(entityType == ModEntities.RABBIT_ZOMBIE.get())
-				return false;*/
-			/*else if(entityType == ModEntities.WOLF_ZOMBIE.get())
-				return false;*/
 		}
 
 		return MonsterEntity.canMonsterSpawnInLight(entityType, world, reason, pos, random);

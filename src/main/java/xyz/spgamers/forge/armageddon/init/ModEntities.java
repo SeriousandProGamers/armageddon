@@ -60,12 +60,12 @@ public final class ModEntities
 			builder -> builder.size(.6F, .7F).trackingRange(8).func_233607_a_(Blocks.SWEET_BERRY_BUSH) // same values as fox
 	);
 
-	/*public static final RegistryObject<EntityType<PandaZombieEntity>> PANDA_ZOMBIE = register(
+	public static final RegistryObject<EntityType<PandaZombieEntity>> PANDA_ZOMBIE = register(
 			ModConstants.Entities.PANDA_ZOMBIE,
 			PandaZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(1.3F, 1.25F).trackingRange(10) // same values as panda
-	);*/
+	);
 
 	/*public static final RegistryObject<EntityType<PolarBearZombieEntity>> POLAR_BEAR_ZOMBIE = register(
 			ModConstants.Entities.POLAR_BEAR_ZOMBIE,
@@ -120,10 +120,10 @@ public final class ModEntities
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, FoxZombieEntity::canFoxZombieSpawn);
 		});
 
-		/*PANDA_ZOMBIE.ifPresent(entityType -> {
+		PANDA_ZOMBIE.ifPresent(entityType -> {
 			GlobalEntityTypeAttributes.put(entityType, PandaZombieEntity.registerPandaZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PandaZombieEntity::canPandaZombieSpawn);
-		});*/
+		});
 
 		/*POLAR_BEAR_ZOMBIE.ifPresent(entityType -> {
 			GlobalEntityTypeAttributes.put(entityType, PolarBearZombieEntity.registerPolarBearZombieAttributes().create());
@@ -149,7 +149,7 @@ public final class ModEntities
 		registerEntityRenderer(CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
 		registerEntityRenderer(SHEEP_ZOMBIE, SheepZombieRenderer::new);
 		registerEntityRenderer(FOX_ZOMBIE, FoxZombieRenderer::new);
-		/*registerEntityRenderer(PANDA_ZOMBIE, PandaZombieRenderer::new);*/
+		registerEntityRenderer(PANDA_ZOMBIE, PandaZombieRenderer::new);
 		/*registerEntityRenderer(POLAR_BEAR_ZOMBIE, PolarBearZombieRenderer::new);*/
 		/*registerEntityRenderer(RABBIT_ZOMBIE, RabbitZombieRenderer::new);*/
 		/*registerEntityRenderer(WOLF_ZOMBIE, WolfZombieRenderer::new);*/

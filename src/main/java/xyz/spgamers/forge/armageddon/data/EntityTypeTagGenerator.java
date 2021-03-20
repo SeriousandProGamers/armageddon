@@ -22,7 +22,7 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 		EntityType<?>[] passive = Arrays.asList(
 				ModEntities.PIG_ZOMBIE.get(),
 				ModEntities.COW_ZOMBIE.get(),
-				/*ModEntities.PANDA_ZOMBIE.get(),*/
+				ModEntities.PANDA_ZOMBIE.get(),
 				/*ModEntities.POLAR_BEAR_ZOMBIE.get(),*/
 				ModEntities.FOX_ZOMBIE.get(),
 				/*ModEntities.WOLF_ZOMBIE.get(),*/

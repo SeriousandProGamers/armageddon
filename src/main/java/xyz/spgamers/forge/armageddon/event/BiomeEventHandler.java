@@ -38,7 +38,7 @@ public final class BiomeEventHandler
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.CHICKEN_ZOMBIE.get(), zombieWeight, 4, 4))
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.SHEEP_ZOMBIE.get(), zombieWeight, 4, 4))
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.FOX_ZOMBIE.get(), zombieWeight, 4, 4))
-				/*.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.PANDA_ZOMBIE.get(), zombieWeight, 4, 4))*/
+				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.PANDA_ZOMBIE.get(), zombieWeight, 4, 4))
 				/*.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.POLAR_BEAR_ZOMBIE.get(), zombieWeight, 4, 4))*/
 				/*.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.RABBIT_ZOMBIE.get(), zombieWeight, 4, 4))*/
 				/*.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.WOLF_ZOMBIE.get(), zombieWeight, 4, 4))*/

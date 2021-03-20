@@ -100,11 +100,11 @@ public final class ModItems
 			ModItems::defaultItemProperties
 	);
 
-	/*public static final RegistryObject<DeferredSpawnEggItem> PANDA_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> PANDA_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.PANDA_ZOMBIE,
 			44975, 1776418,
 			ModItems::defaultItemProperties
-	);*/
+	);
 
 	/*public static final RegistryObject<DeferredSpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.POLAR_BEAR_ZOMBIE,

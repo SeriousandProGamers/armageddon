@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.spgamers.forge.armageddon.Armageddon;
+import xyz.spgamers.forge.armageddon.entity.monster.zombie.AbstractZombieEntity;
 import xyz.spgamers.forge.armageddon.entity.monster.zombie.ChickenZombieEntity;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.util.ZombieHelper;
@@ -106,7 +107,7 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		boolean isCow = type == ModEntities.COW_ZOMBIE.get();
 		boolean isSheep = type == ModEntities.SHEEP_ZOMBIE.get();
 		boolean isFox = type == ModEntities.FOX_ZOMBIE.get();
-		boolean isPanda = false/*type == ModEntities.PANDA_ZOMBIE.get()*/;
+		boolean isPanda = type == ModEntities.PANDA_ZOMBIE.get();
 		boolean isPolarBear = false/*type == ModEntities.POLAR_BEAR_ZOMBIE.get()*/;
 		boolean isRabbit = false/*type == ModEntities.RABBIT_ZOMBIE.get()*/;
 		boolean isWolf = false/*type == ModEntities.WOLF_ZOMBIE.get()*/;
@@ -162,6 +163,21 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		if(isWolf)
 			wolfPriority--;
 
+		// babies go for chickens more as they like to ride around on them
+		if(isChild() && ZombieHelper.isChickenJockeySupported(type))
+			chickenPriority -= 2;
+
+		// ensure priorities dont go below 1
+		chickenPriority = Math.max(chickenPriority, 1);
+		pigPriority = Math.max(pigPriority, 1);
+		cowPriority = Math.max(cowPriority, 1);
+		sheepPriority = Math.max(sheepPriority, 1);
+		foxPriority = Math.max(foxPriority, 1);
+		pandaPriority = Math.max(pandaPriority, 1);
+		polarBearPriority = Math.max(polarBearPriority, 1);
+		rabbitPriority = Math.max(rabbitPriority, 1);
+		wolfPriority = Math.max(wolfPriority, 1);
+
 		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
 			targetSelector.addGoal(chickenPriority, new NearestAttackableTargetGoal<>(this, ChickenEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isPigZombieEnabled())
@@ -214,6 +230,9 @@ public abstract class MixinZombieEntity extends MonsterEntity
 						new ZombieEntity.GroupData(original.isChild(), false),
 						null
 				);
+
+				if(turned instanceof AbstractZombieEntity)
+					((AbstractZombieEntity) turned).setupTurnedZombie(original);
 
 				// turned chicken into zombie chicken
 				if(turned.getType() == ModEntities.CHICKEN_ZOMBIE.get() && ZombieHelper.isChickenJockeySupported(getType()))

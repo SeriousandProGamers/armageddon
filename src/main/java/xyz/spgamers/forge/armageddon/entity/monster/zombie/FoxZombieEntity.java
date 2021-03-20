@@ -3,15 +3,13 @@ package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -20,6 +18,7 @@ import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
+import xyz.spgamers.forge.armageddon.util.EntityEnumDataHelper;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 import xyz.spgamers.forge.armageddon.util.ZombieHelper;
 
@@ -27,8 +26,7 @@ import java.util.Random;
 
 public final class FoxZombieEntity extends AbstractZombieEntity
 {
-	public static final DataParameter<Integer> FOX_TYPE = EntityDataManager.createKey(FoxZombieEntity.class, DataSerializers.VARINT);
-	public static final DataParameter<Byte> FOX_FLAGS = EntityDataManager.createKey(FoxZombieEntity.class, DataSerializers.BYTE);
+	public static final EntityEnumDataHelper<FoxEntity.Type, FoxZombieEntity> FOX_TYPE = EntityEnumDataHelper.create(ModConstants.NBT.TYPE, FoxEntity.Type.class, FoxZombieEntity.class);
 
 	public FoxZombieEntity(World world)
 	{
@@ -40,32 +38,41 @@ public final class FoxZombieEntity extends AbstractZombieEntity
 	{
 		super.registerData();
 
-		dataManager.register(FOX_TYPE, 0);
+		FOX_TYPE.registerDataKey(this);
 	}
 
 	public FoxEntity.Type getVariantType()
 	{
-		return FoxEntity.Type.getTypeByIndex(dataManager.get(FOX_TYPE));
+		return FOX_TYPE.getValue(this);
 	}
 
 	public void setVariantType(FoxEntity.Type type)
 	{
-		dataManager.set(FOX_TYPE, type.getIndex());
+		FOX_TYPE.setValue(this, type);
+	}
+
+	@Override
+	public void setupTurnedZombie(MobEntity originalEntity)
+	{
+		if(originalEntity instanceof FoxEntity)
+		{
+			FoxEntity.Type type = ((FoxEntity) originalEntity).getVariantType();
+			setVariantType(type);
+		}
 	}
 
 	@Override
 	public void writeAdditional(CompoundNBT compound)
 	{
 		super.writeAdditional(compound);
-		compound.putInt(ModConstants.NBT.TYPE, getVariantType().getIndex());
+		FOX_TYPE.writeToEntityNBT(this, compound);
 	}
 
 	@Override
 	public void readAdditional(CompoundNBT compound)
 	{
 		super.readAdditional(compound);
-
-		setVariantType(FoxEntity.Type.getTypeByIndex(compound.getInt(ModConstants.NBT.TYPE)));
+		FOX_TYPE.readFromEntityNBT(this, compound);
 	}
 
 	@Override

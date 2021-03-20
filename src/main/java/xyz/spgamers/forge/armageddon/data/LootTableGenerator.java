@@ -2,6 +2,7 @@ package xyz.spgamers.forge.armageddon.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
@@ -131,6 +132,19 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 			);
 
 			registerLootTable(ModEntities.FOX_ZOMBIE.get(), LootTable.builder());
+
+			registerLootTable(
+					ModEntities.PANDA_ZOMBIE.get(),
+					LootTable.builder()
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    .addEntry(
+						                    		ItemLootEntry.builder(Blocks.BAMBOO)
+								                                 .acceptFunction(SetCount.builder(ConstantRange.of(1)))
+						                    )
+					         )
+			);
 		}
 
 		@Override

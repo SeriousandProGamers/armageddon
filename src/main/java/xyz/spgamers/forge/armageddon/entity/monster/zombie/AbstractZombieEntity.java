@@ -1,6 +1,7 @@
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.world.World;
 
@@ -22,6 +23,10 @@ public class AbstractZombieEntity extends ZombieEntity
 	public boolean isEntityEnabled()
 	{
 		return entityEnabledSupplier.getAsBoolean();
+	}
+
+	public void setupTurnedZombie(MobEntity originalEntity)
+	{
 	}
 
 	@Override

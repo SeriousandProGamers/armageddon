@@ -145,6 +145,8 @@ public final class ModConstants
 		public static final String IS_CHICKEN_JOCKEY = "IsChickenJockey";
 		public static final String EGG_LAY_TIME = "EggLayTime";
 		public static final String TYPE = "Type";
+		public static final String MAIN_GENE = "MainGene";
+		public static final String HIDDEN_GENE = "HiddenGene";
 
 		public static final String IS_BLOOD_MOON = "IsBloodMoon";
 

@@ -30,6 +30,7 @@ import net.minecraftforge.common.IForgeShearable;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
+import xyz.spgamers.forge.armageddon.util.EntityEnumDataHelper;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 import xyz.spgamers.forge.armageddon.util.WorldHelper;
 import xyz.spgamers.forge.armageddon.util.ZombieHelper;
@@ -43,7 +44,8 @@ import java.util.Random;
 
 public final class SheepZombieEntity extends AbstractZombieEntity implements IForgeShearable
 {
-	public static final DataParameter<Byte> DYE_COLOR = EntityDataManager.createKey(SheepZombieEntity.class, DataSerializers.BYTE);
+	public static final EntityEnumDataHelper<DyeColor, SheepZombieEntity> FLEECE_COLOR = EntityEnumDataHelper.create("", DyeColor.class, SheepZombieEntity.class);
+	public static final DataParameter<Boolean> SHEARED = EntityDataManager.createKey(SheepZombieEntity.class, DataSerializers.BOOLEAN);
 
 	private int sheepTimer;
 	private EatGrassGoal eatGrassGoal;
@@ -83,7 +85,8 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	{
 		super.registerData();
 
-		dataManager.register(DYE_COLOR, (byte) 0);
+		FLEECE_COLOR.registerDataKey(this);
+		dataManager.register(SHEARED, false);
 	}
 
 	@Override
@@ -166,7 +169,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	{
 		super.writeAdditional(compound);
 		compound.putBoolean(ModConstants.NBT.SHEARED, isSheared());
-		compound.putByte(ModConstants.NBT.COLOR, (byte) getFleeceColor().getId());
+		FLEECE_COLOR.writeToEntityNBT(this, compound);
 	}
 
 	@Override
@@ -174,18 +177,17 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	{
 		super.readAdditional(compound);
 		setSheared(compound.getBoolean(ModConstants.NBT.SHEARED));
-		setFleeceColor(DyeColor.byId(compound.getByte(ModConstants.NBT.COLOR)));
+		FLEECE_COLOR.readFromEntityNBT(this, compound);
 	}
 
 	public DyeColor getFleeceColor()
 	{
-		return DyeColor.byId(dataManager.get(DYE_COLOR) & 15);
+		return FLEECE_COLOR.getValue(this);
 	}
 
 	public void setFleeceColor(DyeColor color)
 	{
-		byte b = dataManager.get(DYE_COLOR);
-		dataManager.set(DYE_COLOR, (byte) (b & 240 | color.getId() & 15));
+		FLEECE_COLOR.setValue(this, color);
 	}
 
 	public boolean isSheared()
@@ -193,7 +195,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 		// if shearing is disabled all sheep have no wool
 		if(!Armageddon.SERVER_CONFIG.animals.isSheepZombieShearble())
 			return true;
-		return (dataManager.get(DYE_COLOR) & 16) != 0;
+		return dataManager.get(SHEARED);
 	}
 
 	public void setSheared(boolean sheared)
@@ -202,12 +204,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 		if(!Armageddon.SERVER_CONFIG.animals.isSheepZombieShearble())
 			sheared = true;
 
-		byte b = dataManager.get(DYE_COLOR);
-
-		if(sheared)
-			dataManager.set(DYE_COLOR, (byte) (b | 16));
-		else
-			dataManager.set(DYE_COLOR, (byte) (b & -17));
+		dataManager.set(SHEARED, sheared);
 	}
 
 	public void eatGrassBonus()
@@ -226,7 +223,24 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 		return super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag);
 	}
 
-	@Nullable
+	@Override
+	public void setupTurnedZombie(MobEntity originalEntity)
+	{
+		if(originalEntity instanceof SheepEntity)
+		{
+			SheepEntity sheep = (SheepEntity) originalEntity;
+			boolean isSheared = sheep.getSheared();
+			DyeColor color = sheep.getFleeceColor();
+			setSheared(isSheared);
+			setFleeceColor(color);
+		}
+	}
+
+	// Incorrect method of copying data for turned zombies
+	// need the original entity before being turned
+	// which this doesn't give us
+	// custom method above is correct way to do it
+	/*@Nullable
 	@Override
 	// copy data across when being turned
 	public <T extends MobEntity> T func_233656_b_(EntityType<T> entityType, boolean copyLoot)
@@ -241,7 +255,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 		}
 
 		return entity;
-	}
+	}*/
 
 	@Override
 	protected SoundEvent getAmbientSound()
