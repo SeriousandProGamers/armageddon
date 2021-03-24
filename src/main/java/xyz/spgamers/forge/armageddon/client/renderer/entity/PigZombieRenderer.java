@@ -12,7 +12,7 @@ import xyz.spgamers.forge.armageddon.util.ModConstants;
 @OnlyIn(Dist.CLIENT)
 public final class PigZombieRenderer extends MobRenderer<PigZombieEntity, PigModel<PigZombieEntity>>
 {
-	public static final ResourceLocation TEXTURES = new ResourceLocation(ModConstants.MOD_ID, "textures/entity/zombie/pig_zombie.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(ModConstants.MOD_ID, "textures/entity/zombie/pig.png");
 
 	public PigZombieRenderer(EntityRendererManager rendererManager)
 	{

@@ -13,7 +13,7 @@ import xyz.spgamers.forge.armageddon.util.ModConstants;
 @OnlyIn(Dist.CLIENT)
 public final class SheepZombieRenderer extends MobRenderer<SheepZombieEntity, SheepZombieModel>
 {
-	private static final ResourceLocation SHEARED_SHEEP_TEXTURES = new ResourceLocation(ModConstants.MOD_ID,"textures/entity/zombie/sheep_zombie.png");
+	private static final ResourceLocation SHEARED_SHEEP_TEXTURES = new ResourceLocation(ModConstants.MOD_ID,"textures/entity/zombie/sheep.png");
 
 	public SheepZombieRenderer(EntityRendererManager rendererManager)
 	{
