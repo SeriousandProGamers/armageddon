@@ -141,12 +141,8 @@ public final class ModConstants
 	public static final class NBT
 	{
 		public static final String SHEARED = "Sheared";
-		public static final String COLOR = "Color";
 		public static final String IS_CHICKEN_JOCKEY = "IsChickenJockey";
 		public static final String EGG_LAY_TIME = "EggLayTime";
-		public static final String TYPE = "Type";
-		public static final String MAIN_GENE = "MainGene";
-		public static final String HIDDEN_GENE = "HiddenGene";
 
 		public static final String IS_BLOOD_MOON = "IsBloodMoon";
 
