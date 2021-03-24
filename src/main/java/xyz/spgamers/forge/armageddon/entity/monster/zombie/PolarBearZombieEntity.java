@@ -1,4 +1,3 @@
-/*
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.Blocks;
@@ -66,4 +65,3 @@ public final class PolarBearZombieEntity extends AbstractZombieEntity
 		return world.getBlockState(pos.down()).isIn(Blocks.GRASS_BLOCK) && world.getLightSubtracted(pos, 0) > 8;
 	}
 }
-*/

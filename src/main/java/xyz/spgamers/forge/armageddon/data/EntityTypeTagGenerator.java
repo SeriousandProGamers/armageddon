@@ -23,10 +23,10 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 				ModEntities.PIG_ZOMBIE.get(),
 				ModEntities.COW_ZOMBIE.get(),
 				ModEntities.PANDA_ZOMBIE.get(),
-				/*ModEntities.POLAR_BEAR_ZOMBIE.get(),*/
+				ModEntities.POLAR_BEAR_ZOMBIE.get(),
 				ModEntities.FOX_ZOMBIE.get(),
-				/*ModEntities.WOLF_ZOMBIE.get(),*/
-				/*ModEntities.RABBIT_ZOMBIE.get(),*/
+				ModEntities.WOLF_ZOMBIE.get(),
+				ModEntities.RABBIT_ZOMBIE.get(),
 				ModEntities.CHICKEN_ZOMBIE.get(),
 				ModEntities.SHEEP_ZOMBIE.get()
 				/*ModEntities.FIRE_ZOMBIE.get(),*/

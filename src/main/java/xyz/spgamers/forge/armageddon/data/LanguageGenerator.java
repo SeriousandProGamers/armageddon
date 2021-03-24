@@ -35,6 +35,7 @@ public final class LanguageGenerator extends LanguageProvider
 		addItem(ModItems.ROTTEN_BEEF, "Rotten Beef");
 		addItem(ModItems.ROTTEN_FISH, "Rotten Fish");
 		addItem(ModItems.ROTTEN_RABBIT, "Rotten Rabbit");
+		addItem(ModItems.ROTTEN_RABBIT_FOOT, "Rotten Rabbit Foot");
 		addItem(ModItems.ROTTEN_CHICKEN, "Rotten Chicken");
 		addItem(ModItems.ROTTEN_EGG, "Rotten Egg");
 		addItem(ModItems.ROTTEN_MUTTON, "Rotten Mutton");
@@ -48,9 +49,9 @@ public final class LanguageGenerator extends LanguageProvider
 		addEntityType(ModEntities.SHEEP_ZOMBIE, "Zombie Sheep");
 		addEntityType(ModEntities.FOX_ZOMBIE, "Zombie Fox");
 		addEntityType(ModEntities.PANDA_ZOMBIE, "Zombie Panda");
-		/*addEntityType(ModEntities.POLAR_BEAR_ZOMBIE, "Zombie Polar Bear");*/
-		/*addEntityType(ModEntities.RABBIT_ZOMBIE, "Zombie Rabbit");*/
-		/*addEntityType(ModEntities.WOLF_ZOMBIE, "Zombie Wolf");*/
+		addEntityType(ModEntities.POLAR_BEAR_ZOMBIE, "Zombie Polar Bear");
+		addEntityType(ModEntities.RABBIT_ZOMBIE, "Zombie Rabbit");
+		addEntityType(ModEntities.WOLF_ZOMBIE, "Zombie Wolf");
 		addSpawnEggTranslations();
 	}
 

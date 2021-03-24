@@ -67,26 +67,26 @@ public final class ModEntities
 			builder -> builder.size(1.3F, 1.25F).trackingRange(10) // same values as panda
 	);
 
-	/*public static final RegistryObject<EntityType<PolarBearZombieEntity>> POLAR_BEAR_ZOMBIE = register(
+	public static final RegistryObject<EntityType<PolarBearZombieEntity>> POLAR_BEAR_ZOMBIE = register(
 			ModConstants.Entities.POLAR_BEAR_ZOMBIE,
 			PolarBearZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(1.4F, 1.4F).trackingRange(10) // same values as polar bear
-	);*/
+	);
 
-	/*public static final RegistryObject<EntityType<RabbitZombieEntity>> RABBIT_ZOMBIE = register(
+	public static final RegistryObject<EntityType<RabbitZombieEntity>> RABBIT_ZOMBIE = register(
 			ModConstants.Entities.RABBIT_ZOMBIE,
 			RabbitZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.4F, 0.5F).trackingRange(8) // same values as rabbit
-	);*/
+	);
 
-	/*public static final RegistryObject<EntityType<WolfZombieEntity>> WOLF_ZOMBIE = register(
+	public static final RegistryObject<EntityType<WolfZombieEntity>> WOLF_ZOMBIE = register(
 			ModConstants.Entities.WOLF_ZOMBIE,
 			WolfZombieEntity::new,
 			EntityClassification.MONSTER,
 			builder -> builder.size(.6F, .85F).trackingRange(10) // same values as wolf
-	);*/
+	);
 
 	private ModEntities()
 	{
@@ -125,20 +125,20 @@ public final class ModEntities
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PandaZombieEntity::canPandaZombieSpawn);
 		});
 
-		/*POLAR_BEAR_ZOMBIE.ifPresent(entityType -> {
+		POLAR_BEAR_ZOMBIE.ifPresent(entityType -> {
 			GlobalEntityTypeAttributes.put(entityType, PolarBearZombieEntity.registerPolarBearZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, PolarBearZombieEntity::canPolarBearZombieSpawn);
-		});*/
+		});
 
-		/*RABBIT_ZOMBIE.ifPresent(entityType -> {
+		RABBIT_ZOMBIE.ifPresent(entityType -> {
 			GlobalEntityTypeAttributes.put(entityType, RabbitZombieEntity.registerRabbitZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, RabbitZombieEntity::canRabbitZombieSpawn);
-		});*/
+		});
 
-		/*WOLF_ZOMBIE.ifPresent(entityType -> {
+		WOLF_ZOMBIE.ifPresent(entityType -> {
 			GlobalEntityTypeAttributes.put(entityType, WolfZombieEntity.registerWolfZombieAttributes().create());
 			EntitySpawnPlacementRegistry.register(entityType, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, WolfZombieEntity::canWolfZombieSpawn);
-		});*/
+		});
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -150,9 +150,9 @@ public final class ModEntities
 		registerEntityRenderer(SHEEP_ZOMBIE, SheepZombieRenderer::new);
 		registerEntityRenderer(FOX_ZOMBIE, FoxZombieRenderer::new);
 		registerEntityRenderer(PANDA_ZOMBIE, PandaZombieRenderer::new);
-		/*registerEntityRenderer(POLAR_BEAR_ZOMBIE, PolarBearZombieRenderer::new);*/
-		/*registerEntityRenderer(RABBIT_ZOMBIE, RabbitZombieRenderer::new);*/
-		/*registerEntityRenderer(WOLF_ZOMBIE, WolfZombieRenderer::new);*/
+		registerEntityRenderer(POLAR_BEAR_ZOMBIE, PolarBearZombieRenderer::new);
+		registerEntityRenderer(RABBIT_ZOMBIE, RabbitZombieRenderer::new);
+		registerEntityRenderer(WOLF_ZOMBIE, WolfZombieRenderer::new);
 	}
 
 	// utility methods to make registering entities easier

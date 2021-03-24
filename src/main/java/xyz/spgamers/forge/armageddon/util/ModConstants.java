@@ -32,6 +32,7 @@ public final class ModConstants
 		public static final String ROTTEN_BEEF = "rotten_beef";
 		public static final String ROTTEN_FISH = "rotten_fish";
 		public static final String ROTTEN_RABBIT = "rotten_rabbit";
+		public static final String ROTTEN_RABBIT_FOOT = "rotten_rabbit_foot";
 		public static final String ROTTEN_CHICKEN = "rotten_chicken";
 		public static final String ROTTEN_EGG = "rotten_egg";
 		public static final String ROTTEN_MUTTON = "rotten_mutton";

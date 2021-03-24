@@ -45,12 +45,12 @@ public final class ZombieHelper
 			turnedType = ModEntities.FOX_ZOMBIE.get();
 		else if(originalType == EntityType.PANDA)
 			turnedType = ModEntities.PANDA_ZOMBIE.get();
-		/*else if(originalType == EntityType.POLAR_BEAR)
-			turnedType = ModEntities.POLAR_BEAR_ZOMBIE.get();*/
-		/*else if(originalType == EntityType.RABBIT)
-			turnedType = ModEntities.RABBIT_ZOMBIE.get();*/
-		/*else if(originalType == EntityType.WOLF)
-			turnedType = ModEntities.WOLF_ZOMBIE.get();*/
+		else if(originalType == EntityType.POLAR_BEAR)
+			turnedType = ModEntities.POLAR_BEAR_ZOMBIE.get();
+		else if(originalType == EntityType.RABBIT)
+			turnedType = ModEntities.RABBIT_ZOMBIE.get();
+		else if(originalType == EntityType.WOLF)
+			turnedType = ModEntities.WOLF_ZOMBIE.get();
 
 		if(turnedType != null)
 			return original.func_233656_b_(turnedType, false);

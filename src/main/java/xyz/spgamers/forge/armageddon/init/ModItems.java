@@ -46,6 +46,12 @@ public final class ModItems
 			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
 	);
 
+	public static final RegistryObject<Item> ROTTEN_RABBIT_FOOT = registerItem(
+			ModConstants.Items.ROTTEN_RABBIT_FOOT,
+			Item::new,
+			ModItems::defaultItemProperties
+	);
+
 	public static final RegistryObject<Item> ROTTEN_CHICKEN = registerItem(
 			ModConstants.Items.ROTTEN_CHICKEN,
 			Item::new,
@@ -106,23 +112,23 @@ public final class ModItems
 			ModItems::defaultItemProperties
 	);
 
-	/*public static final RegistryObject<DeferredSpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.POLAR_BEAR_ZOMBIE,
 			44975, 9803152,
 			ModItems::defaultItemProperties
-	);*/
+	);
 
-	/*public static final RegistryObject<DeferredSpawnEggItem> RABBIT_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> RABBIT_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.RABBIT_ZOMBIE,
 			44975, 7555121,
 			ModItems::defaultItemProperties
-	);*/
+	);
 
-	/*public static final RegistryObject<DeferredSpawnEggItem> WOLF_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<DeferredSpawnEggItem> WOLF_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
 			ModEntities.WOLF_ZOMBIE,
 			44975, 13545366,
 			ModItems::defaultItemProperties
-	);*/
+	);
 
 	private ModItems()
 	{

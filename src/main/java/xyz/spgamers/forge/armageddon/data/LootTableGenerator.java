@@ -8,6 +8,8 @@ import net.minecraft.data.loot.EntityLootTables;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Items;
 import net.minecraft.loot.*;
+import net.minecraft.loot.conditions.KilledByPlayer;
+import net.minecraft.loot.conditions.RandomChanceWithLooting;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
@@ -145,6 +147,69 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 						                    )
 					         )
 			);
+
+			registerLootTable(
+					ModEntities.POLAR_BEAR_ZOMBIE.get(),
+					LootTable.builder()
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    /*.addEntry(
+						                    		ItemLootEntry.builder(Items.COD)
+								                                 .weight(3)
+								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 2F)))
+								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+						                    )*/
+						                    /*.addEntry(
+						                    		ItemLootEntry.builder(Items.SALMON)
+								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 2F)))
+								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+						                    )*/
+							                .addEntry(
+							                		ItemLootEntry.builder(ModItems.ROTTEN_FISH.get())
+									                             .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 2F)))
+									                             .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+							                )
+					         )
+			);
+
+			registerLootTable(
+					ModEntities.RABBIT_ZOMBIE.get(),
+					LootTable.builder()
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    .addEntry(
+						                    		ItemLootEntry.builder(Items.RABBIT_HIDE)
+								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 1F)))
+								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+						                    )
+					         )
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    .addEntry(
+						                    		// ItemLootEntry.builder(Items.RABBIT)
+						                            ItemLootEntry.builder(ModItems.ROTTEN_RABBIT.get())
+								                                 .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 1F)))
+								                                 /*.acceptFunction(
+								                                 		Smelt.func_215953_b()
+									                                         .acceptCondition(EntityHasProperty.builder(LootContext.EntityTarget.THIS, ON_FIRE))
+								                                 )*/
+								                                 .acceptFunction(LootingEnchantBonus.builder(RandomValueRange.of(0F, 1F)))
+						                    )
+					         )
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+						                    // .addEntry(ItemLootEntry.builder(Items.RABBIT_FOOT))
+						                    .addEntry(ItemLootEntry.builder(ModItems.ROTTEN_RABBIT_FOOT.get()))
+						                    .acceptCondition(KilledByPlayer.builder())
+						                    .acceptCondition(RandomChanceWithLooting.builder(.1F, .03F))
+					         )
+			);
+
+			registerLootTable(ModEntities.WOLF_ZOMBIE.get(), LootTable.builder());
 		}
 
 		@Override

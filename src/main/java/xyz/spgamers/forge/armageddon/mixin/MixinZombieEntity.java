@@ -108,9 +108,9 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		boolean isSheep = type == ModEntities.SHEEP_ZOMBIE.get();
 		boolean isFox = type == ModEntities.FOX_ZOMBIE.get();
 		boolean isPanda = type == ModEntities.PANDA_ZOMBIE.get();
-		boolean isPolarBear = false/*type == ModEntities.POLAR_BEAR_ZOMBIE.get()*/;
-		boolean isRabbit = false/*type == ModEntities.RABBIT_ZOMBIE.get()*/;
-		boolean isWolf = false/*type == ModEntities.WOLF_ZOMBIE.get()*/;
+		boolean isPolarBear = type == ModEntities.POLAR_BEAR_ZOMBIE.get();
+		boolean isRabbit = type == ModEntities.RABBIT_ZOMBIE.get();
+		boolean isWolf = type == ModEntities.WOLF_ZOMBIE.get();
 
 		boolean isZombie = type == EntityType.ZOMBIE;
 		boolean isDrowned = type == EntityType.DROWNED;
