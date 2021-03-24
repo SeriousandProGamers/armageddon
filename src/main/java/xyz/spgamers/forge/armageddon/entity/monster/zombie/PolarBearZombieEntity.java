@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -50,7 +51,7 @@ public final class PolarBearZombieEntity extends AbstractZombieEntity
 
 	public static AttributeModifierMap.MutableAttribute registerPolarBearZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 30D).createMutableAttribute(Attributes.FOLLOW_RANGE, 20D).createMutableAttribute(Attributes.MOVEMENT_SPEED, .25D).createMutableAttribute(Attributes.ATTACK_DAMAGE, 6D);
 	}
 
 	public static boolean canPolarBearZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

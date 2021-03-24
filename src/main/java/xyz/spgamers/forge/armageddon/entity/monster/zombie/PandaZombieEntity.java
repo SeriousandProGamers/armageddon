@@ -4,6 +4,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -50,7 +51,7 @@ public final class PandaZombieEntity extends AbstractZombieEntity
 
 	public static AttributeModifierMap.MutableAttribute registerPandaZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MOVEMENT_SPEED, .15F).createMutableAttribute(Attributes.ATTACK_DAMAGE, 6D);
 	}
 
 	public static boolean canPandaZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

@@ -1,9 +1,12 @@
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -48,9 +51,15 @@ public final class WolfZombieEntity extends AbstractZombieEntity
 		return SoundEvents.ENTITY_WOLF_STEP;
 	}
 
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
+	{
+		return sizeIn.height * .8F;
+	}
+
 	public static AttributeModifierMap.MutableAttribute registerWolfZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MOVEMENT_SPEED, .3F).createMutableAttribute(Attributes.MAX_HEALTH, 8D).createMutableAttribute(Attributes.ATTACK_DAMAGE, 2D);
 	}
 
 	public static boolean canWolfZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

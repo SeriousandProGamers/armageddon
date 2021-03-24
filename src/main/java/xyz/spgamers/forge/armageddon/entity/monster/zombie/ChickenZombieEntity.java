@@ -1,11 +1,9 @@
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.pathfinding.PathNodeType;
@@ -172,9 +170,15 @@ public final class ChickenZombieEntity extends AbstractZombieEntity
 		return SoundEvents.ENTITY_CHICKEN_STEP;
 	}
 
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
+	{
+		return isChild() ? sizeIn.height * .85F : sizeIn.height * .925F;
+	}
+
 	public static AttributeModifierMap.MutableAttribute registerChickenZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 4D).createMutableAttribute(Attributes.MOVEMENT_SPEED, .25D);
 	}
 
 	public static boolean canChickenZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

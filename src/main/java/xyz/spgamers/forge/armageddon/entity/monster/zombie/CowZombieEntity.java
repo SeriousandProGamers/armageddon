@@ -1,9 +1,12 @@
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -66,9 +69,15 @@ public final class CowZombieEntity extends AbstractZombieEntity
 		return super.func_230254_b_(player, hand);
 	}
 
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
+	{
+		return isChild() ? sizeIn.height * .95F : 1.3F;
+	}
+
 	public static AttributeModifierMap.MutableAttribute registerCowZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 10D).createMutableAttribute(Attributes.MOVEMENT_SPEED, .2F);
 	}
 
 	public static boolean canCowZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

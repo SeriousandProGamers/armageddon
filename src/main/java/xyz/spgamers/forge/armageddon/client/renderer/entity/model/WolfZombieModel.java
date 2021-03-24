@@ -134,6 +134,7 @@ public final class WolfZombieModel extends TintedAgeableModel<WolfZombieEntity>
 	public void setRotationAngles(WolfZombieEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.head.rotateAngleX = headPitch * ((float)Math.PI / 180F);
 		this.head.rotateAngleY = netHeadYaw * ((float)Math.PI / 180F);
-		this.tail.rotateAngleX = ageInTicks;
+		// this.tail.rotateAngleX = ageInTicks;
+		this.tail.rotateAngleX = 1.5393804F;
 	}
 }

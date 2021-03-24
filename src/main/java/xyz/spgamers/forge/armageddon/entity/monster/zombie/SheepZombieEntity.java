@@ -2,11 +2,9 @@ package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.SheepEntity;
@@ -281,9 +279,15 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 		return SoundEvents.ENTITY_SHEEP_STEP;
 	}
 
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
+	{
+		return .95F * sizeIn.height;
+	}
+
 	public static AttributeModifierMap.MutableAttribute registerSheepZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MAX_HEALTH, 8D).createMutableAttribute(Attributes.MOVEMENT_SPEED, .23F);
 	}
 
 	public static boolean canSheepZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)

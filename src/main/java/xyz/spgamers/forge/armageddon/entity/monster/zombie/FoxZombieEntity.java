@@ -2,9 +2,12 @@ package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
@@ -56,9 +59,15 @@ public final class FoxZombieEntity extends AbstractZombieEntity
 		// NOOP: getStepSound() is not nullable, this stops the sound being played
 	}
 
+	@Override
+	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
+	{
+		return isChild() ? sizeIn.height * .85F : .4F;
+	}
+
 	public static AttributeModifierMap.MutableAttribute registerFoxZombieAttributes()
 	{
-		return ZombieHelper.registerZombieAttributes();
+		return ZombieHelper.registerZombieAttributes().createMutableAttribute(Attributes.MOVEMENT_SPEED, .3F).createMutableAttribute(Attributes.MAX_HEALTH, 10D).createMutableAttribute(Attributes.FOLLOW_RANGE, 32D).createMutableAttribute(Attributes.ATTACK_DAMAGE, 2D);
 	}
 
 	public static boolean canFoxZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
