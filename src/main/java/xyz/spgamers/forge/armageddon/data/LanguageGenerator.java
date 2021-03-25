@@ -12,6 +12,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
+import xyz.spgamers.forge.armageddon.item.RottenRabbitFootItem;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 import java.util.Map;
@@ -30,6 +31,8 @@ public final class LanguageGenerator extends LanguageProvider
 	@Override
 	protected void addTranslations()
 	{
+		add(RottenRabbitFootItem.STATUS_TRANSLATION_KEY, "%s has given you %s");
+
 		add(ModItems.ITEM_GROUP, "Armageddon");
 		addItem(ModItems.ROTTEN_PORKCHOP, "Rotten Porkchop");
 		addItem(ModItems.ROTTEN_BEEF, "Rotten Beef");

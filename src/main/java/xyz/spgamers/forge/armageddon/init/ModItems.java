@@ -9,6 +9,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import xyz.spgamers.forge.armageddon.item.DeferredSpawnEggItem;
+import xyz.spgamers.forge.armageddon.item.RottenRabbitFootItem;
 import xyz.spgamers.forge.armageddon.item.SpoiledMilkBucketItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
@@ -48,7 +49,7 @@ public final class ModItems
 
 	public static final RegistryObject<Item> ROTTEN_RABBIT_FOOT = registerItem(
 			ModConstants.Items.ROTTEN_RABBIT_FOOT,
-			Item::new,
+			RottenRabbitFootItem::new,
 			ModItems::defaultItemProperties
 	);
 
