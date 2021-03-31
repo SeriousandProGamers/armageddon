@@ -10,6 +10,7 @@ import net.minecraft.potion.Effect;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import xyz.spgamers.forge.armageddon.init.ModEnchantments;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.item.RottenRabbitFootItem;
@@ -44,6 +45,8 @@ public final class LanguageGenerator extends LanguageProvider
 		addItem(ModItems.ROTTEN_MUTTON, "Rotten Mutton");
 		addItem(ModItems.SPOILED_MILK_BUCKET, "Spoiled Milk Bucket");
 		// addEffect(ModEffects.ZOMBIE_EVASION, "Zombie Evasion");
+
+		addEnchantment(ModEnchantments.POISON_ENCHANTMENT, "Poison");
 
 		// human readable names are Zombie<> but code names are <>Zombie
 		addEntityType(ModEntities.PIG_ZOMBIE, "Zombie Pig");

@@ -68,6 +68,16 @@ public final class ModConstants
 		}
 	}
 
+	public static final class Enchantments
+	{
+		public static final String POISON = "poison_enchantment";
+
+		private Enchantments()
+		{
+			throw new IllegalStateException();
+		}
+	}
+
 	public static final class Potions
 	{
 		// public static final String ZOMBIE_EVASION = "zombie_evasion";
