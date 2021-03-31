@@ -67,13 +67,16 @@ public final class ZombieHelper
 
 	public static boolean canZombieSpawn(EntityType<? extends MonsterEntity> entityType, IServerWorld world, SpawnReason reason, BlockPos pos, Random random)
 	{
-		if(BloodMoonHelper.isBloodMoonActive(world.getWorld()))
+		/*if(BloodMoonHelper.isBloodMoonActive(world.getWorld()))
 			return true;
 		else
 		{
 			if(ModConstants.Entities.EntityTypeTags.MOD_PASSIVE_ZOMBIES.contains(entityType))
 				return false;
-		}
+		}*/
+
+		if(ModConstants.Entities.EntityTypeTags.MOD_PASSIVE_ZOMBIES.contains(entityType))
+			return false;
 
 		return MonsterEntity.canMonsterSpawnInLight(entityType, world, reason, pos, random);
 	}

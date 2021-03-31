@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.spgamers.forge.armageddon.util.BloodMoonHelper;
 
 @Mixin(ClientWorld.class)
 @OnlyIn(Dist.CLIENT)
@@ -21,7 +20,7 @@ public abstract class MixinClientWorld
 	)
 	private void getCloudColor(float partialTicks, CallbackInfoReturnable<Vector3d> cir)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-			cir.setReturnValue(BloodMoonHelper.getMoonColorVec3D());
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+			cir.setReturnValue(BloodMoonHelper.getMoonColorVec3D());*/
 	}
 }

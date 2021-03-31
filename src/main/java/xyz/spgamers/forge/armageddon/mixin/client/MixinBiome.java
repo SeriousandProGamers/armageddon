@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xyz.spgamers.forge.armageddon.util.BloodMoonHelper;
 
 @Mixin(Biome.class)
 @OnlyIn(Dist.CLIENT)
@@ -20,8 +19,8 @@ public abstract class MixinBiome
 	)
 	private void getSkyColor(CallbackInfoReturnable<Integer> cir)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());*/
 	}
 
 	@Inject(
@@ -31,8 +30,8 @@ public abstract class MixinBiome
 	)
 	private void getFogColor(CallbackInfoReturnable<Integer> cir)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());*/
 	}
 
 	@Inject(
@@ -42,8 +41,8 @@ public abstract class MixinBiome
 	)
 	private void getWaterColor(CallbackInfoReturnable<Integer> cir)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());*/
 	}
 
 	@Inject(
@@ -53,7 +52,7 @@ public abstract class MixinBiome
 	)
 	private void getWaterFogColor(CallbackInfoReturnable<Integer> cir)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
-			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+			cir.setReturnValue(BloodMoonHelper.MOON_COLOR.getColor());*/
 	}
 }

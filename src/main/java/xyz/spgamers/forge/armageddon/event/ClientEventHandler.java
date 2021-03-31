@@ -5,7 +5,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.spgamers.forge.armageddon.util.BloodMoonHelper;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 @Mod.EventBusSubscriber(modid = ModConstants.MOD_ID, value = Dist.CLIENT)
@@ -20,10 +19,10 @@ public final class ClientEventHandler
 	@SubscribeEvent
 	public static void onFogDensity(EntityViewRenderEvent.FogDensity event)
 	{
-		if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
+		/*if(BloodMoonHelper.ClientHelper.isBloodMoonEnabled())
 		{
 			event.setDensity(.025F);
 			event.setCanceled(true);
-		}
+		}*/
 	}
 }

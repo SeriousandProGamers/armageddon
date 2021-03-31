@@ -15,7 +15,6 @@ import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
 import xyz.spgamers.forge.armageddon.data.*;
 import xyz.spgamers.forge.armageddon.init.*;
-import xyz.spgamers.forge.armageddon.packet.BloodMoonStateChangePacket;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
 @Mod(ModConstants.MOD_ID)
@@ -76,12 +75,12 @@ public final class Armageddon
 
 	private void registerPackets()
 	{
-		ModConstants.NETWORK.registerMessage(
+		/*ModConstants.NETWORK.registerMessage(
 				0,
 				BloodMoonStateChangePacket.class,
 				BloodMoonStateChangePacket::encode,
 				BloodMoonStateChangePacket::new,
 				BloodMoonStateChangePacket::process
-		);
+		);*/
 	}
 }
