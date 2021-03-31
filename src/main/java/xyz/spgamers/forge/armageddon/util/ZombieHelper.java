@@ -51,6 +51,8 @@ public final class ZombieHelper
 			turnedType = ModEntities.RABBIT_ZOMBIE.get();
 		else if(originalType == EntityType.WOLF)
 			turnedType = ModEntities.WOLF_ZOMBIE.get();
+		else if(originalType == EntityType.HORSE)
+			turnedType = EntityType.ZOMBIE_HORSE;
 
 		if(turnedType != null)
 			return original.func_233656_b_(turnedType, false);

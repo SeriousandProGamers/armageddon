@@ -1,6 +1,7 @@
 package xyz.spgamers.forge.armageddon.event;
 
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraftforge.common.world.MobSpawnInfoBuilder;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
@@ -42,6 +43,7 @@ public final class BiomeEventHandler
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.POLAR_BEAR_ZOMBIE.get(), zombieWeight, 4, 4))
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.RABBIT_ZOMBIE.get(), zombieWeight, 4, 4))
 				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(ModEntities.WOLF_ZOMBIE.get(), zombieWeight, 4, 4))
+				.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(EntityType.ZOMBIE_HORSE, zombieWeight, 4, 4))
 		;
 	}
 }

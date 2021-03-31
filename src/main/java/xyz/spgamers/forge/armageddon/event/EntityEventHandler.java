@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.spgamers.forge.armageddon.Armageddon;
@@ -45,11 +44,11 @@ public final class EntityEventHandler
 		SpawnReason reason = event.getSpawnReason();
 		IWorld world = event.getWorld();
 
-		if(entity.getType() != EntityType.ZOMBIE)
+		/*if(entity.getType() != EntityType.ZOMBIE)
 		{
 			event.setResult(Event.Result.DENY);
 			return;
-		}
+		}*/
 
 		// is night
 		if(WorldHelper.isNight(world))

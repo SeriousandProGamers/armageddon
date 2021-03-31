@@ -1,13 +1,12 @@
 package xyz.spgamers.forge.armageddon.entity.monster.zombie;
 
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -55,6 +54,35 @@ public final class WolfZombieEntity extends AbstractZombieEntity
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn)
 	{
 		return sizeIn.height * .8F;
+	}
+
+	@Override
+	public boolean attackEntityAsMob(Entity entityIn)
+	{
+		if(super.attackEntityAsMob(entityIn))
+		{
+			if(entityIn instanceof LivingEntity)
+			{
+				int poisonDuration = 0;
+
+				switch(world.getDifficulty())
+				{
+					case NORMAL:
+						poisonDuration = 7;
+						break;
+					case HARD:
+						poisonDuration = 15;
+						break;
+				}
+
+				if(poisonDuration > 0)
+					((LivingEntity) entityIn).addPotionEffect(new EffectInstance(Effects.POISON, poisonDuration * 20, 0));
+			}
+
+			return true;
+		}
+		else
+			return false;
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerWolfZombieAttributes()

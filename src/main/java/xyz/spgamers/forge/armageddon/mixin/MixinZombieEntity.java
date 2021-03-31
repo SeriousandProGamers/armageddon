@@ -5,6 +5,7 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.passive.*;
+import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.world.Difficulty;
@@ -111,6 +112,7 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		boolean isPolarBear = type == ModEntities.POLAR_BEAR_ZOMBIE.get();
 		boolean isRabbit = type == ModEntities.RABBIT_ZOMBIE.get();
 		boolean isWolf = type == ModEntities.WOLF_ZOMBIE.get();
+		boolean isHorse = type == EntityType.ZOMBIE_HORSE;
 
 		boolean isZombie = type == EntityType.ZOMBIE;
 		boolean isDrowned = type == EntityType.DROWNED;
@@ -119,7 +121,7 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		boolean isPiglin = type == EntityType.ZOMBIFIED_PIGLIN;
 
 		boolean isHostile = isZombie || isDrowned || isHusk || isVillager || isPiglin;
-		boolean isPassive = isChicken || isPig || isCow || isSheep || isFox || isPanda || isPolarBear || isRabbit || isWolf;
+		boolean isPassive = isChicken || isPig || isCow || isSheep || isFox || isPanda || isPolarBear || isRabbit || isWolf || isHorse;
 
 		int chickenPriority = 2;
 		int pigPriority = 2;
@@ -130,6 +132,7 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		int polarBearPriority = 2;
 		int rabbitPriority = 2;
 		int wolfPriority = 2;
+		int horsePriority = 2;
 
 		if(isHostile)
 		{
@@ -162,6 +165,8 @@ public abstract class MixinZombieEntity extends MonsterEntity
 			rabbitPriority--;
 		if(isWolf)
 			wolfPriority--;
+		if(isHorse)
+			horsePriority--;
 
 		// babies go for chickens more as they like to ride around on them
 		if(isChild() && ZombieHelper.isChickenJockeySupported(type))
@@ -177,6 +182,7 @@ public abstract class MixinZombieEntity extends MonsterEntity
 		polarBearPriority = Math.max(polarBearPriority, 1);
 		rabbitPriority = Math.max(rabbitPriority, 1);
 		wolfPriority = Math.max(wolfPriority, 1);
+		horsePriority = Math.max(horsePriority, 1);
 
 		if(Armageddon.SERVER_CONFIG.animals.isChickenZombieEnabled())
 			targetSelector.addGoal(chickenPriority, new NearestAttackableTargetGoal<>(this, ChickenEntity.class, true));
@@ -196,6 +202,8 @@ public abstract class MixinZombieEntity extends MonsterEntity
 			targetSelector.addGoal(rabbitPriority, new NearestAttackableTargetGoal<>(this, RabbitEntity.class, true));
 		if(Armageddon.SERVER_CONFIG.animals.isWolfZombieEnabled())
 			targetSelector.addGoal(wolfPriority, new NearestAttackableTargetGoal<>(this, WolfEntity.class, true));
+
+		targetSelector.addGoal(horsePriority, new NearestAttackableTargetGoal<>(this, HorseEntity.class, true));
 	}
 
 	@Inject(
@@ -223,11 +231,18 @@ public abstract class MixinZombieEntity extends MonsterEntity
 				// this stops the original entity from dropping their loot
 				original.setLastAttackedEntity(this);
 
+				ILivingEntityData data = null;
+
+				if(turned instanceof ZombieEntity)
+					data = new ZombieEntity.GroupData(original.isChild(), false);
+				else if(turned instanceof AgeableEntity)
+					data = new AgeableEntity.AgeableData(original.isChild());
+
 				turned.onInitialSpawn(
 						world,
 						world.getDifficultyForLocation(getPosition()),
 						SpawnReason.CONVERSION,
-						new ZombieEntity.GroupData(original.isChild(), false),
+						data,
 						null
 				);
 
