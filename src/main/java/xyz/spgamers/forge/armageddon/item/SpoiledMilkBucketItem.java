@@ -18,7 +18,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.capability.wrappers.FluidBucketWrapper;
-import xyz.spgamers.forge.armageddon.util.WorldHelper;
 
 import javax.annotation.Nullable;
 
@@ -32,7 +31,7 @@ public final class SpoiledMilkBucketItem extends Item
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World world, LivingEntity entityLiving)
 	{
-		if(WorldHelper.isServerWorld(world))
+		if(!world.isRemote())
 		{
 			for(Pair<EffectInstance, Float> pair : Foods.ROTTEN_FLESH.getEffects())
 			{

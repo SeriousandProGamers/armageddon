@@ -20,7 +20,6 @@ import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
-import xyz.spgamers.forge.armageddon.util.WorldHelper;
 import xyz.spgamers.forge.armageddon.util.ZombieHelper;
 
 import javax.annotation.Nullable;
@@ -66,7 +65,7 @@ public final class ChickenZombieEntity extends AbstractZombieEntity
 
 		wingRotation += windRotDelta * 2F;
 
-		if(WorldHelper.isServerWorld(world) && isAlive() && !isChild() && !isChickenJockey() && --timeUntilNextEgg <= 0)
+		if(!world.isRemote() && isAlive() && !isChild() && !isChickenJockey() && --timeUntilNextEgg <= 0)
 		{
 			playSound(SoundEvents.ENTITY_CHICKEN_EGG, 1F, (rand.nextFloat() - rand.nextFloat()) * .2F + 1F);
 			entityDropItem(ModItems.ROTTEN_EGG.get());

@@ -9,16 +9,6 @@ public final class WorldHelper
 		throw new IllegalStateException();
 	}
 
-	public static boolean isServerWorld(IWorld world)
-	{
-		return !world.isRemote();
-	}
-
-	public static boolean isClientWorld(IWorld world)
-	{
-		return world.isRemote();
-	}
-
 	public static boolean isNight(IWorld world)
 	{
 		long dayTime = world.getWorldInfo().getDayTime();

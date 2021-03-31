@@ -30,7 +30,6 @@ import xyz.spgamers.forge.armageddon.Armageddon;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.util.EntityEnumDataHelper;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
-import xyz.spgamers.forge.armageddon.util.WorldHelper;
 import xyz.spgamers.forge.armageddon.util.ZombieHelper;
 
 import javax.annotation.Nonnull;
@@ -72,7 +71,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	@Override
 	public void livingTick()
 	{
-		if(WorldHelper.isClientWorld(world))
+		if(world.isRemote())
 			sheepTimer = Math.max(0, sheepTimer - 1);
 
 		super.livingTick();
@@ -126,7 +125,7 @@ public final class SheepZombieEntity extends AbstractZombieEntity implements IFo
 	{
 		world.playMovingSound(null, this, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.PLAYERS, 1F, 1F);
 
-		if(WorldHelper.isServerWorld(world))
+		if(!world.isRemote())
 		{
 			setSheared(true);
 			int i = 1 + rand.nextInt(3);
