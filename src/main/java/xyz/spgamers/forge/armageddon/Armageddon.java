@@ -14,10 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
 import xyz.spgamers.forge.armageddon.data.*;
-import xyz.spgamers.forge.armageddon.init.ModEffects;
-import xyz.spgamers.forge.armageddon.init.ModEntities;
-import xyz.spgamers.forge.armageddon.init.ModItems;
-import xyz.spgamers.forge.armageddon.init.ModPotions;
+import xyz.spgamers.forge.armageddon.init.*;
 import xyz.spgamers.forge.armageddon.packet.BloodMoonStateChangePacket;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
@@ -38,6 +35,7 @@ public final class Armageddon
 		ModEntities.ENTITIES.register(bus);
 		ModEffects.EFFECTS.register(bus);
 		ModPotions.POTIONS.register(bus);
+		ModEnchantments.ENCHANTMENTS.register(bus);
 
 		bus.addListener(this::onCommonSetup);
 		bus.addListener(this::onGatherData);

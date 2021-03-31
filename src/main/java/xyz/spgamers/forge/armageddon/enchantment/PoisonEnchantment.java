@@ -30,6 +30,18 @@ public final class PoisonEnchantment extends Enchantment
 	}
 
 	@Override
+	public boolean isTreasureEnchantment()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean canGenerateInLoot()
+	{
+		return true;
+	}
+
+	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
 		return false;
