@@ -15,6 +15,8 @@ import net.minecraft.loot.functions.SetCount;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.ForgeLootTableProvider;
 import net.minecraftforge.fml.RegistryObject;
+import xyz.spgamers.forge.armageddon.data.loot.EnchantSpecificWithLevels;
+import xyz.spgamers.forge.armageddon.init.ModEnchantments;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 
@@ -133,7 +135,19 @@ public final class LootTableGenerator extends ForgeLootTableProvider
 					         )
 			);
 
-			registerLootTable(ModEntities.FOX_ZOMBIE.get(), LootTable.builder());
+			registerLootTable(
+					ModEntities.FOX_ZOMBIE.get(),
+					LootTable.builder()
+					         .addLootPool(
+					         		LootPool.builder()
+						                    .rolls(ConstantRange.of(1))
+							                .addEntry(
+							                		ItemLootEntry.builder(Items.BOOK)
+									                             .acceptFunction(SetCount.builder(RandomValueRange.of(0F, 1F)))
+									                             .acceptFunction(EnchantSpecificWithLevels.builder(ModEnchantments.POISON_ENCHANTMENT::get))
+							                )
+					         )
+			);
 
 			registerLootTable(
 					ModEntities.PANDA_ZOMBIE.get(),

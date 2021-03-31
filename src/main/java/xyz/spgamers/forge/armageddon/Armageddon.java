@@ -36,6 +36,7 @@ public final class Armageddon
 		ModEffects.EFFECTS.register(bus);
 		ModPotions.POTIONS.register(bus);
 		ModEnchantments.ENCHANTMENTS.register(bus);
+		ModLootFunctionTypes.register();
 
 		bus.addListener(this::onCommonSetup);
 		bus.addListener(this::onGatherData);
