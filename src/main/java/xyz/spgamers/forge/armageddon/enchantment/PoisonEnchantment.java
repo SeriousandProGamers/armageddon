@@ -24,6 +24,12 @@ public final class PoisonEnchantment extends Enchantment
 	}
 
 	@Override
+	public boolean canApply(ItemStack stack)
+	{
+		return true;
+	}
+
+	@Override
 	public int getMaxLevel()
 	{
 		return 3;
