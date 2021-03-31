@@ -35,4 +35,10 @@ public final class WorldHelper
 	{
 		worldDayTimeMap.put(world.getDimensionKey(), world.getDayTime());
 	}
+
+	public static boolean isNight(IWorld world)
+	{
+		long dayTime = world.getWorldInfo().getDayTime();
+		return dayTime <= 24000L && dayTime >= 13000L;
+	}
 }

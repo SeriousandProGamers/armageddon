@@ -80,7 +80,7 @@ public final class BloodMoonSavedData extends WorldSavedData
 			long worldTime = world.getDayTime();
 
 			boolean wasNight = previousTime <= 24000L && previousTime >= 13000L;
-			boolean isNight = worldTime <= 24000L && worldTime >= 13000L;
+			boolean isNight = WorldHelper.isNight(world);
 
 			// when a new night starts
 			if(isNight && !wasNight)

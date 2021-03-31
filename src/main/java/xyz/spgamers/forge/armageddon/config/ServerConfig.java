@@ -9,6 +9,7 @@ public final class ServerConfig
 	public final ForgeConfigSpec configSpec;
 	public final Animals animals;
 	public final Mobs mobs;
+	public final Common common;
 
 	private final ForgeConfigSpec.Builder configBuilder;
 
@@ -17,6 +18,7 @@ public final class ServerConfig
 		configBuilder = new ForgeConfigSpec.Builder();
 				// .comment("Configs for Server side.", "Changes Require Server Restart!"); // kills the game
 
+		common = config("common", Common::new);
 		animals = config("animals", Animals::new);
 		mobs = config("mobs", Mobs::new);
 		configSpec = configBuilder.build();
@@ -28,6 +30,21 @@ public final class ServerConfig
 		T config = configBuilder.apply(this.configBuilder);
 		this.configBuilder.pop();
 		return config;
+	}
+
+	public static final class Common
+	{
+		private final ForgeConfigSpec.IntValue hordeSpawnCount;
+
+		Common(ForgeConfigSpec.Builder builder)
+		{
+			hordeSpawnCount = builder.comment("Change amount of additional Zombies to spawn in Hordes").defineInRange("hordeSpawnCount", 4, 0, 10);
+		}
+
+		public int getHordeSpawnCount()
+		{
+			return hordeSpawnCount.get();
+		}
 	}
 
 	public static final class Animals
