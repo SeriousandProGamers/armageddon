@@ -3,11 +3,10 @@ package xyz.spgamers.forge.armageddon.client;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import xyz.apex.forge.apexcore.lib.util.ModHelper;
 import xyz.spgamers.forge.armageddon.config.ClientConfig;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
@@ -18,12 +17,10 @@ public final class ClientSetup
 
 	public ClientSetup()
 	{
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.configSpec);
 
-		bus.addListener(this::onClientSetup);
-		bus.addListener(this::onItemColors);
+		ModHelper.addListener(this::onClientSetup);
+		ModHelper.addListener(this::onItemColors);
 	}
 
 	private void onClientSetup(FMLClientSetupEvent event)

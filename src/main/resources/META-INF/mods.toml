@@ -34,7 +34,12 @@ Adds the Zombie variants to the game with different abilities.
     side="BOTH"
 
 # Required dependencies
-# NO-OP
+[[dependencies.armageddon]]
+    modId="apexcore"
+    mandatory=true
+    versionRange="[1.1,)"
+    ordering="BEFORE"
+    side="BOTH"
 
 # Optional dependencies
 [[dependencies.armageddon]]

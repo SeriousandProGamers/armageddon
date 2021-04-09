@@ -1,28 +1,21 @@
 package xyz.spgamers.forge.armageddon.data;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
-import net.minecraft.item.SpawnEggItem;
 import net.minecraft.potion.Effect;
-import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import xyz.spgamers.forge.armageddon.init.ModEnchantments;
 import xyz.spgamers.forge.armageddon.init.ModEntities;
 import xyz.spgamers.forge.armageddon.init.ModItems;
 import xyz.spgamers.forge.armageddon.item.RottenRabbitFootItem;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
 
-import java.util.Map;
+import java.util.stream.Collectors;
 
-public final class LanguageGenerator extends LanguageProvider
+public final class LanguageGenerator extends xyz.apex.forge.apexcore.lib.data.LanguageGenerator
 {
 	private static final String ENGLISH_LOCALE = "en_us";
 	private static final String SPAWN_EGG_SUFFIX = "Spawn Egg";
-	private static final String ITEM_GROUP_PREFIX = "itemGroup";
 
 	public LanguageGenerator(DataGenerator generator)
 	{
@@ -58,7 +51,7 @@ public final class LanguageGenerator extends LanguageProvider
 		addEntityType(ModEntities.POLAR_BEAR_ZOMBIE, "Zombie Polar Bear");
 		addEntityType(ModEntities.RABBIT_ZOMBIE, "Zombie Rabbit");
 		addEntityType(ModEntities.WOLF_ZOMBIE, "Zombie Wolf");
-		addSpawnEggTranslations();
+		addSpawnEggTranslations(ModItems.ITEMS.getEntries().stream().map(RegistryObject::get).collect(Collectors.toSet()), SPAWN_EGG_SUFFIX);
 	}
 
 	@Override
@@ -71,51 +64,5 @@ public final class LanguageGenerator extends LanguageProvider
 		add(String.format("%s.%s", Items.SPLASH_POTION.getTranslationKey(), effectName), String.format("Splash Potion of %s", value));
 		add(String.format("%s.%s", Items.LINGERING_POTION.getTranslationKey(), effectName), String.format("Lingering Potion of %s", value));
 		add(String.format("%s.%s", Items.TIPPED_ARROW.getTranslationKey(), effectName), String.format("Arrow of %s", value));
-	}
-
-	// this assumes entity types have already been translated
-	// call this after entity type translation
-	private void addSpawnEggTranslations()
-	{
-		for(RegistryObject<Item> obj : ModItems.ITEMS.getEntries())
-		{
-			obj.ifPresent(item -> {
-				if(item instanceof SpawnEggItem)
-				{
-					EntityType<?> entityType = ((SpawnEggItem) item).getType(null);
-					String translatedEntityName = getTranslationValue(entityType.getTranslationKey());
-					add(item, String.format("%s %s", translatedEntityName, SPAWN_EGG_SUFFIX));
-				}
-			});
-		}
-	}
-
-	// adds translation for item groups
-	// pulls the correct translation key
-	// off of the given item group
-	// uses reflection cause mojang made it private
-	private void add(ItemGroup group, String name)
-	{
-		String tabLabel = ObfuscationReflectionHelper.getPrivateValue(ItemGroup.class, group, "tabLabel");
-		add(String.format("%s.%s", ITEM_GROUP_PREFIX, tabLabel), name);
-	}
-
-	// obtains translation value from the data map
-	// if any errors occur translation key is returned
-	private String getTranslationValue(String translationKey)
-	{
-		try
-		{
-			Map<String, String> data = ObfuscationReflectionHelper.getPrivateValue(LanguageProvider.class, this, "data");
-
-			if(data == null)
-				return translationKey;
-
-			return data.getOrDefault(translationKey, translationKey);
-		}
-		catch(ObfuscationReflectionHelper.UnableToFindFieldException | ObfuscationReflectionHelper.UnableToAccessFieldException e)
-		{
-			return translationKey;
-		}
 	}
 }

@@ -1,21 +1,16 @@
 package xyz.spgamers.forge.armageddon.init;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Foods;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import xyz.spgamers.forge.armageddon.item.DeferredSpawnEggItem;
+import xyz.apex.forge.apexcore.lib.util.Registrar;
 import xyz.spgamers.forge.armageddon.item.RottenRabbitFootItem;
 import xyz.spgamers.forge.armageddon.item.SpoiledMilkBucketItem;
 import xyz.spgamers.forge.armageddon.item.group.ModItemGroup;
 import xyz.spgamers.forge.armageddon.util.ModConstants;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public final class ModItems
 {
@@ -23,112 +18,112 @@ public final class ModItems
 
 	public static final ModItemGroup ITEM_GROUP = new ModItemGroup();
 
-	public static final RegistryObject<Item> ROTTEN_PORKCHOP = registerItem(
+	public static final RegistryObject<Item> ROTTEN_PORKCHOP = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_PORKCHOP,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<Item> ROTTEN_BEEF = registerItem(
+	public static final RegistryObject<Item> ROTTEN_BEEF = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_BEEF,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<Item> ROTTEN_FISH = registerItem(
+	public static final RegistryObject<Item> ROTTEN_FISH = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_FISH,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<Item> ROTTEN_RABBIT = registerItem(
+	public static final RegistryObject<Item> ROTTEN_RABBIT = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_RABBIT,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<Item> ROTTEN_RABBIT_FOOT = registerItem(
+	public static final RegistryObject<Item> ROTTEN_RABBIT_FOOT = Registrar.registerItemBuilder(
+			ITEMS,
 			ModConstants.Items.ROTTEN_RABBIT_FOOT,
-			RottenRabbitFootItem::new,
-			ModItems::defaultItemProperties
+			RottenRabbitFootItem::new
 	);
 
-	public static final RegistryObject<Item> ROTTEN_CHICKEN = registerItem(
+	public static final RegistryObject<Item> ROTTEN_CHICKEN = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_CHICKEN,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<Item> ROTTEN_EGG = registerItem(
-			ModConstants.Items.ROTTEN_EGG,
-			Item::new,
-			ModItems::defaultItemProperties
+	public static final RegistryObject<Item> ROTTEN_EGG = Registrar.registerItem(
+			ITEMS,
+			ModConstants.Items.ROTTEN_EGG
 	);
 
-	public static final RegistryObject<Item> ROTTEN_MUTTON = registerItem(
+	public static final RegistryObject<Item> ROTTEN_MUTTON = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.ROTTEN_MUTTON,
-			Item::new,
-			() -> defaultItemProperties().food(Foods.ROTTEN_FLESH)
+			properties -> properties.food(Foods.ROTTEN_FLESH)
 	);
 
-	public static final RegistryObject<SpoiledMilkBucketItem> SPOILED_MILK_BUCKET = registerItem(
+	public static final RegistryObject<SpoiledMilkBucketItem> SPOILED_MILK_BUCKET = Registrar.registerItem(
+			ITEMS,
 			ModConstants.Items.SPOILED_MILK_BUCKET,
 			SpoiledMilkBucketItem::new,
-			() -> defaultItemProperties().containerItem(Items.BUCKET).maxStackSize(1)
+			Registrar::bucketItemPropertiesModifier
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> PIG_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> PIG_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.PIG_ZOMBIE,
-			44975, 14377823,
-			ModItems::defaultItemProperties
+			44975, 14377823
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> COW_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> COW_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.COW_ZOMBIE,
-			44975, 10592673,
-			ModItems::defaultItemProperties
+			44975, 10592673
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> CHICKEN_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> CHICKEN_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.CHICKEN_ZOMBIE,
-			44975, 16711680,
-			ModItems::defaultItemProperties
+			44975, 16711680
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> SHEEP_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> SHEEP_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.SHEEP_ZOMBIE,
-			44975, 16758197,
-			ModItems::defaultItemProperties
+			44975, 16758197
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> FOX_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> FOX_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.FOX_ZOMBIE,
-			44975, 13396256,
-			ModItems::defaultItemProperties
+			44975, 13396256
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> PANDA_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> PANDA_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.PANDA_ZOMBIE,
-			44975, 1776418,
-			ModItems::defaultItemProperties
+			44975, 1776418
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> POLAR_BEAR_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.POLAR_BEAR_ZOMBIE,
-			44975, 9803152,
-			ModItems::defaultItemProperties
+			44975, 9803152
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> RABBIT_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> RABBIT_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.RABBIT_ZOMBIE,
-			44975, 7555121,
-			ModItems::defaultItemProperties
+			44975, 7555121
 	);
 
-	public static final RegistryObject<DeferredSpawnEggItem> WOLF_ZOMBIE_SPAWN_EGG = registerSpawnEgg(
+	public static final RegistryObject<SpawnEggItem> WOLF_ZOMBIE_SPAWN_EGG = Registrar.registerSpawnEggItem(
+			ITEMS,
 			ModEntities.WOLF_ZOMBIE,
-			44975, 13545366,
-			ModItems::defaultItemProperties
+			44975, 13545366
 	);
 
 	private ModItems()
@@ -139,29 +134,5 @@ public final class ModItems
 	public static void commonSetup()
 	{
 		ITEM_GROUP.setItems(ITEMS);
-		DeferredSpawnEggItem.initUnaddedEggs();
-	}
-
-	private static <E extends Entity> RegistryObject<DeferredSpawnEggItem> registerSpawnEgg(RegistryObject<EntityType<E>> entityTypeObj, int primaryColor, int secondaryColor, Supplier<Item.Properties> propertiesSupplier)
-	{
-		return registerItem(
-				// <entity_type>_spawn_egg
-				String.format("%s_%s", entityTypeObj.getId().getPath(), ModConstants.Items.SPAWN_EGG_SUFFIX),
-				properties -> new DeferredSpawnEggItem(entityTypeObj, primaryColor, secondaryColor, properties),
-				propertiesSupplier
-		);
-	}
-
-	private static <I extends Item> RegistryObject<I> registerItem(String itemName, Function<Item.Properties, I> itemBuilder, Supplier<Item.Properties> propertiesSupplier)
-	{
-		return ITEMS.register(
-				itemName,
-				() -> itemBuilder.apply(propertiesSupplier.get())
-		);
-	}
-
-	private static Item.Properties defaultItemProperties()
-	{
-		return new Item.Properties().group(ITEM_GROUP);
 	}
 }

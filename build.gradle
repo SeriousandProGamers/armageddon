@@ -122,6 +122,10 @@ dependencies {
 	runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_version_short}:${mc_version_short}-${top_version}")
 
 	if(project.hasProperty('apex_local_deps') && project.getProperty('apex_local_deps')) {
+		// TODO: This should really be stored in some public maven repository, right now it only exists in my (ApexModder) local repo
+		compileOnly "${apex_package}:apexcore:${mc_version}-${apex_core_version}" // no fg.deobf() to include sources
+		runtimeOnly fg.deobf("${apex_package}:apexcore:${mc_version}-${apex_core_version}")
+
 		// Local Deps
 		runtimeOnly fg.deobf("${apex_package}:devworld:${mc_version}-${devworld_version}")
 	}

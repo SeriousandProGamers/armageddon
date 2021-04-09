@@ -1,16 +1,17 @@
 package xyz.spgamers.forge.armageddon;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import xyz.apex.forge.apexcore.lib.util.ModHelper;
+import xyz.apex.forge.apexcore.lib.util.Registrar;
 import xyz.spgamers.forge.armageddon.client.ClientSetup;
 import xyz.spgamers.forge.armageddon.config.ServerConfig;
 import xyz.spgamers.forge.armageddon.data.*;
@@ -24,21 +25,17 @@ public final class Armageddon
 
 	public Armageddon()
 	{
-		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
 		DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetup::new);
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SERVER_CONFIG.configSpec);
 
-		ModItems.ITEMS.register(bus);
-		ModEntities.ENTITIES.register(bus);
-		ModEffects.EFFECTS.register(bus);
-		ModPotions.POTIONS.register(bus);
-		ModEnchantments.ENCHANTMENTS.register(bus);
-		ModLootFunctionTypes.register();
+		// default item properties for all items in this mod
+		Registrar.registerModDefaultItemProperties(ModConstants.MOD_ID, () -> new Item.Properties().group(ModItems.ITEM_GROUP));
 
-		bus.addListener(this::onCommonSetup);
-		bus.addListener(this::onGatherData);
+		ModHelper.registerDeferredRegisters(ModItems.ITEMS, ModEntities.ENTITIES, ModEffects.EFFECTS, ModPotions.POTIONS, ModEnchantments.ENCHANTMENTS);
+		ModLootFunctionTypes.register();
+		ModHelper.addListener(this::onCommonSetup);
+		ModHelper.addListener(this::onGatherData);
 	}
 
 	private void onCommonSetup(FMLCommonSetupEvent event)
