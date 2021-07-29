@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[37,)"
 license="GNU"
 issueTrackerURL="https://github.com/SeriousandProGamers/Armageddon/issues"
 
@@ -7,51 +7,25 @@ issueTrackerURL="https://github.com/SeriousandProGamers/Armageddon/issues"
 modId="armageddon"
 version="${file.jarVersion}"
 displayName="Armageddon"
-# updateJSONURL="https://raw.githubusercontent.com/SeriousandProGamers/Armageddon/main/update.json" # causing 500: internal error usure why though
+updateJSONURL="https://raw.githubusercontent.com/SeriousandProGamers/Armageddon/main/update.json"
 # displayURL="https://www.curseforge.com/minecraft/mc-mods/armageddon"
 # logoFile="logo.png"
 # credits=""
-authors="ApexModder, RudySPG"
+authors="ApexModder"
 description='''
 Adds the Zombie variants to the game with different abilities.
 '''
 
-# Minecraft & Forge dependencies are optional
-# and not required, all mods are loaded after these
-# but for completness best to include them
 [[dependencies.armageddon]]
     modId="forge"
     mandatory=true
-    versionRange="[34,)"
+    versionRange="[37,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.armageddon]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3]"
+    versionRange="[1.17.1,1.18]"
     ordering="NONE"
-    side="BOTH"
-
-# Required dependencies
-[[dependencies.armageddon]]
-    modId="apexcore"
-    mandatory=true
-    versionRange="[1.1,)"
-    ordering="BEFORE"
-    side="BOTH"
-
-# Optional dependencies
-[[dependencies.armageddon]]
-    modId="jei"
-    mandatory=false
-    versionRange="[7.6,)"
-    ordering="AFTER"
-    side="BOTH"
-
-[[dependencies.armageddon]]
-    modId="theoneprobe"
-    mandatory=false
-    versionRange="[1.16.3-3,)"
-    ordering="AFTER"
     side="BOTH"
