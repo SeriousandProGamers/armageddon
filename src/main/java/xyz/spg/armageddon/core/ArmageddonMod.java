@@ -2,6 +2,7 @@ package xyz.spg.armageddon.core;
 
 import com.google.common.base.Functions;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,10 +22,8 @@ import xyz.spg.armageddon.core.data.*;
 import xyz.spg.armageddon.core.enchantment.PoisonEnchantment;
 import xyz.spg.armageddon.core.entity.PigZombie;
 import xyz.spg.armageddon.core.item.DeferredSpawnEggItem;
-import xyz.spg.armageddon.shared.AEnchantments;
-import xyz.spg.armageddon.shared.AEntityTypes;
-import xyz.spg.armageddon.shared.AItems;
-import xyz.spg.armageddon.shared.Armageddon;
+import xyz.spg.armageddon.core.item.DeferredThrownEggItem;
+import xyz.spg.armageddon.shared.*;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -33,7 +32,6 @@ import java.util.function.Supplier;
 public final class ArmageddonMod
 {
 	public static final CreativeTab CREATIVE_TAB = new CreativeTab();
-	private static Function<Item.Properties, Item.Properties> DEFAULT_ITEM_PROPERTIES = properties -> properties.tab(CREATIVE_TAB);
 
 	public ArmageddonMod()
 	{
@@ -89,23 +87,32 @@ public final class ArmageddonMod
 	static
 	{
 		// Items
+		item(ANames.ROTTEN_PORKCHOP, Item::new, properties -> properties.food(AFoods.ROTTEN_PORKCHOP));
+		item(ANames.ROTTEN_BEEF, Item::new, properties -> properties.food(AFoods.ROTTEN_BEEF));
+		item(ANames.ROTTEN_MUTTON, Item::new, properties -> properties.food(AFoods.ROTTEN_MUTTON));
+		item(ANames.ROTTEN_CHICKEN, Item::new, properties -> properties.food(AFoods.ROTTEN_CHICKEN));
+		item(ANames.ROTTEN_RABBIT, Item::new, properties -> properties.food(AFoods.ROTTEN_RABBIT));
+		item(ANames.ROTTEN_RABBIT_FOOT, Item::new);
+		item(ANames.ROTTEN_FISH, Item::new, properties -> properties.food(AFoods.ROTTEN_FISH));
 
 		// Entities
-		// entityAndSpawnEgg(AEntityTypes.Names.PANDA_ZOMBIE, PandaZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(1.3F, 1.25F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.POLAR_BEAR_ZOMBIE, PolarBearZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.FOX_ZOMBIE, FoxZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.6F, .7F).clientTrackingRange(8).immuneTo(Blocks.SWEET_BERRY_BUSH));
-		// entityAndSpawnEgg(AEntityTypes.Names.WOLF_ZOMBIE, WolfZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.6F, .85F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
-		// entityAndSpawnEgg(AEntityTypes.Names.CHICKEN_ZOMBIE, ChickenZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.4F, .7F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.SHEEP_ZOMBIE, SheepZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.9F, 1.3F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.COW_ZOMBIE, CowZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.9F, 1.4F).clientTrackingRange(10));
-		entityAndSpawnEgg(AEntityTypes.Names.PIG_ZOMBIE, PigZombie::new, MobCategory.MONSTER, 44975, 14377823, DEFAULT_ITEM_PROPERTIES, builder -> builder.sized(.9F, .9F).clientTrackingRange(10));
-		// entityAndSpawnEgg(AEntityTypes.Names.BLAZE_ZOMBIE, BlazeZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder);
-		// entityAndSpawnEgg(AEntityTypes.Names.EXPLOSIVE_ZOMBIE, ExplosiveZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder);
-		// entityAndSpawnEgg(AEntityTypes.Names.TELEPORTING_ZOMBIE, TeleportingZombie::new, MobCategory.MONSTER, 0, 0, DEFAULT_ITEM_PROPERTIES, builder -> builder);
+		entityAndThrownEgg(ANames.ROTTEN_EGG, ThrownEgg::new, MobCategory.MISC, Functions.identity(), builder -> builder.sized(.25F, .25F).clientTrackingRange(4).updateInterval(10));
+
+		// entityAndSpawnEgg(ANames.PANDA_ZOMBIE, PandaZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(1.3F, 1.25F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.POLAR_BEAR_ZOMBIE, PolarBearZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.FOX_ZOMBIE, FoxZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.6F, .7F).clientTrackingRange(8).immuneTo(Blocks.SWEET_BERRY_BUSH));
+		// entityAndSpawnEgg(ANames.WOLF_ZOMBIE, WolfZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.6F, .85F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
+		// entityAndSpawnEgg(ANames.CHICKEN_ZOMBIE, ChickenZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.4F, .7F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.SHEEP_ZOMBIE, SheepZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.9F, 1.3F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.COW_ZOMBIE, CowZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.9F, 1.4F).clientTrackingRange(10));
+		entityAndSpawnEgg(ANames.PIG_ZOMBIE, PigZombie::new, MobCategory.MONSTER, 44975, 14377823, Functions.identity(), builder -> builder.sized(.9F, .9F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.BLAZE_ZOMBIE, BlazeZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder);
+		// entityAndSpawnEgg(ANames.EXPLOSIVE_ZOMBIE, ExplosiveZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder);
+		// entityAndSpawnEgg(ANames.TELEPORTING_ZOMBIE, TeleportingZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder);
 
 		// Enchantments
-		enchantment(AEnchantments.Names.POISON, PoisonEnchantment::new);
+		enchantment(ANames.POISON, PoisonEnchantment::new);
 
 		// MobEffects
 
@@ -118,7 +125,7 @@ public final class ArmageddonMod
 	{
 		return Armageddon.ITEMS.register(
 				itemName,
-				() -> itemBuilder.apply(propertiesModifier.apply(new Item.Properties()))
+				() -> itemBuilder.apply(propertiesModifier.apply(new Item.Properties().tab(CREATIVE_TAB)))
 		);
 	}
 
@@ -144,12 +151,38 @@ public final class ArmageddonMod
 
 	private static <E extends Mob> RegistryObject<DeferredSpawnEggItem> spawnEgg(RegistryObject<EntityType<E>> entityTypeObject, int primaryColor, int secondaryColor, Function<Item.Properties, Item.Properties> propertiesModifier)
 	{
-		return spawnEgg(entityTypeObject.getId().getPath() + "_spawn_egg", entityTypeObject::get, primaryColor, secondaryColor, propertiesModifier);
+		return spawnEgg(entityTypeObject.getId().getPath() + ANames.SPAWN_EGG_SUFFIX, entityTypeObject::get, primaryColor, secondaryColor, propertiesModifier);
 	}
 
 	private static <E extends Mob> RegistryObject<DeferredSpawnEggItem> spawnEgg(RegistryObject<EntityType<E>> entityTypeObject, int primaryColor, int secondaryColor)
 	{
 		return spawnEgg(entityTypeObject, primaryColor, secondaryColor, Functions.identity());
+	}
+	// endregion
+
+	// region: Thrown Egg
+	private static RegistryObject<DeferredThrownEggItem> thrownEgg(String itemName, Supplier<EntityType<? extends ThrownEgg>> entityTypeSupplier, Function<Item.Properties, Item.Properties> propertiesModifier)
+	{
+		return item(
+				itemName,
+				properties -> new DeferredThrownEggItem(entityTypeSupplier, properties),
+				propertiesModifier
+		);
+	}
+
+	private static RegistryObject<DeferredThrownEggItem> thrownEgg(String itemName, Supplier<EntityType<? extends ThrownEgg>> entityTypeSupplier)
+	{
+		return thrownEgg(itemName, entityTypeSupplier, Functions.identity());
+	}
+
+	private static <E extends ThrownEgg> RegistryObject<DeferredThrownEggItem> thrownEgg(RegistryObject<EntityType<E>> entityTypeObject, Function<Item.Properties, Item.Properties> propertiesModifier)
+	{
+		return thrownEgg(entityTypeObject.getId().getPath(), entityTypeObject::get, propertiesModifier);
+	}
+
+	private static <E extends ThrownEgg> RegistryObject<DeferredThrownEggItem> thrownEgg(RegistryObject<EntityType<E>> entityTypeObject)
+	{
+		return thrownEgg(entityTypeObject, Functions.identity());
 	}
 	// endregion
 	// endregion
@@ -182,6 +215,13 @@ public final class ArmageddonMod
 		var entity = entity(entityName, entityFactory, mobCategory, entityModifier);
 		var spawnEgg = spawnEgg(entity, spawnEggPrimaryColor, spawnEggSecondaryColor, itemPropertiesModifier);
 		return Pair.of(entity, spawnEgg);
+	}
+
+	private static <E extends ThrownEgg> Pair<RegistryObject<EntityType<E>>, RegistryObject<DeferredThrownEggItem>> entityAndThrownEgg(String entityName, EntityType.EntityFactory<E> entityFactory, MobCategory mobCategory, Function<Item.Properties, Item.Properties> itemPropertiesModifier, Function<EntityType.Builder<E>, EntityType.Builder<E>> entityModifier)
+	{
+		var entity = entity(entityName, entityFactory, mobCategory, entityModifier);
+		var thrownEgg = thrownEgg(entity, itemPropertiesModifier);
+		return Pair.of(entity, thrownEgg);
 	}
 	// endregion
 	// endregion

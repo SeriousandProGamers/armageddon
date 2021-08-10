@@ -7,12 +7,26 @@ import net.minecraft.data.loot.EntityLoot;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.ValidationContext;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceWithLootingCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import xyz.spg.armageddon.shared.AEntityTypes;
+import xyz.spg.armageddon.shared.AItems;
 import xyz.spg.armageddon.shared.Armageddon;
 
 import java.util.List;
@@ -48,14 +62,18 @@ public final class LootTableGenerator extends LootTableProvider
 		@Override
 		protected void addTables()
 		{
-			add(AEntityTypes.PIG_ZOMBIE, LootTable.lootTable());
+			// region: Pig Zombie
+			add(
+					AEntityTypes.PIG_ZOMBIE,
+					zombieLootTable(AItems.ROTTEN_PORKCHOP, 3F)
+			);
+			// endregion
 
 			// this.add(EntityType.ZOMBIE, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.ROTTEN_FLESH).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.IRON_INGOT)).add(LootItem.lootTableItem(Items.CARROT)).add(LootItem.lootTableItem(Items.POTATO).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))).when(LootItemKilledByPlayerCondition.killedByPlayer()).when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.025F, 0.01F))));this.add(EntityType.COW, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.LEATHER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BEEF).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			// this.add(EntityType.CREEPER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.GUNPOWDER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().add(TagEntry.expandTag(ItemTags.CREEPER_DROP_MUSIC_DISCS)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)))));
 			// this.add(EntityType.ENDERMAN, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			// this.add(EntityType.FOX, LootTable.lootTable());
 			// this.add(EntityType.PANDA, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Blocks.BAMBOO).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F))))));
-			// this.add(EntityType.PIG, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.PORKCHOP).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			// this.add(EntityType.POLAR_BEAR, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.COD).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).setWeight(3).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))).add(LootItem.lootTableItem(Items.SALMON).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			// this.add(EntityType.RABBIT, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.RABBIT_HIDE).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.RABBIT).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.RABBIT_FOOT)).when(LootItemKilledByPlayerCondition.killedByPlayer()).when(LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(0.1F, 0.03F))));
 			// this.add(EntityType.SHEEP, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.MUTTON).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
@@ -84,5 +102,99 @@ public final class LootTableGenerator extends LootTableProvider
 		{
 			return Armageddon.ENTITIES.getEntries().stream().map(RegistryObject::get).collect(Collectors.toList());
 		}
+
+		// region: Helpers
+		private LootTable.Builder zombieLootTable(ItemLike rottenItem, float maxRottenItem)
+		{
+			return LootTable
+					.lootTable()
+					.withPool(
+							LootPool
+									.lootPool()
+									.setRolls(
+											ConstantValue
+													.exactly(
+															1F
+													)
+									)
+									.add(
+											LootItem
+													.lootTableItem(
+															rottenItem
+													)
+													.apply(
+															SetItemCountFunction
+																	.setCount(
+																			UniformGenerator
+																					.between(
+																							0F,
+																							maxRottenItem
+																					)
+																	)
+													)
+													.apply(
+															LootingEnchantFunction
+																	.lootingMultiplier(
+																			UniformGenerator
+																					.between(
+																							0F,
+																							1F
+																					)
+																	)
+													)
+									)
+					)
+					.withPool(
+							LootPool
+									.lootPool()
+									.setRolls(
+											ConstantValue
+													.exactly(
+															1F
+													)
+									)
+									.add(
+											LootItem
+													.lootTableItem(
+															Items.IRON_INGOT
+													)
+									)
+									.add(
+											LootItem
+													.lootTableItem(
+															Items.CARROT
+													)
+									)
+									.add(
+											LootItem
+													.lootTableItem(
+															Items.POTATO
+													)
+													.apply(
+															SmeltItemFunction
+																	.smelted()
+																	.when(
+																			LootItemEntityPropertyCondition
+																					.hasProperties(
+																							LootContext.EntityTarget.THIS,
+																							ENTITY_ON_FIRE
+																					)
+																	)
+													)
+									)
+									.when(
+											LootItemKilledByPlayerCondition
+													.killedByPlayer()
+									)
+									.when(
+											LootItemRandomChanceWithLootingCondition
+													.randomChanceAndLootingBoost(
+															.025F,
+															.01F
+													)
+									)
+					);
+		}
+		// endregion
 	}
 }

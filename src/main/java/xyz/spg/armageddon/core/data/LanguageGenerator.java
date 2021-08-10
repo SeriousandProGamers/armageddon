@@ -18,6 +18,15 @@ public final class LanguageGenerator extends LanguageProvider
 	protected void addTranslations()
 	{
 		// Items
+		add(AItems.ROTTEN_PORKCHOP, "Rotten Porkchop");
+		add(AItems.ROTTEN_BEEF, "Rotten Beef");
+		add(AItems.ROTTEN_MUTTON, "Rotten Mutton");
+		add(AItems.ROTTEN_CHICKEN, "Rotten Chicken");
+		add(AItems.ROTTEN_EGG, "Rotten Egg");
+		add(AItems.ROTTEN_RABBIT, "Rotten Rabbit");
+		add(AItems.ROTTEN_RABBIT_FOOT, "Rotten Rabbit's Foot");
+		add(AItems.ROTTEN_FISH, "Rotten Fish");
+
 		// add(AItems.PANDA_ZOMBIE_SPAWN_EGG, "Panda Zombie Spawn Egg")
 		// add(AItems.POLAR_BEAR_ZOMBIE_SPAWN_EGG, "Polar Bear Zombie Spawn Egg")
 		// add(AItems.FOX_ZOMBIE_SPAWN_EGG, "Fox Zombie Spawn Egg")

@@ -22,7 +22,27 @@ public final class ItemModelGenerator extends ItemModelProvider
 	@Override
 	protected void registerModels()
 	{
+		generatedItem(AItems.ROTTEN_PORKCHOP);
+		generatedItem(AItems.ROTTEN_BEEF);
+		generatedItem(AItems.ROTTEN_MUTTON);
+		generatedItem(AItems.ROTTEN_CHICKEN);
+		generatedItem(AItems.ROTTEN_EGG);
+		generatedItem(AItems.ROTTEN_RABBIT);
+		generatedItem(AItems.ROTTEN_RABBIT_FOOT);
+		generatedItem(AItems.ROTTEN_FISH);
+
+		// spawnEggItem(AItems.PANDA_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.POLAR_BEAR_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.FOX_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.WOLF_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.RABBIT_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.CHICKEN_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.SHEEP_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.COW_ZOMBIE_SPAWN_EGG);
 		spawnEggItem(AItems.PIG_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.BLAZE_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.EXPLOSIVE_ZOMBIE_SPAWN_EGG);
+		// spawnEggItem(AItems.TELEPORTING_ZOMBIE_SPAWN_EGG);
 	}
 
 	@Override

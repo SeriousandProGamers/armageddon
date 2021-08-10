@@ -2,6 +2,7 @@ package xyz.spg.armageddon.core.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import xyz.spg.armageddon.shared.AEntityTypes;
@@ -18,6 +19,7 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 	@Override
 	protected void addTags()
 	{
+		// Zombies
 		tag(ATags.EntityTypes.ZOMBIES_SPECIAL).add(
 				/*AEntityTypes.BLAZE_ZOMBIE,*/
 				/*AEntityTypes.EXPLOSIVE_ZOMBIE,*/
@@ -49,6 +51,10 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 
 		tag(ATags.EntityTypes.ZOMBIES)
 				.addTags(ATags.EntityTypes.ZOMBIES_MOB, ATags.EntityTypes.ZOMBIES_SPECIAL);
+
+		// Eggs
+		tag(EntityTypeTags.IMPACT_PROJECTILES).add(AEntityTypes.ROTTEN_EGG);
+		tag(ATags.EntityTypes.EGGS).add(EntityType.EGG, AEntityTypes.ROTTEN_EGG);
 	}
 
 	@Override
