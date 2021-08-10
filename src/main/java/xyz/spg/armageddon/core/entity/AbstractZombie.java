@@ -53,7 +53,7 @@ import net.minecraftforge.eventbus.api.Event;
 import org.apache.commons.lang3.Validate;
 import xyz.spg.armageddon.core.entity.goal.ZombieAttackGoal;
 import xyz.spg.armageddon.core.entity.goal.ZombieAttackTurtleEggGoal;
-import xyz.spg.armageddon.core.evemt.ModEventFactory;
+import xyz.spg.armageddon.core.event.ModEventFactory;
 import xyz.spg.armageddon.shared.ATags;
 import xyz.spg.armageddon.shared.NBTTags;
 

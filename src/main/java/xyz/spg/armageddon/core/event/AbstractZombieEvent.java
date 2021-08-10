@@ -1,4 +1,4 @@
-package xyz.spg.armageddon.core.evemt;
+package xyz.spg.armageddon.core.event;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
