@@ -17,7 +17,7 @@ public final class AEntityTypes
 	// @ObjectHolder(ANames.RABBIT_ZOMBIE) public static final EntityType<? extends AbstractZombie> RABBIT_ZOMBIE = null;
 	// @ObjectHolder(ANames.CHICKEN_ZOMBIE) public static final EntityType<? extends AbstractZombie> CHICKEN_ZOMBIE = null;
 	// @ObjectHolder(ANames.SHEEP_ZOMBIE) public static final EntityType<? extends AbstractZombie> SHEEP_ZOMBIE = null;
-	// @ObjectHolder(ANames.COW_ZOMBIE) public static final EntityType<? extends AbstractZombie> COW_ZOMBIE = null;
+	@ObjectHolder(ANames.COW_ZOMBIE) public static final EntityType<? extends AbstractZombie> COW_ZOMBIE = null;
 	@ObjectHolder(ANames.PIG_ZOMBIE) public static final EntityType<? extends AbstractZombie> PIG_ZOMBIE = null;
 
 	// @ObjectHolder(ANames.BLAZE_ZOMBIE) public static final EntityType<? extends AbstractZombie> BLAZE_ZOMBIE = null;

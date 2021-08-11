@@ -38,7 +38,7 @@ public final class ItemModelGenerator extends ItemModelProvider
 		// spawnEggItem(AItems.RABBIT_ZOMBIE_SPAWN_EGG);
 		// spawnEggItem(AItems.CHICKEN_ZOMBIE_SPAWN_EGG);
 		// spawnEggItem(AItems.SHEEP_ZOMBIE_SPAWN_EGG);
-		// spawnEggItem(AItems.COW_ZOMBIE_SPAWN_EGG);
+		spawnEggItem(AItems.COW_ZOMBIE_SPAWN_EGG);
 		spawnEggItem(AItems.PIG_ZOMBIE_SPAWN_EGG);
 		// spawnEggItem(AItems.BLAZE_ZOMBIE_SPAWN_EGG);
 		// spawnEggItem(AItems.EXPLOSIVE_ZOMBIE_SPAWN_EGG);

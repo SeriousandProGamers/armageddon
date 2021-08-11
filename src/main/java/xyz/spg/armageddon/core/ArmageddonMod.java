@@ -6,6 +6,7 @@ import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,17 +15,20 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import xyz.spg.armageddon.core.client.ClientSetup;
 import xyz.spg.armageddon.core.data.*;
 import xyz.spg.armageddon.core.enchantment.PoisonEnchantment;
+import xyz.spg.armageddon.core.entity.CowZombie;
 import xyz.spg.armageddon.core.entity.PigZombie;
 import xyz.spg.armageddon.core.item.DeferredSpawnEggItem;
 import xyz.spg.armageddon.core.item.DeferredThrownEggItem;
 import xyz.spg.armageddon.shared.*;
 
+import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -49,6 +53,8 @@ public final class ArmageddonMod
 	private void onCommonSetup(FMLCommonSetupEvent event)
 	{
 		event.enqueueWork(this::setupEntities);
+		event.enqueueWork(this::fixSpawnEggs);
+		event.enqueueWork(Armageddon::postRegister);
 	}
 
 	private void onGatherData(GatherDataEvent event)
@@ -77,11 +83,20 @@ public final class ArmageddonMod
 	private void onCreateEntityAttribute(EntityAttributeCreationEvent event)
 	{
 		event.put(AEntityTypes.PIG_ZOMBIE, PigZombie.createAttributes().build());
+		event.put(AEntityTypes.COW_ZOMBIE, CowZombie.createAttributes().build());
+	}
+
+	private void fixSpawnEggs()
+	{
+		Map<EntityType<? extends Mob>, SpawnEggItem> by_id = ObfuscationReflectionHelper.getPrivateValue(SpawnEggItem.class, null, "f_43201_");
+		by_id.put(AEntityTypes.PIG_ZOMBIE, AItems.PIG_ZOMBIE_SPAWN_EGG);
+		by_id.put(AEntityTypes.COW_ZOMBIE, AItems.COW_ZOMBIE_SPAWN_EGG);
 	}
 
 	private void setupEntities()
 	{
 		SpawnPlacements.register(AEntityTypes.PIG_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PigZombie::canPigZombieSpawn);
+		SpawnPlacements.register(AEntityTypes.COW_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CowZombie::canCowZombieSpawn);
 	}
 
 	static
@@ -98,14 +113,14 @@ public final class ArmageddonMod
 		// Entities
 		entityAndThrownEgg(ANames.ROTTEN_EGG, ThrownEgg::new, MobCategory.MISC, Functions.identity(), builder -> builder.sized(.25F, .25F).clientTrackingRange(4).updateInterval(10));
 
-		// entityAndSpawnEgg(ANames.PANDA_ZOMBIE, PandaZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(1.3F, 1.25F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.POLAR_BEAR_ZOMBIE, PolarBearZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.FOX_ZOMBIE, FoxZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.6F, .7F).clientTrackingRange(8).immuneTo(Blocks.SWEET_BERRY_BUSH));
+		// entityAndSpawnEgg(ANames.PANDA_ZOMBIE, PandaZombie::new, MobCategory.MONSTER, 44975, 1776418, Functions.identity(), builder -> builder.sized(1.3F, 1.25F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.POLAR_BEAR_ZOMBIE, PolarBearZombie::new, MobCategory.MONSTER, 44975, 9803152, Functions.identity(), builder -> builder.immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.FOX_ZOMBIE, FoxZombie::new, MobCategory.MONSTER, 44975, 13396256, Functions.identity(), builder -> builder.sized(.6F, .7F).clientTrackingRange(8).immuneTo(Blocks.SWEET_BERRY_BUSH));
 		// entityAndSpawnEgg(ANames.WOLF_ZOMBIE, WolfZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.6F, .85F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
-		// entityAndSpawnEgg(ANames.CHICKEN_ZOMBIE, ChickenZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.4F, .7F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.SHEEP_ZOMBIE, SheepZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.9F, 1.3F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.COW_ZOMBIE, CowZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.9F, 1.4F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 44975, 7555121, Functions.identity(), builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
+		// entityAndSpawnEgg(ANames.CHICKEN_ZOMBIE, ChickenZombie::new, MobCategory.MONSTER, 44975, 16711680, Functions.identity(), builder -> builder.sized(.4F, .7F).clientTrackingRange(10));
+		// entityAndSpawnEgg(ANames.SHEEP_ZOMBIE, SheepZombie::new, MobCategory.MONSTER, 44975, 16758197, Functions.identity(), builder -> builder.sized(.9F, 1.3F).clientTrackingRange(10));
+		entityAndSpawnEgg(ANames.COW_ZOMBIE, CowZombie::new, MobCategory.MONSTER, 44975, 4470310, Functions.identity(), builder -> builder.sized(.9F, 1.4F).clientTrackingRange(10));
 		entityAndSpawnEgg(ANames.PIG_ZOMBIE, PigZombie::new, MobCategory.MONSTER, 44975, 14377823, Functions.identity(), builder -> builder.sized(.9F, .9F).clientTrackingRange(10));
 		// entityAndSpawnEgg(ANames.BLAZE_ZOMBIE, BlazeZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder);
 		// entityAndSpawnEgg(ANames.EXPLOSIVE_ZOMBIE, ExplosiveZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder);

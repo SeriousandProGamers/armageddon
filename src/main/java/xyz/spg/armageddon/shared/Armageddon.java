@@ -1,6 +1,9 @@
 package xyz.spg.armageddon.shared;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;
@@ -9,6 +12,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.versions.forge.ForgeVersion;
+import xyz.spg.armageddon.core.entity.AbstractZombie;
+
+import javax.annotation.Nullable;
 
 public final class Armageddon
 {
@@ -21,6 +27,8 @@ public final class Armageddon
 	public static final DeferredRegister<Enchantment> ENCHANTMENTS = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, ID_MOD);
 	public static final DeferredRegister<MobEffect> MOB_EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ID_MOD);
 	public static final DeferredRegister<Potion> POTION_TYPES = DeferredRegister.create(ForgeRegistries.POTIONS, ID_MOD);
+
+	private static final BiMap<EntityType<?>, EntityType<? extends AbstractZombie>> zombieTypeMap = HashBiMap.create();
 
 	/**
 	 * Internal use only!! <br>
@@ -44,4 +52,28 @@ public final class Armageddon
 
 		ATags.register();
 	}
+
+	/**
+	 * Internal use only!! <br>
+	 * <b><i>DO NOT CALL MANUALLY!!!</i></b>
+	 */
+	public static void postRegister()
+	{
+		zombieTypeMap.put(EntityType.PIG, AEntityTypes.PIG_ZOMBIE);
+		zombieTypeMap.put(EntityType.COW, AEntityTypes.COW_ZOMBIE);
+	}
+
+	// region: Helpers
+	@Nullable
+	public static EntityType<? extends AbstractZombie> getZombieType(Entity entity)
+	{
+		return zombieTypeMap.get(entity.getType());
+	}
+
+	@Nullable
+	public static EntityType<?> getLivingType(AbstractZombie zombie)
+	{
+		return zombieTypeMap.inverse().get(zombie.getType());
+	}
+	// endregion
 }

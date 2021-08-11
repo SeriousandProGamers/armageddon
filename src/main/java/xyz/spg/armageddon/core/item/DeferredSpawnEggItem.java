@@ -25,7 +25,7 @@ public final class DeferredSpawnEggItem extends SpawnEggItem implements ItemColo
 
 	public DeferredSpawnEggItem(Supplier<EntityType<? extends Mob>> entityType, int primaryColor, int secondaryColor, Properties properties)
 	{
-		super(EntityType.PIG, primaryColor, secondaryColor, properties); // Pig is default type if all else fails
+		super(null, primaryColor, secondaryColor, properties);
 
 		lazyEntityType = new LazyLoadedValue<>(entityType);
 	}
