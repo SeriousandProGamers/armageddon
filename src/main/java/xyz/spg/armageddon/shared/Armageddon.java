@@ -43,6 +43,7 @@ public final class Armageddon
 		POTION_TYPES.register(bus);
 
 		ANames.register();
+		ALootTables.register();
 		AFoods.register();
 		AItems.register();
 		AEntityTypes.register();
@@ -61,6 +62,7 @@ public final class Armageddon
 	{
 		zombieTypeMap.put(EntityType.PIG, AEntityTypes.PIG_ZOMBIE);
 		zombieTypeMap.put(EntityType.COW, AEntityTypes.COW_ZOMBIE);
+		zombieTypeMap.put(EntityType.SHEEP, AEntityTypes.SHEEP_ZOMBIE);
 	}
 
 	// region: Helpers

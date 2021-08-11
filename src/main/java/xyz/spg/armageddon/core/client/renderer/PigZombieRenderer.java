@@ -7,11 +7,11 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import xyz.spg.armageddon.core.entity.AbstractZombie;
+import xyz.spg.armageddon.core.entity.PigZombie;
 import xyz.spg.armageddon.shared.Armageddon;
 
 @OnlyIn(Dist.CLIENT)
-public class PigZombieRenderer<T extends AbstractZombie> extends MobRenderer<T, PigModel<T>>
+public class PigZombieRenderer<T extends PigZombie> extends MobRenderer<T, PigModel<T>>
 {
 	private static final ResourceLocation PIG_LOCATION = new ResourceLocation(Armageddon.ID_MOD, "textures/entity/zombie/pig.png");
 

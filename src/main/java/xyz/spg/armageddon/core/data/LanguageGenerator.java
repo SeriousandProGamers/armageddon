@@ -36,7 +36,7 @@ public final class LanguageGenerator extends LanguageProvider
 		// add(AItems.WOLF_ZOMBIE_SPAWN_EGG, "Wolf Zombie Spawn Egg");
 		// add(AItems.RABBIT_ZOMBIE_SPAWN_EGG, "Rabbit Zombie Spawn Egg");
 		// add(AItems.CHICKEN_ZOMBIE_SPAWN_EGG, "Chicken Zombie Spawn Egg");
-		// add(AItems.SHEEP_ZOMBIE_SPAWN_EGG, "Sheep Zombie Spawn Egg");
+		add(AItems.SHEEP_ZOMBIE_SPAWN_EGG, "Sheep Zombie Spawn Egg");
 		add(AItems.COW_ZOMBIE_SPAWN_EGG, "Cow Zombie Spawn Egg");
 		add(AItems.PIG_ZOMBIE_SPAWN_EGG, "Pig Zombie Spawn Egg");
 
@@ -51,7 +51,7 @@ public final class LanguageGenerator extends LanguageProvider
 		// add(AEntityTypes.WOLF_ZOMBIE, "Wolf Zombie");
 		// add(AEntityTypes.RABBIT_ZOMBIE, "Rabbit Zombie");
 		// add(AEntityTypes.CHICKEN_ZOMBIE, "Chicken Zombie");
-		// add(AEntityTypes.SHEEP_ZOMBIE, "Sheep Zombie");
+		add(AEntityTypes.SHEEP_ZOMBIE, "Sheep Zombie");
 		add(AEntityTypes.COW_ZOMBIE, "Cow Zombie");
 		add(AEntityTypes.PIG_ZOMBIE, "Pig Zombie");
 

@@ -9,4 +9,7 @@ public final class NBTTags
 	public static final String CAN_BREAK_DOORS = "CanBreakDoors";
 	public static final String IN_WATER_TIME = "InWaterTime";
 	public static final String DROWNED_CONVERSION_TIMER = "DrownedConversionTimer";
+
+	public static final String SHEARED = "Sheared";
+	public static final String COLOR = "Color";
 }

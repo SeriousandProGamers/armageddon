@@ -22,7 +22,7 @@ public final class AItems
 	// @ObjectHolder(ANames.WOLF_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem WOLF_ZOMBIE_SPAWN_EGG = null;
 	// @ObjectHolder(ANames.RABBIT_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem RABBIT_ZOMBIE_SPAWN_EGG = null;
 	// @ObjectHolder(ANames.CHICKEN_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem CHICKEN_ZOMBIE_SPAWN_EGG = null;
-	// @ObjectHolder(ANames.SHEEP_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem SHEEP_ZOMBIE_SPAWN_EGG = null;
+	@ObjectHolder(ANames.SHEEP_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem SHEEP_ZOMBIE_SPAWN_EGG = null;
 	@ObjectHolder(ANames.COW_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem COW_ZOMBIE_SPAWN_EGG = null;
 	@ObjectHolder(ANames.PIG_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem PIG_ZOMBIE_SPAWN_EGG = null;
 

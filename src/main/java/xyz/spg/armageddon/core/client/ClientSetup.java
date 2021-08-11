@@ -11,6 +11,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import xyz.spg.armageddon.core.client.renderer.CowZombieRenderer;
 import xyz.spg.armageddon.core.client.renderer.PigZombieRenderer;
+import xyz.spg.armageddon.core.client.renderer.SheepZombieRenderer;
 import xyz.spg.armageddon.shared.AEntityTypes;
 import xyz.spg.armageddon.shared.Armageddon;
 
@@ -47,5 +48,6 @@ public final class ClientSetup
 	{
 		EntityRenderers.register(AEntityTypes.PIG_ZOMBIE, PigZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.COW_ZOMBIE, CowZombieRenderer::new);
+		EntityRenderers.register(AEntityTypes.SHEEP_ZOMBIE, SheepZombieRenderer::new);
 	}
 }
