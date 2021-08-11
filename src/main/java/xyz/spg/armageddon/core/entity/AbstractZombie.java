@@ -712,6 +712,10 @@ public class AbstractZombie extends Monster
 		return ItemStack.EMPTY;
 	}
 
+	public void finalizeZombieTypeConversion(Mob original)
+	{
+	}
+
 	protected static AttributeSupplier.Builder createZombieAttributes()
 	{
 		return Monster.createMonsterAttributes()

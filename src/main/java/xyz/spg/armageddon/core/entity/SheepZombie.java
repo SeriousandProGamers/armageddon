@@ -282,4 +282,14 @@ public final class SheepZombie extends AbstractZombie implements IForgeShearable
 		}
 		return Collections.emptyList();
 	}
+
+	@Override
+	public void finalizeZombieTypeConversion(Mob original)
+	{
+		if(original instanceof Sheep sheep)
+		{
+			setSheared(sheep.isSheared());
+			setColor(sheep.getColor());
+		}
+	}
 }

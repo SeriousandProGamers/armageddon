@@ -113,6 +113,7 @@ public final class EntityEventHandler
 			zombie.setCustomNameVisible(living.isCustomNameVisible());
 		}
 
+		zombie.finalizeZombieTypeConversion(living);
 		zombie.setPersistenceRequired();
 
 		// copy across rain ticks
