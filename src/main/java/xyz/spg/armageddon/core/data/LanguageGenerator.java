@@ -29,6 +29,7 @@ public final class LanguageGenerator extends LanguageProvider
 		add(AItems.ROTTEN_RABBIT, "Rotten Rabbit");
 		add(AItems.ROTTEN_RABBIT_FOOT, "Rotten Rabbit's Foot");
 		add(AItems.ROTTEN_FISH, "Rotten Fish");
+		add(AItems.SPOILED_MILK_BUCKET, "Spoiled Milk Bucket");
 
 		// add(AItems.PANDA_ZOMBIE_SPAWN_EGG, "Panda Zombie Spawn Egg");
 		// add(AItems.POLAR_BEAR_ZOMBIE_SPAWN_EGG, "Polar Bear Zombie Spawn Egg");

@@ -3,10 +3,7 @@ package xyz.spg.armageddon.core;
 import com.google.common.base.Functions;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
@@ -25,6 +22,7 @@ import xyz.spg.armageddon.core.enchantment.PoisonEnchantment;
 import xyz.spg.armageddon.core.entity.*;
 import xyz.spg.armageddon.core.item.DeferredSpawnEggItem;
 import xyz.spg.armageddon.core.item.DeferredThrownEggItem;
+import xyz.spg.armageddon.core.item.SpoiledMilkBucketItem;
 import xyz.spg.armageddon.shared.*;
 
 import java.util.Map;
@@ -114,6 +112,7 @@ public final class ArmageddonMod
 		item(ANames.ROTTEN_RABBIT, Item::new, properties -> properties.food(AFoods.ROTTEN_RABBIT));
 		item(ANames.ROTTEN_RABBIT_FOOT, Item::new);
 		item(ANames.ROTTEN_FISH, Item::new, properties -> properties.food(AFoods.ROTTEN_FISH));
+		item(ANames.SPOILED_MILK_BUCKET, SpoiledMilkBucketItem::new, properties -> properties.craftRemainder(Items.BUCKET).stacksTo(1)); // TODO: Register spoiled milk fluid
 
 		// Entities
 		entityAndThrownEgg(ANames.ROTTEN_EGG, ThrownRottenEgg::new, MobCategory.MISC, Functions.identity(), builder -> builder.sized(.25F, .25F).clientTrackingRange(4).updateInterval(10));

@@ -3,14 +3,19 @@ package xyz.spg.armageddon.core.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import xyz.spg.armageddon.shared.AEntityTypes;
+import xyz.spg.armageddon.shared.AItems;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -72,6 +77,24 @@ public class CowZombie extends AbstractZombie
 	protected boolean convertsInWater()
 	{
 		return false;
+	}
+
+	@Override
+	protected InteractionResult mobInteract(Player player, InteractionHand hand)
+	{
+		var stack = player.getItemInHand(hand);
+
+		if(stack.is(Items.BUCKET) && !isBaby())
+		{
+			player.playSound(SoundEvents.COW_MILK, 1F, 1F);
+			// This does not work, although its exactly what vanilla does when milking cows
+			// var bucket = ItemUtils.createFilledResult(stack, player, AItems.SPOILED_MILK_BUCKET.getDefaultInstance());
+			var bucket = AItems.SPOILED_MILK_BUCKET.getDefaultInstance();
+			player.setItemInHand(hand, bucket);
+			return InteractionResult.sidedSuccess(level.isClientSide);
+		}
+		else
+			return super.mobInteract(player, hand);
 	}
 
 	public static AttributeSupplier.Builder createAttributes()

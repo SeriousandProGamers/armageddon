@@ -16,6 +16,8 @@ public final class AItems
 	@ObjectHolder(ANames.ROTTEN_RABBIT_FOOT) public static final Item ROTTEN_RABBIT_FOOT = null;
 	@ObjectHolder(ANames.ROTTEN_FISH) public static final Item ROTTEN_FISH = null;
 
+	@ObjectHolder(ANames.SPOILED_MILK_BUCKET) public static final Item SPOILED_MILK_BUCKET = null;
+
 	// @ObjectHolder(ANames.PANDA_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem PANDA_ZOMBIE_SPAWN_EGG = null;
 	// @ObjectHolder(ANames.POLAR_BEAR_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem POLAR_BEAR_ZOMBIE_SPAWN_EGG = null;
 	// @ObjectHolder(ANames.FOX_ZOMBIE_SPAWN_EGG) public static final SpawnEggItem FOX_ZOMBIE_SPAWN_EGG = null;

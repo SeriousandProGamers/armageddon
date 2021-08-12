@@ -30,6 +30,7 @@ public final class ItemModelGenerator extends ItemModelProvider
 		generatedItem(AItems.ROTTEN_RABBIT);
 		generatedItem(AItems.ROTTEN_RABBIT_FOOT);
 		generatedItem(AItems.ROTTEN_FISH);
+		generatedItem(AItems.SPOILED_MILK_BUCKET);
 
 		// spawnEggItem(AItems.PANDA_ZOMBIE_SPAWN_EGG);
 		// spawnEggItem(AItems.POLAR_BEAR_ZOMBIE_SPAWN_EGG);

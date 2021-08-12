@@ -33,6 +33,8 @@ public class ANames
 	public static final String ROTTEN_RABBIT_FOOT = "rotten_rabbit_foot";
 	public static final String ROTTEN_FISH = "rotten_fish";
 
+	public static final String SPOILED_MILK_BUCKET = "spoiled_milk_bucket";
+
 	// public static final String PANDA_ZOMBIE_SPAWN_EGG = PANDA_ZOMBIE + SPAWN_EGG_SUFFIX;
 	// public static final String POLAR_BEAR_ZOMBIE_SPAWN_EGG = POLAR_BEAR_ZOMBIE + SPAWN_EGG_SUFFIX;
 	// public static final String FOX_ZOMBIE_SPAWN_EGG = FOX_ZOMBIE + SPAWN_EGG_SUFFIX;
