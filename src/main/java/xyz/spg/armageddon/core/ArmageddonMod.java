@@ -83,6 +83,7 @@ public final class ArmageddonMod
 		event.put(AEntityTypes.COW_ZOMBIE, CowZombie.createAttributes().build());
 		event.put(AEntityTypes.SHEEP_ZOMBIE, SheepZombie.createAttributes().build());
 		event.put(AEntityTypes.CHICKEN_ZOMBIE, ChickenZombie.createAttributes().build());
+		event.put(AEntityTypes.RABBIT_ZOMBIE, RabbitZombie.createAttributes().build());
 	}
 
 	private void fixSpawnEggs()
@@ -92,6 +93,7 @@ public final class ArmageddonMod
 		by_id.put(AEntityTypes.COW_ZOMBIE, AItems.COW_ZOMBIE_SPAWN_EGG);
 		by_id.put(AEntityTypes.SHEEP_ZOMBIE, AItems.SHEEP_ZOMBIE_SPAWN_EGG);
 		by_id.put(AEntityTypes.CHICKEN_ZOMBIE, AItems.CHICKEN_ZOMBIE_SPAWN_EGG);
+		by_id.put(AEntityTypes.RABBIT_ZOMBIE, AItems.RABBIT_ZOMBIE_SPAWN_EGG);
 	}
 
 	private void setupEntities()
@@ -100,6 +102,7 @@ public final class ArmageddonMod
 		SpawnPlacements.register(AEntityTypes.COW_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CowZombie::canCowZombieSpawn);
 		SpawnPlacements.register(AEntityTypes.SHEEP_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SheepZombie::canSheepZombieSpawn);
 		SpawnPlacements.register(AEntityTypes.CHICKEN_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ChickenZombie::canChickenZombieSpawn);
+		SpawnPlacements.register(AEntityTypes.RABBIT_ZOMBIE, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RabbitZombie::canRabbitZombieSpawn);
 	}
 
 	static
@@ -121,7 +124,7 @@ public final class ArmageddonMod
 		// entityAndSpawnEgg(ANames.POLAR_BEAR_ZOMBIE, PolarBearZombie::new, MobCategory.MONSTER, 44975, 9803152, Functions.identity(), builder -> builder.immuneTo(Blocks.POWDER_SNOW).sized(1.4F, 1.4F).clientTrackingRange(10));
 		// entityAndSpawnEgg(ANames.FOX_ZOMBIE, FoxZombie::new, MobCategory.MONSTER, 44975, 13396256, Functions.identity(), builder -> builder.sized(.6F, .7F).clientTrackingRange(8).immuneTo(Blocks.SWEET_BERRY_BUSH));
 		// entityAndSpawnEgg(ANames.WOLF_ZOMBIE, WolfZombie::new, MobCategory.MONSTER, 0, 0, Functions.identity(), builder -> builder.sized(.6F, .85F).clientTrackingRange(10));
-		// entityAndSpawnEgg(ANames.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 44975, 7555121, Functions.identity(), builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
+		entityAndSpawnEgg(ANames.RABBIT_ZOMBIE, RabbitZombie::new, MobCategory.MONSTER, 44975, 7555121, Functions.identity(), builder -> builder.sized(.4F, .5F).clientTrackingRange(8));
 		entityAndSpawnEgg(ANames.CHICKEN_ZOMBIE, ChickenZombie::new, MobCategory.MONSTER, 44975, 16711680, Functions.identity(), builder -> builder.sized(.4F, .7F).clientTrackingRange(10));
 		entityAndSpawnEgg(ANames.SHEEP_ZOMBIE, SheepZombie::new, MobCategory.MONSTER, 44975, 16758197, Functions.identity(), builder -> builder.sized(.9F, 1.3F).clientTrackingRange(10));
 		entityAndSpawnEgg(ANames.COW_ZOMBIE, CowZombie::new, MobCategory.MONSTER, 44975, 4470310, Functions.identity(), builder -> builder.sized(.9F, 1.4F).clientTrackingRange(10));

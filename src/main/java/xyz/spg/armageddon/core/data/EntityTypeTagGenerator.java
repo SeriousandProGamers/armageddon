@@ -34,7 +34,7 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 				/*AEntityTypes.POLAR_BEAR_ZOMBIE,*/
 				/*AEntityTypes.FOX_ZOMBIE,*/
 				/*AEntityTypes.WOLF_ZOMBIE,*/
-				/*AEntityTypes.RABBIT_ZOMBIE,*/
+				AEntityTypes.RABBIT_ZOMBIE,
 				AEntityTypes.CHICKEN_ZOMBIE,
 				AEntityTypes.SHEEP_ZOMBIE,
 				AEntityTypes.COW_ZOMBIE,

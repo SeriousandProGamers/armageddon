@@ -10,10 +10,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
-import xyz.spg.armageddon.core.client.renderer.ChickenZombieRenderer;
-import xyz.spg.armageddon.core.client.renderer.CowZombieRenderer;
-import xyz.spg.armageddon.core.client.renderer.PigZombieRenderer;
-import xyz.spg.armageddon.core.client.renderer.SheepZombieRenderer;
+import xyz.spg.armageddon.core.client.renderer.*;
 import xyz.spg.armageddon.shared.AEntityTypes;
 import xyz.spg.armageddon.shared.Armageddon;
 
@@ -54,5 +51,6 @@ public final class ClientSetup
 		EntityRenderers.register(AEntityTypes.COW_ZOMBIE, CowZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.SHEEP_ZOMBIE, SheepZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
+		EntityRenderers.register(AEntityTypes.RABBIT_ZOMBIE, RabbitZombieRenderer::new);
 	}
 }

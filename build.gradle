@@ -121,7 +121,7 @@ dependencies {
 	// runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-${mc_version_short}:${mc_version_short}-${top_version}")
 
 	if(project.hasProperty('apex_local_deps') && project.getProperty('apex_local_deps')) {
-		// runtimeOnly fg.deobf("${apex_package}:devworld:${mc_version}-${devworld_version}")
+		runtimeOnly fg.deobf("${apex_package}:devworld:${mc_version}-${devworld_version}")
 	}
 }
 
