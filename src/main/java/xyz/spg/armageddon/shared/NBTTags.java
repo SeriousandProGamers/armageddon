@@ -12,4 +12,7 @@ public final class NBTTags
 
 	public static final String SHEARED = "Sheared";
 	public static final String COLOR = "Color";
+
+	public static final String IS_CHICKEN_JOCKEY = "IsChickenJockey";
+	public static final String EGG_LAY_TIME = "EggLayTime";
 }

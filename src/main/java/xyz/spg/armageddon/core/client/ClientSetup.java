@@ -2,6 +2,7 @@ package xyz.spg.armageddon.core.client;
 
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -9,6 +10,7 @@ import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fmllegacy.RegistryObject;
+import xyz.spg.armageddon.core.client.renderer.ChickenZombieRenderer;
 import xyz.spg.armageddon.core.client.renderer.CowZombieRenderer;
 import xyz.spg.armageddon.core.client.renderer.PigZombieRenderer;
 import xyz.spg.armageddon.core.client.renderer.SheepZombieRenderer;
@@ -46,8 +48,11 @@ public final class ClientSetup
 
 	private void setupEntities()
 	{
+		EntityRenderers.register(AEntityTypes.ROTTEN_EGG, ThrownItemRenderer::new);
+
 		EntityRenderers.register(AEntityTypes.PIG_ZOMBIE, PigZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.COW_ZOMBIE, CowZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.SHEEP_ZOMBIE, SheepZombieRenderer::new);
+		EntityRenderers.register(AEntityTypes.CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
 	}
 }

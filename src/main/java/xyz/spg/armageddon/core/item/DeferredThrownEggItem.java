@@ -8,7 +8,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownEgg;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -17,9 +17,9 @@ import java.util.function.Supplier;
 
 public final class DeferredThrownEggItem extends Item
 {
-	private final LazyLoadedValue<EntityType<? extends ThrownEgg>> lazyThrownEggEntityType;
+	private final LazyLoadedValue<EntityType<? extends ThrowableItemProjectile>> lazyThrownEggEntityType;
 
-	public DeferredThrownEggItem(Supplier<EntityType<? extends ThrownEgg>> thrownEggEntityTypeSupplier, Properties properties)
+	public DeferredThrownEggItem(Supplier<EntityType<? extends ThrowableItemProjectile>> thrownEggEntityTypeSupplier, Properties properties)
 	{
 		super(properties);
 
@@ -39,6 +39,8 @@ public final class DeferredThrownEggItem extends Item
 			if(thrownEgg != null)
 			{
 				thrownEgg.setItem(stack);
+				thrownEgg.setPos(player.getX(), player.getEyeY() - (double) .1F, player.getZ());
+				thrownEgg.setOwner(player);
 				thrownEgg.shootFromRotation(player, player.getXRot(), player.getYRot(), 0F, 1.5F, 1F);
 				level.addFreshEntity(thrownEgg);
 			}

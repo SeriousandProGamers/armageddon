@@ -133,6 +133,49 @@ public final class LootTableGenerator extends LootTableProvider
 			add(ALootTables.ZOMBIE_SHEEP_YELLOW, createSheepTable(Blocks.YELLOW_WOOL, AEntityTypes.SHEEP_ZOMBIE));
 			// endregion
 
+			// region: ChickenZombie
+			add(
+					AEntityTypes.CHICKEN_ZOMBIE,
+					zombieLootTable(AItems.ROTTEN_CHICKEN, 1F)
+							.withPool(
+									LootPool
+											.lootPool()
+											.setRolls(
+													ConstantValue
+															.exactly(
+																	1F
+															)
+											)
+											.add(
+													LootItem
+															.lootTableItem(
+																	Items.FEATHER
+															)
+															.apply(
+																	SetItemCountFunction
+																			.setCount(
+																					UniformGenerator
+																							.between(
+																									0F,
+																									2F
+																							)
+																			)
+															)
+															.apply(
+																	LootingEnchantFunction
+																			.lootingMultiplier(
+																					UniformGenerator
+																							.between(
+																									0F,
+																									1F
+																							)
+																			)
+															)
+											)
+							)
+			);
+			// endregion
+
 			// this.add(EntityType.CREEPER, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.GUNPOWDER).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))).withPool(LootPool.lootPool().add(TagEntry.expandTag(ItemTags.CREEPER_DROP_MUSIC_DISCS)).when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityTypeTags.SKELETONS)))));
 			// this.add(EntityType.ENDERMAN, LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.ENDER_PEARL).apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))));
 			// this.add(EntityType.FOX, LootTable.lootTable());
