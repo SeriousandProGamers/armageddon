@@ -5,13 +5,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import xyz.spg.armageddon.shared.AEntityTypes;
-import xyz.spg.armageddon.shared.ATags;
+import xyz.spg.armageddon.core.helper.ZombieHelper;
 import xyz.spg.armageddon.shared.Armageddon;
 
 import java.util.Map;
@@ -27,10 +25,10 @@ public final class EntityEventHandler
 	{
 		var hit = event.getEntity();
 
-		if(hit instanceof Mob mob && tryConvertToZombie(mob))
+		if(hit instanceof Mob mob && ZombieHelper.tryConvertToZombie(mob))
 			event.setCanceled(true);
-		else if(!hit.getType().is(ATags.EntityTypes.ZOMBIES_MOB))
-			setEntityRainTicks(hit, 0);
+
+		setEntityRainTicks(hit, 0);
 	}
 
 	@SubscribeEvent
@@ -38,7 +36,7 @@ public final class EntityEventHandler
 	{
 		if(event.getEntityLiving() instanceof Mob mob)
 		{
-			var zombieType = Armageddon.getZombieType(mob);
+			var zombieType = ZombieHelper.getZombieType(mob);
 			var level = mob.level;
 			var rainTicks = getEntityRainTicks(mob);
 			var prevRainTicks = rainTicks;
@@ -77,53 +75,17 @@ public final class EntityEventHandler
 
 	// region: Helpers
 	// region: Rain Ticks
-	private static int getEntityRainTicks(Entity entity)
+	public static int getEntityRainTicks(Entity entity)
 	{
 		var uuid = entity.getUUID();
 		return entityRainTicks.computeIfAbsent(uuid, $ -> 0);
 	}
 
-	private static void setEntityRainTicks(Entity entity, int rainTicks)
+	public static void setEntityRainTicks(Entity entity, int rainTicks)
 	{
 		var uuid = entity.getUUID();
 		entityRainTicks.put(uuid, rainTicks);
 	}
 	// endregion
-
-	private static boolean tryConvertToZombie(Mob living)
-	{
-		var level = living.level;
-		var zombieType = Armageddon.getZombieType(living);
-
-		if(zombieType == null)
-			return false;
-
-		var zombie = zombieType.create(level);
-
-		if(zombie == null || !ForgeEventFactory.canLivingConvert(living, AEntityTypes.PIG_ZOMBIE, timer -> { }))
-			return false;
-
-		zombie.moveTo(living.getX(), living.getY(), living.getZ());
-		zombie.setNoAi(living.isNoAi());
-		zombie.setBaby(living.isBaby());
-
-		if(living.hasCustomName())
-		{
-			zombie.setCustomName(living.getCustomName());
-			zombie.setCustomNameVisible(living.isCustomNameVisible());
-		}
-
-		zombie.finalizeZombieTypeConversion(living);
-		zombie.setPersistenceRequired();
-
-		// copy across rain ticks
-		var rainTicks = getEntityRainTicks(living);
-		setEntityRainTicks(zombie, rainTicks);
-
-		ForgeEventFactory.onLivingConvert(living, zombie);
-		level.addFreshEntity(zombie);
-		living.discard();
-		return true;
-	}
 	// endregion
 }

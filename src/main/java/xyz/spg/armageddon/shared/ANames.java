@@ -75,8 +75,9 @@ public class ANames
 
 	// region: EntityTypes
 	public static final String ZOMBIES = "zombies";
-	public static final String ZOMBIES_MOB = "zombies/mobs";
-	public static final String ZOMBIES_SPECIAL = "zombies/special";
+	public static final String ZOMBIES_HUMANOID = "zombies/humanoid";
+	public static final String ZOMBIES_PASSIVE = "zombies/passive";
+	public static final String ZOMBIES_HOSTILE = "zombies/hostile";
 	// endregion
 	// endregion
 

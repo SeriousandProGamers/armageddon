@@ -140,12 +140,6 @@ public final class SheepZombie extends AbstractZombie implements IForgeShearable
 	}
 
 	@Override
-	protected boolean isHumanoid()
-	{
-		return false;
-	}
-
-	@Override
 	public boolean canBreakDoors()
 	{
 		return false;

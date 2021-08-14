@@ -3,7 +3,6 @@ package xyz.spg.armageddon.core.entity;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -25,15 +24,13 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
-import net.minecraft.world.entity.animal.Chicken;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.AbstractVillager;
-import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -54,6 +51,8 @@ import org.apache.commons.lang3.Validate;
 import xyz.spg.armageddon.core.entity.goal.ZombieAttackGoal;
 import xyz.spg.armageddon.core.entity.goal.ZombieAttackTurtleEggGoal;
 import xyz.spg.armageddon.core.event.ModEventFactory;
+import xyz.spg.armageddon.core.helper.ZombieHelper;
+import xyz.spg.armageddon.shared.AEntityTypes;
 import xyz.spg.armageddon.shared.ATags;
 import xyz.spg.armageddon.shared.NBTTags;
 
@@ -360,7 +359,7 @@ public class AbstractZombie extends Monster
 		super.populateDefaultEquipmentSlots(difficultyInstance);
 		var difficultyFactor = level.getDifficulty() == Difficulty.HARD ? .05F : .01F;
 
-		if(isHumanoid() && random.nextFloat() < difficultyFactor)
+		if(getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID) && random.nextFloat() < difficultyFactor)
 		{
 			var i = random.nextInt(3);
 			Item item;
@@ -411,11 +410,26 @@ public class AbstractZombie extends Monster
 
 		var difficulty = level.getDifficulty();
 
-		if((difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) && attacker instanceof Villager villager && ForgeEventFactory.canLivingConvert(villager, EntityType.ZOMBIE_VILLAGER, timer -> { }))
+		if(difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD)
+		{
+			if(attacker instanceof Mob mob)
+			{
+				if(difficulty == Difficulty.HARD && random.nextBoolean())
+					return;
+
+				if(ZombieHelper.tryConvertToZombie(mob))
+				{
+					if(!isSilent())
+						level.levelEvent(null, 1026, blockPosition(), 0);
+				}
+			}
+		}
+
+		/*if((difficulty == Difficulty.NORMAL || difficulty == Difficulty.HARD) && attacker instanceof Villager villager && ForgeEventFactory.canLivingConvert(villager, EntityType.ZOMBIE_VILLAGER, timer -> { }))
 		{
 			if(difficulty == Difficulty.HARD && random.nextBoolean())
 				return;
-			if(!isHumanoid())
+			if(!getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID))
 				return;
 
 			var zombieVillager = villager.convertTo(EntityType.ZOMBIE_VILLAGER, false);
@@ -433,7 +447,7 @@ public class AbstractZombie extends Monster
 				if(!isSilent())
 					level.levelEvent(null, 1026, blockPosition(), 0);
 			}
-		}
+		}*/
 	}
 
 	@Override
@@ -445,7 +459,7 @@ public class AbstractZombie extends Monster
 	@Override
 	public boolean canHoldItem(ItemStack stack)
 	{
-		if(!isHumanoid())
+		if(!getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID))
 			return false;
 		if(stack.is(Tags.Items.EGGS))
 			return false;
@@ -459,7 +473,7 @@ public class AbstractZombie extends Monster
 	@Override
 	public boolean wantsToPickUp(ItemStack stack)
 	{
-		if(!isHumanoid())
+		if(!getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID))
 			return false;
 		if(stack.is(Items.GLOW_INK_SAC))
 			return false;
@@ -504,7 +518,7 @@ public class AbstractZombie extends Monster
 
 		if(groupData instanceof Zombie.ZombieGroupData zombieGroupData)
 		{
-			if(isHumanoid())
+			if(getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID))
 			{
 				if(zombieGroupData.isBaby)
 				{
@@ -564,11 +578,6 @@ public class AbstractZombie extends Monster
 		return groupData;
 	}
 
-	protected boolean isHumanoid()
-	{
-		return false;
-	}
-
 	protected void addBehaviourGoals()
 	{
 		goalSelector.addGoal(2, new ZombieAttackGoal(this, 1D, false));
@@ -579,6 +588,8 @@ public class AbstractZombie extends Monster
 		targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
 		targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
 		targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Turtle.class, 10, true, false, Turtle.BABY_ON_LAND_SELECTOR));
+
+		registerZombieVariantGoals(this);
 	}
 
 	public boolean isUnderWaterConverting()
@@ -588,12 +599,12 @@ public class AbstractZombie extends Monster
 
 	public boolean canBreakDoors()
 	{
-		return isHumanoid() && canBreakDoors;
+		return getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID) && canBreakDoors;
 	}
 
 	public void setCanBreakDoors(boolean canBreakDoors)
 	{
-		if(isHumanoid() && supportsBreakDoorGoal())
+		if(getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID) && supportsBreakDoorGoal())
 		{
 			if(this.canBreakDoors != canBreakDoors)
 			{
@@ -615,7 +626,7 @@ public class AbstractZombie extends Monster
 
 	public boolean supportsBreakDoorGoal()
 	{
-		return isHumanoid();
+		return getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID);
 	}
 
 	protected boolean convertsInWater()
@@ -653,7 +664,7 @@ public class AbstractZombie extends Monster
 		{
 			zombie.handAttributes(zombie.level.getCurrentDifficultyAt(zombie.blockPosition()).getSpecialMultiplier());
 
-			if(zombie.isHumanoid() && zombie.supportsBreakDoorGoal())
+			if(zombie.getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID) && zombie.supportsBreakDoorGoal())
 				zombie.setCanBreakDoors(canBreakDoors());
 
 			ForgeEventFactory.onLivingConvert(this, zombie);
@@ -694,7 +705,7 @@ public class AbstractZombie extends Monster
 			if(maxHealth != null)
 				maxHealth.addPermanentModifier(new AttributeModifier("Leader zombie bonus", random.nextDouble() * 3D + 1D, AttributeModifier.Operation.MULTIPLY_TOTAL));
 
-			if(isHumanoid())
+			if(getType().is(ATags.EntityTypes.ZOMBIES_HUMANOID))
 				setCanBreakDoors(supportsBreakDoorGoal());
 		}
 	}
@@ -712,9 +723,7 @@ public class AbstractZombie extends Monster
 		return ItemStack.EMPTY;
 	}
 
-	public void finalizeZombieTypeConversion(Mob original)
-	{
-	}
+	public void finalizeZombieTypeConversion(Mob original) { }
 
 	protected static AttributeSupplier.Builder createZombieAttributes()
 	{
@@ -734,6 +743,103 @@ public class AbstractZombie extends Monster
 	public static boolean canZombieSpawn(EntityType<? extends AbstractZombie> entityType, ServerLevelAccessor level, MobSpawnType spawnType, BlockPos pos, Random rng)
 	{
 		return Monster.checkMonsterSpawnRules(entityType, level, spawnType, pos, rng);
+	}
+
+	public static void registerZombieVariantGoals(Monster zombie)
+	{
+		var zombieType = zombie.getType();
+
+		var isChicken = zombieType == AEntityTypes.CHICKEN_ZOMBIE;
+		var isPig = zombieType == AEntityTypes.PIG_ZOMBIE;
+		var isCow = zombieType == AEntityTypes.COW_ZOMBIE;
+		var isSheep = zombieType == AEntityTypes.SHEEP_ZOMBIE;
+		var isFox = false; // zombieType == AEntityTypes.FOX_ZOMBIE;
+		var isPanda = false; // zombieType == AEntityTypes.PANDA_ZOMBIE;
+		var isPolarBear = false; // zombieType == AEntityTypes.POLAR_BEAR_ZOMBIE;
+		var isRabbit = zombieType == AEntityTypes.RABBIT_ZOMBIE;
+		var isWolf = zombieType == AEntityTypes.WOLF_ZOMBIE;
+		var isHorse = zombieType == EntityType.ZOMBIE_HORSE;
+
+		var isZombie = zombieType == EntityType.ZOMBIE;
+		var isDrowned = zombieType == EntityType.DROWNED;
+		var isHusk = zombieType == EntityType.HUSK;
+		var isVillager = zombieType == EntityType.ZOMBIE_VILLAGER;
+		var isPiglin = zombieType == EntityType.ZOMBIFIED_PIGLIN;
+
+		var isHostile = zombieType.is(ATags.EntityTypes.ZOMBIES_HOSTILE);
+		var isPassive = zombieType.is(ATags.EntityTypes.ZOMBIES_PASSIVE);
+
+		var chickenPriority = 2;
+		var pigPriority = 2;
+		var cowPriority = 2;
+		var sheepPriority = 2;
+		var foxPriority = 2;
+		var pandaPriority = 2;
+		var polarBearPriority = 2;
+		var rabbitPriority = 2;
+		var wolfPriority = 2;
+		var horsePriority = 2;
+
+		if(isHostile)
+		{
+			chickenPriority++;
+			pigPriority++;
+			cowPriority++;
+			sheepPriority++;
+			foxPriority++;
+			pandaPriority++;
+			polarBearPriority++;
+			rabbitPriority++;
+			wolfPriority++;
+		}
+
+		if(isChicken)
+			chickenPriority--;
+		if(isPig)
+			pigPriority--;
+		if(isCow)
+			cowPriority--;
+		if(isSheep)
+			sheepPriority--;
+		if(isFox)
+			foxPriority--;
+		if(isPanda)
+			pandaPriority--;
+		if(isPolarBear)
+			polarBearPriority--;
+		if(isRabbit)
+			rabbitPriority--;
+		if(isWolf)
+			wolfPriority--;
+		if(isHorse)
+			horsePriority--;
+
+		// babies go for chickens more as they like to ride around on them
+		if(zombie.isBaby() && zombieType.is(ATags.EntityTypes.ZOMBIES_HUMANOID))
+			chickenPriority -= 2;
+
+		// ensure priorities dont go below 1
+		chickenPriority = Math.max(chickenPriority, 1);
+		pigPriority = Math.max(pigPriority, 1);
+		cowPriority = Math.max(cowPriority, 1);
+		sheepPriority = Math.max(sheepPriority, 1);
+		foxPriority = Math.max(foxPriority, 1);
+		pandaPriority = Math.max(pandaPriority, 1);
+		polarBearPriority = Math.max(polarBearPriority, 1);
+		rabbitPriority = Math.max(rabbitPriority, 1);
+		wolfPriority = Math.max(wolfPriority, 1);
+		horsePriority = Math.max(horsePriority, 1);
+
+		zombie.targetSelector.addGoal(chickenPriority, new NearestAttackableTargetGoal<>(zombie, Chicken.class, true));
+		zombie.targetSelector.addGoal(pigPriority, new NearestAttackableTargetGoal<>(zombie, Pig.class, true));
+		zombie.targetSelector.addGoal(cowPriority, new NearestAttackableTargetGoal<>(zombie, Cow.class, true));
+		zombie.targetSelector.addGoal(sheepPriority, new NearestAttackableTargetGoal<>(zombie, Sheep.class, true));
+		zombie.targetSelector.addGoal(foxPriority, new NearestAttackableTargetGoal<>(zombie, Fox.class, true));
+		zombie.targetSelector.addGoal(pandaPriority, new NearestAttackableTargetGoal<>(zombie, Panda.class, true));
+		zombie.targetSelector.addGoal(polarBearPriority, new NearestAttackableTargetGoal<>(zombie, PolarBear.class, true));
+		zombie.targetSelector.addGoal(rabbitPriority, new NearestAttackableTargetGoal<>(zombie, Rabbit.class, true));
+		zombie.targetSelector.addGoal(wolfPriority, new NearestAttackableTargetGoal<>(zombie, Wolf.class, true));
+		zombie.targetSelector.addGoal(horsePriority, new NearestAttackableTargetGoal<>(zombie, Horse.class, true));
 	}
 
 	// TODO: Find better place for this

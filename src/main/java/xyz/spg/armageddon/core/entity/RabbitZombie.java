@@ -68,12 +68,6 @@ public final class RabbitZombie extends AbstractZombie
 	}
 
 	@Override
-	protected boolean isHumanoid()
-	{
-		return false;
-	}
-
-	@Override
 	public boolean canBreakDoors()
 	{
 		return false;
@@ -297,7 +291,7 @@ public final class RabbitZombie extends AbstractZombie
 	@Override
 	public Vec3 getLeashOffset()
 	{
-		return new Vec3(0D, (double) (.6F * getEyeHeight()), (double) (getBbWidth() * .4F));
+		return new Vec3(0D, .6F * getEyeHeight(), getBbWidth() * .4F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes()

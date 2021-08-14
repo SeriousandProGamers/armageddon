@@ -79,8 +79,9 @@ public final class ATags
 	public static final class EntityTypes
 	{
 		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES = bindForge(ANames.ZOMBIES);
-		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES_MOB = bindForge(ANames.ZOMBIES_MOB);
-		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES_SPECIAL = bindForge(ANames.ZOMBIES_SPECIAL);
+		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES_HUMANOID = bindForge(ANames.ZOMBIES_HUMANOID);
+		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES_PASSIVE = bindForge(ANames.ZOMBIES_PASSIVE);
+		public static final Tags.IOptionalNamedTag<EntityType<?>> ZOMBIES_HOSTILE = bindForge(ANames.ZOMBIES_HOSTILE);
 
 		public static final Tags.IOptionalNamedTag<EntityType<?>> EGGS = bindForge(ANames.EGGS);
 

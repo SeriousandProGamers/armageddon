@@ -19,42 +19,93 @@ public final class EntityTypeTagGenerator extends EntityTypeTagsProvider
 	@Override
 	protected void addTags()
 	{
-		// Zombies
-		tag(ATags.EntityTypes.ZOMBIES_SPECIAL).add(
-				/*AEntityTypes.BLAZE_ZOMBIE,*/
-				/*AEntityTypes.EXPLOSIVE_ZOMBIE,*/
-				/*AEntityTypes.TELEPORTING_ZOMBIE*/
+		// region: Zombies
+		// region: Humanoid
+		tag(ATags.EntityTypes.ZOMBIES_HUMANOID)
+				.add(
+						/* Vanilla */
+						EntityType.ZOMBIE,
+						EntityType.ZOMBIE_VILLAGER,
+						EntityType.DROWNED,
+						EntityType.HUSK
+				);
+		// endregion
 
-				// Vanilla
-				EntityType.ZOMBIFIED_PIGLIN
-		);
+		// region: Passive
+		tag(ATags.EntityTypes.ZOMBIES_PASSIVE)
+				.add(
+						/* Modded */
+						/*AEntityTypes.PANDA_ZOMBIE,*/
+						/*AEntityTypes.POLAR_BEAR_ZOMBIE,*/
+						/*AEntityTypes.FOX_ZOMBIE,*/
+						AEntityTypes.WOLF_ZOMBIE,
+						AEntityTypes.RABBIT_ZOMBIE,
+						AEntityTypes.CHICKEN_ZOMBIE,
+						AEntityTypes.SHEEP_ZOMBIE,
+						AEntityTypes.COW_ZOMBIE,
+						AEntityTypes.PIG_ZOMBIE,
 
-		tag(ATags.EntityTypes.ZOMBIES_MOB).add(
-				/*AEntityTypes.PANDA_ZOMBIE,*/
-				/*AEntityTypes.POLAR_BEAR_ZOMBIE,*/
-				/*AEntityTypes.FOX_ZOMBIE,*/
-				AEntityTypes.WOLF_ZOMBIE,
-				AEntityTypes.RABBIT_ZOMBIE,
-				AEntityTypes.CHICKEN_ZOMBIE,
-				AEntityTypes.SHEEP_ZOMBIE,
-				AEntityTypes.COW_ZOMBIE,
-				AEntityTypes.PIG_ZOMBIE,
+						/* Vanilla */
+						EntityType.ZOMBIE_VILLAGER,
+						EntityType.ZOMBIE_HORSE,
+						EntityType.ZOGLIN
+				);
+		// endregion
 
-				// Vanilla
-				EntityType.ZOMBIE,
-				EntityType.DROWNED,
-				EntityType.HUSK,
+		// region: Hostile
+		tag(ATags.EntityTypes.ZOMBIES_HOSTILE)
+				.add(
+						/* Modded */
+						/*AEntityTypes.BLAZE_ZOMBIE,*/
+						/*AEntityTypes.EXPLOSIVE_ZOMBIE,*/
+						/*AEntityTypes.TELEPORTING_ZOMBIE,*/
 
-				EntityType.ZOMBIE_HORSE,
-				EntityType.ZOMBIE_VILLAGER
-		);
+						/* Vanilla */
+						EntityType.ZOMBIE,
+						EntityType.DROWNED,
+						EntityType.HUSK
+				);
+		// endregion
 
+		// region: Generic
 		tag(ATags.EntityTypes.ZOMBIES)
-				.addTags(ATags.EntityTypes.ZOMBIES_MOB, ATags.EntityTypes.ZOMBIES_SPECIAL);
+				.add(
+						/* Modded */
+						/*AEntityTypes.PANDA_ZOMBIE,*/
+						/*AEntityTypes.POLAR_BEAR_ZOMBIE,*/
+						/*AEntityTypes.FOX_ZOMBIE,*/
+						AEntityTypes.WOLF_ZOMBIE,
+						AEntityTypes.RABBIT_ZOMBIE,
+						AEntityTypes.CHICKEN_ZOMBIE,
+						AEntityTypes.SHEEP_ZOMBIE,
+						AEntityTypes.COW_ZOMBIE,
+						AEntityTypes.PIG_ZOMBIE,
 
-		// Eggs
+						/*AEntityTypes.BLAZE_ZOMBIE,*/
+						/*AEntityTypes.EXPLOSIVE_ZOMBIE,*/
+						/*AEntityTypes.TELEPORTING_ZOMBIE,*/
+
+						/* Vanilla */
+						EntityType.ZOMBIE,
+						EntityType.ZOMBIE_VILLAGER,
+						EntityType.ZOMBIE_HORSE,
+						EntityType.ZOMBIFIED_PIGLIN,
+						EntityType.DROWNED,
+						EntityType.HUSK,
+						EntityType.ZOGLIN
+				)
+				.addTags(
+						ATags.EntityTypes.ZOMBIES_HUMANOID,
+						ATags.EntityTypes.ZOMBIES_PASSIVE,
+						ATags.EntityTypes.ZOMBIES_HOSTILE
+				);
+		// endregion
+		// endregion
+
+		// region: Eggs
 		tag(EntityTypeTags.IMPACT_PROJECTILES).add(AEntityTypes.ROTTEN_EGG);
 		tag(ATags.EntityTypes.EGGS).add(EntityType.EGG, AEntityTypes.ROTTEN_EGG);
+		// endregion
 	}
 
 	@Override

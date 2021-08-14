@@ -56,12 +56,6 @@ public class CowZombie extends AbstractZombie
 	}
 
 	@Override
-	protected boolean isHumanoid()
-	{
-		return false;
-	}
-
-	@Override
 	public boolean canBreakDoors()
 	{
 		return false;
