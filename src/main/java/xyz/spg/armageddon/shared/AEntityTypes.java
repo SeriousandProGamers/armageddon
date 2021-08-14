@@ -13,7 +13,7 @@ public final class AEntityTypes
 	// @ObjectHolder(ANames.PANDA_ZOMBIE) public static final EntityType<? extends AbstractZombie> PANDA_ZOMBIE = null;
 	// @ObjectHolder(ANames.POLAR_BEAR_ZOMBIE) public static final EntityType<? extends AbstractZombie> POLAR_BEAR_ZOMBIE = null;
 	// @ObjectHolder(ANames.FOX_ZOMBIE) public static final EntityType<? extends AbstractZombie> FOX_ZOMBIE = null;
-	// @ObjectHolder(ANames.WOLF_ZOMBIE) public static final EntityType<? extends AbstractZombie> WOLF_ZOMBIE = null;
+	@ObjectHolder(ANames.WOLF_ZOMBIE) public static final EntityType<? extends WolfZombie> WOLF_ZOMBIE = null;
 	@ObjectHolder(ANames.RABBIT_ZOMBIE) public static final EntityType<? extends RabbitZombie> RABBIT_ZOMBIE = null;
 	@ObjectHolder(ANames.CHICKEN_ZOMBIE) public static final EntityType<? extends ChickenZombie> CHICKEN_ZOMBIE = null;
 	@ObjectHolder(ANames.SHEEP_ZOMBIE) public static final EntityType<? extends SheepZombie> SHEEP_ZOMBIE = null;

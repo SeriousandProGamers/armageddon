@@ -17,7 +17,7 @@ public class RabbitZombieRenderer<T extends RabbitZombie> extends MobRenderer<T,
 
 	public RabbitZombieRenderer(EntityRendererProvider.Context context)
 	{
-		super(context, new RabbitZombieModel<>(context.bakeLayer(ModelLayers.RABBIT)), .7F);
+		super(context, new RabbitZombieModel<>(context.bakeLayer(ModelLayers.RABBIT)), .3F);
 	}
 
 	@Override

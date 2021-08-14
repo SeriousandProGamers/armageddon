@@ -52,5 +52,6 @@ public final class ClientSetup
 		EntityRenderers.register(AEntityTypes.SHEEP_ZOMBIE, SheepZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.CHICKEN_ZOMBIE, ChickenZombieRenderer::new);
 		EntityRenderers.register(AEntityTypes.RABBIT_ZOMBIE, RabbitZombieRenderer::new);
+		EntityRenderers.register(AEntityTypes.WOLF_ZOMBIE, WolfZombieRenderer::new);
 	}
 }

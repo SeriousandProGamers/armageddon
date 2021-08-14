@@ -12,7 +12,7 @@ public class ANames
 	// public static final String PANDA_ZOMBIE = "panda_zombie";
 	// public static final String POLAR_BEAR_ZOMBIE = "polar_bear_zombie";
 	// public static final String FOX_ZOMBIE = "fox_zombie";
-	// public static final String WOLF_ZOMBIE = "wolf_zombie";
+	public static final String WOLF_ZOMBIE = "wolf_zombie";
 	public static final String RABBIT_ZOMBIE = "rabbit_zombie";
 	public static final String CHICKEN_ZOMBIE = "chicken_zombie";
 	public static final String SHEEP_ZOMBIE = "sheep_zombie";
@@ -38,7 +38,7 @@ public class ANames
 	// public static final String PANDA_ZOMBIE_SPAWN_EGG = PANDA_ZOMBIE + SPAWN_EGG_SUFFIX;
 	// public static final String POLAR_BEAR_ZOMBIE_SPAWN_EGG = POLAR_BEAR_ZOMBIE + SPAWN_EGG_SUFFIX;
 	// public static final String FOX_ZOMBIE_SPAWN_EGG = FOX_ZOMBIE + SPAWN_EGG_SUFFIX;
-	// public static final String WOLF_ZOMBIE_SPAWN_EGG = WOLF_ZOMBIE + SPAWN_EGG_SUFFIX;
+	public static final String WOLF_ZOMBIE_SPAWN_EGG = WOLF_ZOMBIE + SPAWN_EGG_SUFFIX;
 	public static final String RABBIT_ZOMBIE_SPAWN_EGG = RABBIT_ZOMBIE + SPAWN_EGG_SUFFIX;
 	public static final String CHICKEN_ZOMBIE_SPAWN_EGG = CHICKEN_ZOMBIE + SPAWN_EGG_SUFFIX;
 	public static final String SHEEP_ZOMBIE_SPAWN_EGG = SHEEP_ZOMBIE + SPAWN_EGG_SUFFIX;
